@@ -150,6 +150,23 @@
   .shot-one{margin-top:16px}
   .shot-one img{width:100%;max-width:460px;display:block;border:1px solid var(--line);border-radius:10px;background:#0d0f13}
   @media(max-width:640px){.logo-grid,.shot-grid{column-count:1}}
+
+  /* we-run flow */
+  .flow{display:flex;align-items:stretch;gap:14px;margin-top:28px}
+  .flow-step{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:opacity .6s ease,transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+  .flow-step:hover{border-color:rgba(79,140,255,.4);transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.35)}
+  .flow-step .fnum{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px}
+  .flow-step h3{font-size:1.12rem;font-weight:700;margin-bottom:6px}
+  .flow-step p{color:var(--muted);font-size:.95rem}
+  .flow-arrow{display:flex;align-items:center;color:var(--accent);font-size:1.7rem;opacity:.55;flex:0 0 auto}
+  @media(max-width:760px){.flow{flex-direction:column}.flow-arrow{justify-content:center;transform:rotate(90deg);padding:4px 0}}
+  /* FAQ accordion */
+  .faq details.qa{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:0;overflow:hidden}
+  .faq details.qa summary{list-style:none;cursor:pointer;padding:18px 20px;font-size:1.05rem;font-weight:700;color:var(--text);display:flex;justify-content:space-between;align-items:center;gap:14px}
+  .faq details.qa summary::-webkit-details-marker{display:none}
+  .faq details.qa summary::after{content:"+";color:var(--accent);font-size:1.6rem;font-weight:300;line-height:1;transition:transform .2s ease}
+  .faq details.qa[open] summary::after{transform:rotate(45deg)}
+  .faq details.qa p{color:var(--muted);font-size:.98rem;padding:0 20px 18px;margin:0}
 </style>
 </head>
 <body>
@@ -217,10 +234,24 @@
   <div class="wrap">
     <h2>We run your whole channel</h2>
     <p class="intro">Most providers sell you one piece of the machine. We own the part that decides whether a channel grows, the strategy and the ideas, then build the operation around it and run it for you.</p>
-    <div class="grid g3">
-      <div class="card"><div class="step">01 / Research</div><h3>Find what will work</h3><p>Market and competitor research, positioning, and a full read of your channel's data, plus your first month of video ideas, each with the thumbnail, the title, and the evidence for why it'll perform.</p></div>
-      <div class="card"><div class="step">02 / Execution</div><h3>Make every video</h3><p>We storyboard each video with you, make and review the thumbnails, review the edits, publish on the new system, and review the performance of every single video.</p></div>
-      <div class="card"><div class="step">03 / Systems</div><h3>Keep it running</h3><p>A steady cadence for prep, posting, and analysis, SOPs for the operational gaps, and mapped growth projections, so the channel compounds instead of stalling.</p></div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="fnum">01 / Research</div>
+        <h3>Find what will work</h3>
+        <p>Market and competitor research, positioning, and a full read of your channel's data, plus your first month of video ideas, each with the thumbnail, the title, and the evidence for why it'll perform.</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="fnum">02 / Execution</div>
+        <h3>Make every video</h3>
+        <p>We storyboard each video with you, make and review the thumbnails, review the edits, publish on the new system, and review the performance of every single video.</p>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="fnum">03 / Systems</div>
+        <h3>Keep it running</h3>
+        <p>A steady cadence for prep, posting, and analysis, SOPs for the operational gaps, and mapped growth projections, so the channel compounds instead of stalling.</p>
+      </div>
     </div>
     <p class="closer">It's human-led. The strategy and creative direction come from people who know what they're doing, not a chatbot writing generic content.</p>
   </div>
@@ -314,95 +345,13 @@
   </div>
 </section>
 
-<!-- PROOF -->
-<section class="block">
-  <div class="wrap">
-    <h2>The track record</h2>
-    <div class="stats">
-      <div class="stat"><div class="n">4B+</div><div class="l">organic long-form views across clients</div></div>
-      <div class="stat"><div class="n">45M+</div><div class="l">subscribers grown</div></div>
-      <div class="stat"><div class="n">8-figure</div><div class="l">brands worked with</div></div>
-      <div class="stat"><div class="n">9-figure</div><div class="l">founders advised</div></div>
-    </div>
-    <p class="creators">Strategy and growth for multi-million-subscriber channels including <b>PlayStation</b>, <b>Neil Patel</b>, <b>Kwebbelkop</b>, <b>WillNE</b>, <b>Chris Bumstead</b>, and <b>Daniel Iles</b>.</p>
-    <div class="logo-grid">
-      <img loading="lazy" src="proof/creator1.png" alt="Channel we've worked with">
-      <img loading="lazy" src="proof/creator2.png" alt="Channel we've worked with">
-      <img loading="lazy" src="proof/creator3.png" alt="Channel we've worked with">
-      <img loading="lazy" src="proof/creator4.png" alt="Channel we've worked with">
-      <img loading="lazy" src="proof/creator5.png" alt="Channel we've worked with">
-    </div>
-
-    <h3 class="proof-sub">Which produced results like these</h3>
-    <div class="shot-grid">
-      <img loading="lazy" src="proof/a-13m.png" alt="13M views">
-      <img loading="lazy" src="proof/a-4.4m.png" alt="4.4M views">
-      <img loading="lazy" src="proof/a-1.2m.png" alt="1.2M views">
-      <img loading="lazy" src="proof/a-ctr.png" alt="9.6% click-through rate">
-      <img loading="lazy" src="proof/a-avd.png" alt="9-minute average view duration">
-      <img loading="lazy" src="proof/a-channel1.png" alt="Channel growth">
-      <img loading="lazy" src="proof/a-realtime.png" alt="Realtime views">
-      <img loading="lazy" src="proof/a-haz.png" alt="Result">
-    </div>
-
-    <div class="case">
-      <h3>A $3M/month CEO, from a standing start</h3>
-      <p>Six figures in attributable revenue, his first podcast, and what he calls his most valuable hiring funnel.</p>
-      <div class="shot-grid">
-        <img loading="lazy" src="proof/ceo1.png" alt="Result">
-        <img loading="lazy" src="proof/ceo2.png" alt="Result">
-        <img loading="lazy" src="proof/ceo5.png" alt="Result">
-        <img loading="lazy" src="proof/ceo3.png" alt="Result">
-        <img loading="lazy" src="proof/ceo4.png" alt="Result">
-        <img loading="lazy" src="proof/ceo6.png" alt="Result">
-      </div>
-    </div>
-
-    <div class="case">
-      <h3>A coaching business: $180k to $565k per month</h3>
-      <p>Scaled across organic and paid combined.</p>
-      <div class="shot-grid">
-        <img loading="lazy" src="proof/coach1.png" alt="Revenue growth">
-        <img loading="lazy" src="proof/coach2.png" alt="Revenue growth">
-      </div>
-    </div>
-
-    <div class="case">
-      <h3>Multiple 9-figure industry leaders, under NDA</h3>
-      <p>Advisory work we can't show publicly, for names you would recognize.</p>
-    </div>
-
-    <div class="case">
-      <h3>$55k/month attributed to YouTube</h3>
-      <p>For a coaching offer.</p>
-      <div class="shot-one"><img loading="lazy" src="proof/k55.png" alt="Attributed revenue"></div>
-    </div>
-
-    <div class="case">
-      <h3>Our founder's own channel: 5k subs in the business niche</h3>
-      <p>Built while signing 7 and 8-figure clients.</p>
-      <div class="shot-grid">
-        <img loading="lazy" src="proof/dom1.png" alt="Channel growth">
-        <img loading="lazy" src="proof/dom2.png" alt="Channel growth">
-        <img loading="lazy" src="proof/dom3.png" alt="Channel growth">
-      </div>
-    </div>
-
-    <div class="case">
-      <h3>144.7k new channel views in the first two weeks back</h3>
-      <div class="shot-grid">
-        <img loading="lazy" src="proof/kevis1.png" alt="Views growth">
-        <img loading="lazy" src="proof/kevis2.png" alt="Creator">
-        <img loading="lazy" src="proof/kevis3.png" alt="Result">
-      </div>
-    </div>
-
-    <div class="case">
-      <h3>A $2M/month CEO: 2k to 7.5k subscribers in under three months</h3>
-      <div class="shot-one"><img loading="lazy" src="proof/pat.png" alt="Subscriber growth"></div>
-    </div>
-  </div>
+<!-- PROOF (verbatim copy of the VSL section, isolated in a frame) -->
+<section style="border-top:1px solid rgba(255,255,255,0.08);padding:0">
+  <iframe id="proofFrame" src="proof-embed.html" title="The track record" loading="lazy" scrolling="no" style="width:100%;border:0;display:block;min-height:640px"></iframe>
 </section>
+<script>
+window.addEventListener('message',function(ev){if(ev.data&&ev.data.mProofHeight){var f=document.getElementById('proofFrame');if(f&&ev.data.mProofHeight>120)f.style.height=ev.data.mProofHeight+'px';}});
+</script>
 
 <!-- DIFFERENT -->
 <section class="block">
@@ -421,13 +370,13 @@
   <div class="wrap">
     <h2>Common questions</h2>
     <div class="faq">
-      <div class="qa"><h3>How much of my time does this take?</h3><p>Far less than running it yourself. Just the parts that genuinely need you: your unique insights, recording, and quick reviews. Expect around 2 to 4 hours per week.</p></div>
-      <div class="qa"><h3>Is this just another agency?</h3><p>No. Most agencies run the same playbook on every account. We do the strategic work ourselves, build everything around your specific business, and give you the choice of staffing your own team or having us run it.</p></div>
-      <div class="qa"><h3>Do you use AI to write the content?</h3><p>No. The strategy and the ideas come directly from us and our billions of views of experience. We only use tools to make production faster, not to replace thinking.</p></div>
-      <div class="qa"><h3>What happens after 90 days?</h3><p>You have a working channel and a system that runs. Whether we built your internal team or ran it as your agency, you are left with positioning, SOPs, and a repeatable process, not a dependency that collapses when we step back.</p></div>
-      <div class="qa"><h3>How quickly will I see results?</h3><p>It depends on what results mean to you. Booking your first sales calls can happen from your first video; reaching a hundred thousand subscribers from zero takes much longer. With most people we work with, we'd expect you to start booking calls and closing deals within the first 90 days.</p></div>
-      <div class="qa"><h3>Do you write all the scripts?</h3><p>Rarely. If you're the subject matter expert, other people shouldn't be injecting their knowledge and framing it as yours. We script the parts that don't need your expertise, where appropriate, and many formats (like vlogs) need little scripting at all.</p></div>
-      <div class="qa"><h3>What if I already have editors or thumbnail designers?</h3><p>If you'd rather keep your current production team and have us focus on strategy, ideation, scripting, and directing them, that's an option. We'd just need to make sure they can deliver the quality required to succeed.</p></div>
+      <details class="qa"><summary>How much of my time does this take?</summary><p>Far less than running it yourself. Just the parts that genuinely need you: your unique insights, recording, and quick reviews. Expect around 2 to 4 hours per week.</p></details>
+      <details class="qa"><summary>Is this just another agency?</summary><p>No. Most agencies run the same playbook on every account. We do the strategic work ourselves, build everything around your specific business, and give you the choice of staffing your own team or having us run it.</p></details>
+      <details class="qa"><summary>Do you use AI to write the content?</summary><p>No. The strategy and the ideas come directly from us and our billions of views of experience. We only use tools to make production faster, not to replace thinking.</p></details>
+      <details class="qa"><summary>What happens after 90 days?</summary><p>You have a working channel and a system that runs. Whether we built your internal team or ran it as your agency, you are left with positioning, SOPs, and a repeatable process, not a dependency that collapses when we step back.</p></details>
+      <details class="qa"><summary>How quickly will I see results?</summary><p>It depends on what results mean to you. Booking your first sales calls can happen from your first video; reaching a hundred thousand subscribers from zero takes much longer. With most people we work with, we'd expect you to start booking calls and closing deals within the first 90 days.</p></details>
+      <details class="qa"><summary>Do you write all the scripts?</summary><p>Rarely. If you're the subject matter expert, other people shouldn't be injecting their knowledge and framing it as yours. We script the parts that don't need your expertise, where appropriate, and many formats (like vlogs) need little scripting at all.</p></details>
+      <details class="qa"><summary>What if I already have editors or thumbnail designers?</summary><p>If you'd rather keep your current production team and have us focus on strategy, ideation, scripting, and directing them, that's an option. We'd just need to make sure they can deliver the quality required to succeed.</p></details>
     </div>
   </div>
 </section>
@@ -473,7 +422,7 @@ function msRunCounters(instant){
 }
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub, .tnode';
+  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub, .tnode, .flow-step';
   var els=[].slice.call(document.querySelectorAll(sel));
   if(reduce){ msRunCounters(true); return; }
   els.forEach(function(el){ el.classList.add('reveal'); });
