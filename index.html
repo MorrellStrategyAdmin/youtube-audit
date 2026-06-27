@@ -131,17 +131,18 @@
   .foot-copy{font-size:0.85rem;color:var(--faint)}
   @media (max-width:560px){.foot-inner{justify-content:center;text-align:center}}
   .brand-logo{height:54px;width:auto;display:inline-block;vertical-align:middle}
-  .hero-fx{position:absolute;top:0;left:0;width:100%;height:720px;z-index:0;overflow:hidden;pointer-events:none}
-  .hero-fx .fx-grid{position:absolute;inset:0;background-image:linear-gradient(to right, rgba(79,140,255,0.26) 1px, transparent 1px),linear-gradient(to bottom, rgba(79,140,255,0.26) 1px, transparent 1px);background-size:48px 48px;-webkit-mask:radial-gradient(ellipse 56% 46% at 50% 33%, #000 0%, rgba(0,0,0,0.4) 46%, transparent 72%);mask:radial-gradient(ellipse 56% 46% at 50% 33%, #000 0%, rgba(0,0,0,0.4) 46%, transparent 72%);animation:fxdrift 26s linear infinite}
-  .hero-fx .fx-glow{position:absolute;left:50%;top:118px;width:780px;max-width:120vw;height:520px;transform:translateX(-50%);background:radial-gradient(ellipse at center, rgba(79,140,255,0.22), transparent 60%);filter:blur(34px);animation:fxpulse 7s ease-in-out infinite}
-  @keyframes fxdrift{from{background-position:0 0}to{background-position:0 48px}}
-  @keyframes fxpulse{0%,100%{opacity:0.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.07)}}
+  .hero-fx{position:absolute;top:0;left:0;width:100%;height:1400px;z-index:0;overflow:hidden;pointer-events:none}
+  .hero-fx .fx-grid{position:absolute;inset:0;background-image:linear-gradient(to right, rgba(79,140,255,0.2) 1px, transparent 1px),linear-gradient(to bottom, rgba(79,140,255,0.2) 1px, transparent 1px);background-size:50px 50px;mask:linear-gradient(to bottom, transparent 0%, #000 6%, #000 88%, transparent 100%), linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);mask-composite:intersect;-webkit-mask:linear-gradient(to bottom, transparent 0%, #000 6%, #000 88%, transparent 100%), linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);-webkit-mask-composite:source-in;animation:fxdrift 30s linear infinite}
+  .hero-fx .fx-glow{position:absolute;left:50%;top:90px;width:820px;max-width:120vw;height:520px;transform:translateX(-50%);background:radial-gradient(ellipse at center, rgba(79,140,255,0.2), transparent 62%);filter:blur(36px);animation:fxpulse 7s ease-in-out infinite}
+  .hero-fx .fx-glow.two{top:780px;width:920px;height:620px;background:radial-gradient(ellipse at center, rgba(79,140,255,0.13), transparent 64%);animation:fxpulse 9s ease-in-out infinite;animation-delay:-3.5s}
+  @keyframes fxdrift{from{background-position:0 0}to{background-position:0 50px}}
+  @keyframes fxpulse{0%,100%{opacity:0.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
   @media (prefers-reduced-motion:reduce){.hero-fx .fx-grid,.hero-fx .fx-glow{animation:none}}
 </style>
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
-  <div class="hero-fx" aria-hidden="true"><div class="fx-glow"></div><div class="fx-grid"></div></div>
+  <div class="hero-fx" aria-hidden="true"><div class="fx-glow"></div><div class="fx-glow two"></div><div class="fx-grid"></div></div>
   <div class="page">
     <div class="brandmark reveal"><img src="/logo.png" alt="Morrell Strategy" class="brand-logo" /></div>
 
