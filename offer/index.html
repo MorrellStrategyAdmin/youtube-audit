@@ -196,6 +196,27 @@
   .seal{width:104px;height:104px;border-radius:50%;border:2px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(79,140,255,.08);box-shadow:0 0 0 7px rgba(79,140,255,.05);margin:0 auto 20px}
   .seal-top{font-size:1.7rem;font-weight:800;color:var(--accent);line-height:1}
   .seal-bot{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:3px}
+  /* problems: diagnosis */
+  .diag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+  .diag-card{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:20px;transition:opacity .6s ease,transform .25s ease,border-color .25s ease}
+  .diag-card:hover{transform:translateY(-3px)}
+  .diag-num{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+  .diag-card h3{font-size:1.08rem;font-weight:700;margin-bottom:4px}
+  .diag-card p{color:var(--muted);font-size:.95rem}
+  .diag-fix{grid-column:1/-1;background:linear-gradient(135deg,rgba(79,140,255,.12),rgba(79,140,255,.03));border:1px solid rgba(79,140,255,.28);border-radius:12px;padding:18px 24px;text-align:center}
+  .diag-fix p{font-size:1.15rem;font-weight:700}
+  @media(max-width:640px){.diag-grid{grid-template-columns:1fr}}
+  /* deliverables: check grid */
+  .deliver-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+  .deliver-item{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;transition:opacity .6s ease,transform .25s ease,border-color .25s ease}
+  .deliver-item:hover{transform:translateY(-3px);border-color:rgba(79,140,255,.4)}
+  .deliver-check{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:rgba(79,140,255,.14);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+  .deliver-check .ic{width:17px;height:17px}
+  .deliver-item h3{font-size:1.05rem;font-weight:700;margin-bottom:3px}
+  .deliver-item p{color:var(--muted);font-size:.93rem}
+  @media(max-width:640px){.deliver-grid{grid-template-columns:1fr}}
+  /* walk away: outcome cards */
+  .outcome{border-left:3px solid var(--accent);background:linear-gradient(100deg,rgba(79,140,255,.06),transparent 55%)}
 </style>
 </head>
 <body>
@@ -249,13 +270,13 @@
   <div class="wrap">
     <h2>What's holding your channel back</h2>
     <p class="intro">Most people guess wrong about which one is actually theirs. We see the same handful over and over, and we fix every one.</p>
-    <div class="grid g3">
-      <div class="card"><div class="num">01</div><h3>No reach</h3><p>A few hundred views a video. The reach isn't there yet, so there's nothing to convert and nothing to build on.</p></div>
-      <div class="card"><div class="num">02</div><h3>No differentiation</h3><p>It gets made without a real strategy or a genuine point of view, so it never breaks out.</p></div>
-      <div class="card"><div class="num">03</div><h3>There's no system</h3><p>No ideation process, no thumbnail or packaging process. Every video starts from a blank page.</p></div>
-      <div class="card"><div class="num">04</div><h3>Production depends on you</h3><p>An editor who needs too much hand-holding, so nothing ships unless you're in the weeds.</p></div>
-      <div class="card"><div class="num">05</div><h3>Views but no business</h3><p>Almost all the content sits at the top of the funnel, so the channel racks up views without bringing in clients.</p></div>
-      <div class="card" style="display:flex;align-items:center"><p style="color:var(--text);font-weight:700;font-size:1.15rem">Whichever it is, we fix <span class="accent">all of them.</span></p></div>
+    <div class="diag-grid">
+      <div class="diag-card"><span class="diag-num">01</span><div><h3>No reach</h3><p>A few hundred views a video. The reach isn't there yet, so there's nothing to convert and nothing to build on.</p></div></div>
+      <div class="diag-card"><span class="diag-num">02</span><div><h3>No differentiation</h3><p>It gets made without a real strategy or a genuine point of view, so it never breaks out.</p></div></div>
+      <div class="diag-card"><span class="diag-num">03</span><div><h3>There's no system</h3><p>No ideation process, no thumbnail or packaging process. Every video starts from a blank page.</p></div></div>
+      <div class="diag-card"><span class="diag-num">04</span><div><h3>Production depends on you</h3><p>An editor who needs too much hand-holding, so nothing ships unless you're in the weeds.</p></div></div>
+      <div class="diag-card"><span class="diag-num">05</span><div><h3>Views but no business</h3><p>Almost all the content sits at the top of the funnel, so the channel racks up views without bringing in clients.</p></div></div>
+      <div class="diag-fix"><p>Whichever it is, we fix <span class="accent">all of them.</span></p></div>
     </div>
   </div>
 </section>
@@ -293,14 +314,14 @@
   <div class="wrap">
     <h2>What's included</h2>
     <div class="deliverables-lead"><span>4 or 8 YouTube videos a month</span>, done for you end to end.</div>
-    <div class="grid g3">
-      <div class="card"><div class="num">01</div><h3>Strategy</h3><p>Positioning, branding, and the content funnel.</p></div>
-      <div class="card"><div class="num">02</div><h3>Ideation</h3><p>Topics, unique angles, and titles, all driven by data.</p></div>
-      <div class="card"><div class="num">03</div><h3>Thumbnails</h3><p>Multiple concepts per video.</p></div>
-      <div class="card"><div class="num">04</div><h3>Scripting &amp; outlining</h3><p>Collaborative, and built around your style.</p></div>
-      <div class="card"><div class="num">05</div><h3>Editing</h3><p>Includes edit reviews.</p></div>
-      <div class="card"><div class="num">06</div><h3>Data analysis &amp; reporting</h3><p>Every video reviewed, so the next one is better.</p></div>
-      <div class="card"><div class="num">07</div><h3>Project management</h3><p>The whole operation managed and systemized.</p></div>
+    <div class="deliver-grid">
+      <div class="deliver-item"><span class="deliver-check"><svg class="ic"><use href="#ic-check"/></svg></span><div><h3>Strategy</h3><p>Positioning, branding, and the content funnel.</p></div></div>
+      <div class="deliver-item"><span class="deliver-check"><svg class="ic"><use href="#ic-check"/></svg></span><div><h3>Ideation</h3><p>Topics, unique angles, and titles, all driven by data.</p></div></div>
+      <div class="deliver-item"><span class="deliver-check"><svg class="ic"><use href="#ic-check"/></svg></span><div><h3>Thumbnails</h3><p>Multiple concepts per video.</p></div></div>
+      <div class="deliver-item"><span class="deliver-check"><svg class="ic"><use href="#ic-check"/></svg></span><div><h3>Scripting &amp; outlining</h3><p>Collaborative, and built around your style.</p></div></div>
+      <div class="deliver-item"><span class="deliver-check"><svg class="ic"><use href="#ic-check"/></svg></span><div><h3>Editing</h3><p>Includes edit reviews.</p></div></div>
+      <div class="deliver-item"><span class="deliver-check"><svg class="ic"><use href="#ic-check"/></svg></span><div><h3>Data analysis &amp; reporting</h3><p>Every video reviewed, so the next one is better.</p></div></div>
+      <div class="deliver-item"><span class="deliver-check"><svg class="ic"><use href="#ic-check"/></svg></span><div><h3>Project management</h3><p>The whole operation managed and systemized.</p></div></div>
     </div>
   </div>
 </section>
@@ -369,10 +390,10 @@
   <div class="wrap">
     <h2>What you walk away with</h2>
     <div class="grid g2">
-      <div class="card"><h3>A channel built around your expertise</h3><p>One that brings in clients, attracts talent, opens doors to partners and investors, and establishes you as a genuine authority in your industry.</p></div>
-      <div class="card"><h3>A repeatable system</h3><p>For ideas, production, and analysis, that does not collapse when the engagement ends.</p></div>
-      <div class="card"><h3>Clear positioning</h3><p>So you are not reinventing your angle every week.</p></div>
-      <div class="card"><h3>A long-term brand asset</h3><p>That keeps working, and keeps compounding, long after each video is published.</p></div>
+      <div class="card outcome"><h3>A channel built around your expertise</h3><p>One that brings in clients, attracts talent, opens doors to partners and investors, and establishes you as a genuine authority in your industry.</p></div>
+      <div class="card outcome"><h3>A repeatable system</h3><p>For ideas, production, and analysis, that does not collapse when the engagement ends.</p></div>
+      <div class="card outcome"><h3>Clear positioning</h3><p>So you are not reinventing your angle every week.</p></div>
+      <div class="card outcome"><h3>A long-term brand asset</h3><p>That keeps working, and keeps compounding, long after each video is published.</p></div>
     </div>
   </div>
 </section>
@@ -469,7 +490,7 @@ function msRunCounters(instant){
 }
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub, .tnode, .flow-step, .check-item, .vs-col';
+  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub, .tnode, .flow-step, .check-item, .vs-col, .diag-card, .deliver-item';
   var els=[].slice.call(document.querySelectorAll(sel));
   if(reduce){ msRunCounters(true); return; }
   els.forEach(function(el){ el.classList.add('reveal'); });
