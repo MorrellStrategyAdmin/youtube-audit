@@ -134,6 +134,17 @@
     .hero-fx .grid,.hero .logo,.hero .eyebrow,.hero h1,.hero .sub,.hero .btn{animation:none;opacity:1}
     .reveal{opacity:1;transform:none;transition:none}
   }
+
+  /* proof gallery */
+  .proof-sub{font-size:1.05rem;font-weight:600;color:var(--text);margin-top:40px;text-align:center}
+  .logo-grid,.shot-grid{column-count:2;column-gap:14px;margin-top:16px}
+  .logo-grid img,.shot-grid img{width:100%;display:block;margin:0 0 14px;border:1px solid var(--line);border-radius:10px;break-inside:avoid;background:#0d0f13}
+  .case{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+  .case h3{font-size:1.18rem;font-weight:700;letter-spacing:-.01em}
+  .case p{color:var(--muted);margin-top:5px;max-width:62ch}
+  .shot-one{margin-top:16px}
+  .shot-one img{width:100%;max-width:460px;display:block;border:1px solid var(--line);border-radius:10px;background:#0d0f13}
+  @media(max-width:640px){.logo-grid,.shot-grid{column-count:1}}
 </style>
 </head>
 <body>
@@ -291,11 +302,81 @@
       <div class="stat"><div class="n">9-figure</div><div class="l">founders advised</div></div>
     </div>
     <p class="creators">Strategy and growth for multi-million-subscriber channels including <b>Neil Patel</b>, <b>Kwebbelkop</b>, <b>WillNE</b>, <b>Chris Bumstead</b>, and <b>Daniel Iles</b>.</p>
-    <div class="results">
-      <div class="result"><span class="dot"></span><p><b>A $3M/month CEO, from a standing start.</b> <span>Six figures in attributable revenue, his first podcast, and what he calls his most valuable hiring funnel.</span></p></div>
-      <div class="result"><span class="dot"></span><p><b>A coaching business scaled from $180k to $565k per month.</b> <span>Across organic and paid combined.</span></p></div>
-      <div class="result"><span class="dot"></span><p><b>$55k/month attributed to YouTube</b> <span>for a coaching offer.</span></p></div>
-      <div class="result"><span class="dot"></span><p><b>A $2M/month CEO grew from 2k to 7.5k subscribers in under three months.</b></p></div>
+    <div class="logo-grid">
+      <img loading="lazy" src="proof/creator1.png" alt="Channel we've worked with">
+      <img loading="lazy" src="proof/creator2.png" alt="Channel we've worked with">
+      <img loading="lazy" src="proof/creator3.png" alt="Channel we've worked with">
+      <img loading="lazy" src="proof/creator4.png" alt="Channel we've worked with">
+      <img loading="lazy" src="proof/creator5.png" alt="Channel we've worked with">
+    </div>
+
+    <h3 class="proof-sub">Which produced results like these</h3>
+    <div class="shot-grid">
+      <img loading="lazy" src="proof/a-13m.png" alt="13M views">
+      <img loading="lazy" src="proof/a-4.4m.png" alt="4.4M views">
+      <img loading="lazy" src="proof/a-1.2m.png" alt="1.2M views">
+      <img loading="lazy" src="proof/a-ctr.png" alt="9.6% click-through rate">
+      <img loading="lazy" src="proof/a-avd.png" alt="9-minute average view duration">
+      <img loading="lazy" src="proof/a-channel1.png" alt="Channel growth">
+      <img loading="lazy" src="proof/a-realtime.png" alt="Realtime views">
+      <img loading="lazy" src="proof/a-haz.png" alt="Result">
+    </div>
+
+    <div class="case">
+      <h3>A $3M/month CEO, from a standing start</h3>
+      <p>Six figures in attributable revenue, his first podcast, and what he calls his most valuable hiring funnel.</p>
+      <div class="shot-grid">
+        <img loading="lazy" src="proof/ceo1.png" alt="Result">
+        <img loading="lazy" src="proof/ceo2.png" alt="Result">
+        <img loading="lazy" src="proof/ceo5.png" alt="Result">
+        <img loading="lazy" src="proof/ceo3.png" alt="Result">
+        <img loading="lazy" src="proof/ceo4.png" alt="Result">
+        <img loading="lazy" src="proof/ceo6.png" alt="Result">
+      </div>
+    </div>
+
+    <div class="case">
+      <h3>A coaching business: $180k to $565k per month</h3>
+      <p>Scaled across organic and paid combined.</p>
+      <div class="shot-grid">
+        <img loading="lazy" src="proof/coach1.png" alt="Revenue growth">
+        <img loading="lazy" src="proof/coach2.png" alt="Revenue growth">
+      </div>
+    </div>
+
+    <div class="case">
+      <h3>Multiple 9-figure industry leaders, under NDA</h3>
+      <p>Advisory work we can't show publicly, for names you would recognize.</p>
+    </div>
+
+    <div class="case">
+      <h3>$55k/month attributed to YouTube</h3>
+      <p>For a coaching offer.</p>
+      <div class="shot-one"><img loading="lazy" src="proof/k55.png" alt="Attributed revenue"></div>
+    </div>
+
+    <div class="case">
+      <h3>Our founder's own channel: 5k subs in the business niche</h3>
+      <p>Built while signing 7 and 8-figure clients.</p>
+      <div class="shot-grid">
+        <img loading="lazy" src="proof/dom1.png" alt="Channel growth">
+        <img loading="lazy" src="proof/dom2.png" alt="Channel growth">
+        <img loading="lazy" src="proof/dom3.png" alt="Channel growth">
+      </div>
+    </div>
+
+    <div class="case">
+      <h3>144.7k new channel views in the first two weeks back</h3>
+      <div class="shot-grid">
+        <img loading="lazy" src="proof/kevis1.png" alt="Views growth">
+        <img loading="lazy" src="proof/kevis2.png" alt="Creator">
+        <img loading="lazy" src="proof/kevis3.png" alt="Result">
+      </div>
+    </div>
+
+    <div class="case">
+      <h3>A $2M/month CEO: 2k to 7.5k subscribers in under three months</h3>
+      <div class="shot-one"><img loading="lazy" src="proof/pat.png" alt="Subscriber growth"></div>
     </div>
   </div>
 </section>
@@ -369,7 +450,7 @@ function msRunCounters(instant){
 }
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2';
+  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub';
   var els=[].slice.call(document.querySelectorAll(sel));
   if(reduce){ msRunCounters(true); return; }
   els.forEach(function(el){ el.classList.add('reveal'); });
