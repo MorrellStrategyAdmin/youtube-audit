@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morrell Strategy | The Offer</title>
+<meta name="description" content="Done-for-you, human-led YouTube growth for 7 to 8-figure operators. What we do, what's included, the 90-day plan, and how to start.">
+<meta name="theme-color" content="#0A0B0D">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Morrell Strategy | The Offer">
+<meta property="og:description" content="Done-for-you, human-led YouTube growth for 7 to 8-figure operators. What we do, what's included, and how to start.">
+<meta property="og:image" content="https://morrellstrategy.com/og-image.png">
+<meta property="og:url" content="https://morrellstrategy.com/offer">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0A0B0D; --panel:rgba(255,255,255,0.025); --panel2:rgba(255,255,255,0.04);
+    --line:rgba(255,255,255,0.08); --text:#E8EBF1; --muted:#99A1B0; --faint:#6B7280;
+    --accent:#4F8CFF; --navy:#14306E;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  a{color:inherit}
+  .logo{height:46px;width:auto;display:block}
+  .btn{display:inline-block;background:var(--accent);color:#08111f;font-weight:700;font-size:1.05rem;text-decoration:none;padding:16px 30px;border-radius:12px;transition:transform .15s ease, box-shadow .15s ease;box-shadow:0 8px 30px rgba(79,140,255,0.28)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(79,140,255,0.4)}
+  .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:64px 0 60px}
+  .hero-fx{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .hero-fx .grid{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(79,140,255,.18) 1px,transparent 1px),linear-gradient(to bottom,rgba(79,140,255,.18) 1px,transparent 1px);background-size:46px 46px;-webkit-mask:radial-gradient(ellipse 70% 70% at 50% 30%,#000 0%,transparent 75%);mask:radial-gradient(ellipse 70% 70% at 50% 30%,#000 0%,transparent 75%)}
+  .hero .inner{position:relative;z-index:1}
+  .hero .logo{margin:0 auto 26px}
+  .hero h1{font-size:clamp(2rem,5vw,3.15rem);line-height:1.08;font-weight:800;letter-spacing:-.02em;margin:14px auto 0;max-width:16ch}
+  .hero p.sub{color:var(--muted);font-size:clamp(1.02rem,2vw,1.18rem);max-width:60ch;margin:20px auto 30px}
+  .accent{color:var(--accent)}
+
+  /* sections */
+  section.block{padding:46px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1.12}
+  h2 .lead-mark{color:var(--accent)}
+  .block > .wrap > .intro{color:var(--muted);font-size:1.06rem;max-width:64ch;margin-top:12px}
+
+  .grid{display:grid;gap:16px;margin-top:28px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{font-size:1.12rem;font-weight:700;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:.98rem}
+  .card .num{font-size:.85rem;font-weight:700;color:var(--accent);letter-spacing:.05em;margin-bottom:10px}
+  .card .step{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:8px}
+
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .pill{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:.95rem;font-weight:600}
+
+  .fit{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+  .fit .card h3{display:flex;align-items:center;gap:8px}
+  .yes{border-color:rgba(79,140,255,.35)}
+  .closer{margin-top:22px;font-size:1.12rem;font-weight:700}
+
+  .deliverables-lead{background:linear-gradient(135deg,rgba(79,140,255,.12),rgba(79,140,255,.03));border:1px solid rgba(79,140,255,.28);border-radius:14px;padding:22px 24px;margin-top:24px;font-size:1.15rem;font-weight:700}
+  .deliverables-lead span{color:var(--accent)}
+
+  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+  .phase .step{color:var(--accent)}
+  .phase ul{list-style:none;margin-top:6px}
+  .phase li{color:var(--muted);font-size:.95rem;padding-left:18px;position:relative;margin:7px 0}
+  .phase li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.7}
+
+  .guarantee{background:linear-gradient(135deg,rgba(79,140,255,.14),rgba(20,48,110,.18));border:1px solid rgba(79,140,255,.35);border-radius:16px;padding:34px;text-align:center;margin-top:8px}
+  .guarantee .eyebrow{color:var(--accent)}
+  .guarantee p{font-size:clamp(1.3rem,3vw,1.7rem);font-weight:800;letter-spacing:-.01em;max-width:24ch;margin:12px auto 0;line-height:1.2}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+  .stat{text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 14px}
+  .stat .n{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;color:var(--accent);letter-spacing:-.02em}
+  .stat .l{color:var(--muted);font-size:.9rem;margin-top:4px}
+  .creators{margin-top:18px;color:var(--muted);font-size:1.02rem;text-align:center}
+  .creators b{color:var(--text);font-weight:600}
+  .results{margin-top:20px;display:grid;gap:12px}
+  .result{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .result .dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:8px}
+  .result p{font-size:1rem}.result p b{color:var(--text)}.result p span{color:var(--muted)}
+
+  .faq{margin-top:24px;display:grid;gap:14px}
+  .qa{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--panel)}
+  .qa h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+  .qa p{color:var(--muted);font-size:.98rem}
+
+  /* cta */
+  .cta{text-align:center;padding:60px 0}
+  .cta h2{max-width:20ch;margin:0 auto}
+  .cta .intro{margin:14px auto 0;text-align:center}
+  .cta-points{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 32px;text-align:left}
+  .cta-points .card p{color:var(--muted)}
+  .cta-note{color:var(--faint);font-size:.92rem;margin-top:18px}
+
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted)}
+  footer .logo{height:30px;margin:0 auto 12px}
+  footer .links{display:flex;gap:22px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+  footer a{color:var(--muted);text-decoration:none;font-size:.95rem}
+  footer a:hover{color:var(--text)}
+  footer .copy{font-size:.85rem;color:var(--faint);margin-top:8px}
+
+  @media(max-width:780px){
+    .g3,.g4,.timeline,.stats,.cta-points{grid-template-columns:1fr 1fr}
+    .fit,.g2{grid-template-columns:1fr}
+  }
+  @media(max-width:520px){
+    .g3,.g4,.timeline,.stats,.cta-points{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- inline logo (defined once) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14306E"/><stop offset="1" stop-color="#3D8BFF"/></linearGradient>
+    <symbol id="ms-logo" viewBox="0 0 1600 1439">
+      <g transform="translate(0,1439) scale(0.1,-0.1)" fill="url(#mg)" stroke="none">
+      <path d="M11533 14320 l-33 -7 -32 -26 -33 -25 -76 -123 -77 -124 -87 -145 -88 -145 -92 -145 -92 -145 -58 -95 -58 -95 -64 -110 -65 -109 -27 -41 -28 -40 -50 -80 -49 -80 -46 -75 -45 -75 -89 -142 -89 -141 -60 -98 -60 -97 -51 -86 -51 -86 -116 -185 -116 -185 -91 -145 -91 -145 -54 -90 -55 -90 -87 -143 -88 -143 -25 -39 -25 -39 -99 -163 -99 -163 -52 -80 -52 -80 -64 -105 -63 -105 -68 -110 -67 -110 -79 -130 -79 -130 -103 -165 -103 -165 -47 -75 -47 -75 -106 -166 -106 -165 -31 -60 -31 -59 -27 -22 -27 -23 -11 0 -11 0 -15 38 -14 37 -96 155 -95 155 -35 60 -35 60 -48 74 -47 73 -171 282 -171 281 -81 135 -82 135 -48 75 -48 75 -59 98 -58 98 -39 62 -38 62 -110 185 -111 185 -72 120 -72 120 -82 130 -82 130 -64 105 -63 105 -56 95 -57 95 -39 64 -40 64 -104 166 -104 166 -65 110 -64 110 -19 26 -18 26 -49 84 -49 84 -73 115 -73 115 -160 265 -160 265 -47 80 -47 80 -39 62 -39 62 -69 113 -69 113 -45 70 -45 70 -35 53 -35 53 -36 25 -36 24 -2140 0 -2140 0 -32 -19 -31 -20 -7 -93 -6 -93 3 -7002 3 -7002 18 -18 18 -18 1863 0 1863 0 16 14 17 13 -4 3727 -4 3726 -6 138 -6 138 15 5 14 6 31 -22 30 -21 0 -29 0 -28 43 -54 44 -53 18 -35 18 -35 97 -145 97 -145 48 -80 49 -80 54 -85 55 -85 84 -129 84 -128 45 -77 45 -76 79 -120 79 -120 42 -70 42 -70 55 -85 55 -85 42 -65 42 -65 78 -120 79 -120 76 -125 76 -125 67 -105 68 -105 112 -177 112 -178 111 -172 111 -173 48 -80 48 -80 57 -85 57 -85 63 -105 63 -105 92 -140 92 -140 40 -70 40 -70 115 -175 115 -175 48 -80 47 -80 43 -65 42 -65 109 -172 109 -172 140 -220 140 -221 109 -173 109 -172 56 -85 55 -85 30 -33 30 -32 32 0 32 0 34 38 34 38 54 89 53 90 62 95 62 95 63 105 63 105 42 65 43 65 43 75 43 75 85 131 86 132 95 148 95 148 59 95 58 96 61 100 60 100 55 85 55 85 32 50 32 50 45 70 44 70 64 105 64 105 52 80 51 80 65 105 65 105 103 165 103 165 80 125 81 125 61 100 62 100 118 185 118 185 55 90 55 90 55 85 55 85 32 50 32 50 64 103 64 103 42 67 43 67 69 115 70 115 95 145 94 145 108 170 108 170 61 95 61 95 87 136 87 137 0 9 0 9 34 53 35 53 20 20 21 19 0 29 0 29 20 11 19 10 11 38 10 37 29 35 30 35 11 -11 11 -11 0 -49 0 -49 -3 -1485 -3 -1485 8 -28 9 -27 21 -12 21 -11 1830 2 1831 2 18 17 18 18 8 55 9 54 -6 4647 -5 4647 -29 28 -29 28 -2127 2 -2127 1 -32 -8z"/>
+      <path d="M12124 4120 l-21 -8 -12 -33 -11 -32 0 -1972 0 -1973 19 -23 19 -24 1871 0 1870 0 13 13 13 13 0 1994 0 1994 -21 28 -21 28 -1849 2 -1849 1 -21 -8z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-fx"><div class="grid"></div></div>
+  <div class="wrap inner">
+    <svg class="logo"><use href="#ms-logo"/></svg>
+    <p class="eyebrow">Morrell Strategy</p>
+    <h1>Done-for-you, <span class="accent">human-led</span> YouTube growth.</h1>
+    <p class="sub">For 7 to 8-figure operators who want their channel to build the business, not just rack up views. We run the strategy, the ideas, the scripting, and the systems that keep it going, backed by 4 billion+ views and 45 million+ subscribers across our clients.</p>
+    <a class="btn" href="https://cal.com/dominic-morrell-2/youtube-audit-call">Book a free channel audit</a>
+  </div>
+</header>
+
+<!-- WHO IT'S FOR -->
+<section class="block">
+  <div class="wrap">
+    <h2>Who we work with</h2>
+    <p class="intro">Established operators who want their channel to build the business, not just rack up views. You're a fit if:</p>
+    <div class="pill-row">
+      <span class="pill">Service business or SaaS</span>
+      <span class="pill">7 to 8-figure revenue</span>
+      <span class="pill">You're the decision-maker</span>
+      <span class="pill">English-language content</span>
+    </div>
+    <div class="fit">
+      <div class="card yes"><h3>It fits you if</h3><p>You have real expertise and a genuine point of view, and you want that turned into content that reaches the right people.</p></div>
+      <div class="card"><h3>It's not for you if</h3><p>You want faceless videos, AI-written scripts, or reach for the sake of reach.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="block">
+  <div class="wrap">
+    <h2>What's holding your channel back</h2>
+    <p class="intro">Most people guess wrong about which one is actually theirs. We see the same handful over and over, and we fix every one.</p>
+    <div class="grid g3">
+      <div class="card"><div class="num">01</div><h3>The channel isn't growing</h3><p>A few hundred views a video. The reach isn't there yet, so there's nothing to convert and nothing to build on.</p></div>
+      <div class="card"><div class="num">02</div><h3>The content isn't good enough</h3><p>It gets made without a real strategy or a genuine point of view, so it never breaks out.</p></div>
+      <div class="card"><div class="num">03</div><h3>There's no system</h3><p>No ideation process, no thumbnail or packaging process. Every video starts from a blank page.</p></div>
+      <div class="card"><div class="num">04</div><h3>Production depends on you</h3><p>An editor who needs too much hand-holding, so nothing ships unless you're in the weeds.</p></div>
+      <div class="card"><div class="num">05</div><h3>Views but no business</h3><p>Almost all the content sits at the top of the funnel, so the channel racks up views without bringing in clients.</p></div>
+      <div class="card" style="display:flex;align-items:center"><p style="color:var(--text);font-weight:700;font-size:1.15rem">Whichever it is, we fix <span class="accent">all of them.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="block">
+  <div class="wrap">
+    <h2>We run your whole channel</h2>
+    <p class="intro">Most providers sell you one piece of the machine. We own the part that decides whether a channel grows, the strategy and the ideas, then build the operation around it and run it for you.</p>
+    <div class="grid g3">
+      <div class="card"><div class="step">01 / Research</div><h3>Find what will work</h3><p>Market and competitor research, positioning, and a full read of your channel's data, plus your first month of video ideas, each with the thumbnail, the title, and the evidence for why it'll perform.</p></div>
+      <div class="card"><div class="step">02 / Execution</div><h3>Make every video</h3><p>We storyboard each video with you, make and review the thumbnails, review the edits, publish on the new system, and review the performance of every single video.</p></div>
+      <div class="card"><div class="step">03 / Systems</div><h3>Keep it running</h3><p>A steady cadence for prep, posting, and analysis, SOPs for the operational gaps, and mapped growth projections, so the channel compounds instead of stalling.</p></div>
+    </div>
+    <p class="closer">It's human-led. The strategy and creative direction come from people who know what they're doing, not a chatbot writing generic content.</p>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="block">
+  <div class="wrap">
+    <h2>What's included</h2>
+    <div class="deliverables-lead"><span>4 or 8 YouTube videos a month</span>, done for you end to end.</div>
+    <div class="grid g3">
+      <div class="card"><div class="num">01</div><h3>Strategy</h3><p>Positioning, branding, and the content funnel.</p></div>
+      <div class="card"><div class="num">02</div><h3>Ideation</h3><p>Topics, unique angles, and titles, all driven by data.</p></div>
+      <div class="card"><div class="num">03</div><h3>Thumbnails</h3><p>Multiple concepts per video.</p></div>
+      <div class="card"><div class="num">04</div><h3>Scripting &amp; outlining</h3><p>Collaborative, and built around your style.</p></div>
+      <div class="card"><div class="num">05</div><h3>Editing</h3><p>Includes edit reviews.</p></div>
+      <div class="card"><div class="num">06</div><h3>Data analysis &amp; reporting</h3><p>Every video reviewed, so the next one is better.</p></div>
+      <div class="card"><div class="num">07</div><h3>Project management</h3><p>The whole operation managed and systemized.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 90 DAY PLAN -->
+<section class="block">
+  <div class="wrap">
+    <h2>Our 90-day plan</h2>
+    <p class="intro">Structured as 90 days, so there's time for results to start without it being a heavy commitment.</p>
+    <div class="timeline">
+      <div class="card phase"><div class="step">Phase 1</div><h3>Strategy</h3><ul>
+        <li>Market and competitor research</li>
+        <li>Brand positioning and style</li>
+        <li>Full data analysis of your channel</li>
+        <li>Project management system set up</li>
+        <li>First month of ideas, with thumbnails, titles, and the evidence behind each</li>
+      </ul></div>
+      <div class="card phase"><div class="step">Phase 2</div><h3>Execution</h3><ul>
+        <li>Structuring and storyboarding each video with you</li>
+        <li>Thumbnails created and reviewed</li>
+        <li>Edits and edit reviews</li>
+        <li>Publishing the first videos together on the new system</li>
+        <li>Performance review of every video</li>
+      </ul></div>
+      <div class="card phase"><div class="step">Phase 3</div><h3>Systems</h3><ul>
+        <li>A consistent prep, posting, and analysis cadence</li>
+        <li>Operational gaps fixed and turned into SOPs</li>
+        <li>The next set of ideas and concepts prepared</li>
+        <li>Growth projections mapped</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="block">
+  <div class="wrap">
+    <div class="guarantee">
+      <p class="eyebrow">Our guarantee</p>
+      <p>If you aren't happy with the ideas we suggest, you get a full refund.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOME -->
+<section class="block">
+  <div class="wrap">
+    <h2>What you walk away with</h2>
+    <div class="grid g2">
+      <div class="card"><h3>A channel built around your expertise</h3><p>One that brings in clients, attracts talent, opens doors to partners and investors, and establishes you as a genuine authority in your industry.</p></div>
+      <div class="card"><h3>A repeatable system</h3><p>For ideas, production, and analysis, that does not collapse when the engagement ends.</p></div>
+      <div class="card"><h3>Clear positioning</h3><p>So you are not reinventing your angle every week.</p></div>
+      <div class="card"><h3>A long-term brand asset</h3><p>That keeps working, and keeps compounding, long after each video is published.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="block">
+  <div class="wrap">
+    <h2>The track record</h2>
+    <div class="stats">
+      <div class="stat"><div class="n">4B+</div><div class="l">organic long-form views across clients</div></div>
+      <div class="stat"><div class="n">45M+</div><div class="l">subscribers grown</div></div>
+      <div class="stat"><div class="n">8-figure</div><div class="l">brands worked with</div></div>
+      <div class="stat"><div class="n">9-figure</div><div class="l">founders advised</div></div>
+    </div>
+    <p class="creators">Strategy and growth for multi-million-subscriber channels including <b>Neil Patel</b>, <b>Kwebbelkop</b>, <b>WillNE</b>, <b>Chris Bumstead</b>, and <b>Daniel Iles</b>.</p>
+    <div class="results">
+      <div class="result"><span class="dot"></span><p><b>A $3M/month CEO, from a standing start.</b> <span>Six figures in attributable revenue, his first podcast, and what he calls his most valuable hiring funnel.</span></p></div>
+      <div class="result"><span class="dot"></span><p><b>A coaching business scaled from $180k to $565k per month.</b> <span>Across organic and paid combined.</span></p></div>
+      <div class="result"><span class="dot"></span><p><b>$55k/month attributed to YouTube</b> <span>for a coaching offer.</span></p></div>
+      <div class="result"><span class="dot"></span><p><b>A $2M/month CEO grew from 2k to 7.5k subscribers in under three months.</b></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENT -->
+<section class="block">
+  <div class="wrap">
+    <h2>How we're different</h2>
+    <div class="grid g3">
+      <div class="card"><h3>We diagnose before we prescribe</h3><p>We find the real bottleneck from your channel first, and fix the foundation (targeting, positioning, packaging) before we touch tactics. A great edit on the wrong idea still fails.</p></div>
+      <div class="card"><h3>It's human-led</h3><p>People do the thinking and the creative direction, not an AI writing filler. We use internal systems to produce efficiently, but the strategy stays with us.</p></div>
+      <div class="card"><h3>Every idea comes with evidence</h3><p>Each video idea comes with the data behind it, not a hunch. Each rule we apply exists because of a specific failure we've already seen.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block">
+  <div class="wrap">
+    <h2>Common questions</h2>
+    <div class="faq">
+      <div class="qa"><h3>How much of my time does this take?</h3><p>Far less than running it yourself. Just the parts that genuinely need you: your unique insights, recording, and quick reviews. Expect around 2 to 4 hours per week.</p></div>
+      <div class="qa"><h3>Is this just another agency?</h3><p>No. Most agencies run the same playbook on every account. We do the strategic work ourselves, build everything around your specific business, and give you the choice of staffing your own team or having us run it.</p></div>
+      <div class="qa"><h3>Do you use AI to write the content?</h3><p>No. The strategy and the ideas come directly from us and our billions of views of experience. We only use tools to make production faster, not to replace thinking.</p></div>
+      <div class="qa"><h3>What happens after 90 days?</h3><p>You have a working channel and a system that runs. Whether we built your internal team or ran it as your agency, you are left with positioning, SOPs, and a repeatable process, not a dependency that collapses when we step back.</p></div>
+      <div class="qa"><h3>How quickly will I see results?</h3><p>It depends on what results mean to you. Booking your first sales calls can happen from your first video; reaching a hundred thousand subscribers from zero takes much longer. With most people we work with, we'd expect you to start booking calls and closing deals within the first 90 days.</p></div>
+      <div class="qa"><h3>Do you write all the scripts?</h3><p>Rarely. If you're the subject matter expert, other people shouldn't be injecting their knowledge and framing it as yours. We script the parts that don't need your expertise, where appropriate, and many formats (like vlogs) need little scripting at all.</p></div>
+      <div class="qa"><h3>What if I already have editors or thumbnail designers?</h3><p>If you'd rather keep your current production team and have us focus on strategy, ideation, scripting, and directing them, that's an option. We'd just need to make sure they can deliver the quality required to succeed.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2>It starts with a free, live audit of your channel.</h2>
+    <p class="intro">On the call, we read your channel live, diagnose what's actually holding it back, and show you exactly what we'd do about it. We'll also talk through what working together could look like.</p>
+    <div class="cta-points">
+      <div class="card"><h3>The real bottleneck</h3><p>Reach, content, packaging, or funnel, verified from your channel rather than guessed.</p></div>
+      <div class="card"><h3>A clear picture</h3><p>Of what we'd change, and why each change works.</p></div>
+      <div class="card"><h3>A plan you can use</h3><p>Whether or not we end up working together.</p></div>
+    </div>
+    <a class="btn" href="https://cal.com/dominic-morrell-2/youtube-audit-call">Book your free audit</a>
+    <p class="cta-note">Takes one call. Free. No obligation to continue.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <svg class="logo"><use href="#ms-logo"/></svg>
+    <div>Morrell Strategy</div>
+    <div class="links">
+      <a href="https://www.youtube.com/@dominicmxrrell">YouTube</a>
+      <a href="https://www.instagram.com/dominicmxrrell">Instagram</a>
+      <a href="https://morrellstrategy.com">Home</a>
+    </div>
+    <div class="copy">&copy; 2026 Morrell Strategy. Human-led YouTube growth, done for you.</div>
+  </div>
+</footer>
+
+</body>
+</html>
