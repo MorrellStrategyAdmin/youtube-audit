@@ -67,11 +67,16 @@
   .deliverables-lead{background:linear-gradient(135deg,rgba(79,140,255,.12),rgba(79,140,255,.03));border:1px solid rgba(79,140,255,.28);border-radius:14px;padding:22px 24px;margin-top:24px;font-size:1.15rem;font-weight:700}
   .deliverables-lead span{color:var(--accent)}
 
-  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
-  .phase .step{color:var(--accent)}
-  .phase ul{list-style:none;margin-top:6px}
-  .phase li{color:var(--muted);font-size:.95rem;padding-left:18px;position:relative;margin:7px 0}
-  .phase li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.7}
+  .timeline{position:relative;margin-top:30px}
+  .timeline::before{content:"";position:absolute;left:21px;top:14px;bottom:14px;width:2px;background:linear-gradient(to bottom,var(--accent),rgba(79,140,255,.12))}
+  .tnode{position:relative;display:flex;gap:20px;padding-bottom:30px}
+  .tnode:last-child{padding-bottom:0}
+  .tnum{flex:0 0 44px;width:44px;height:44px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);color:var(--accent);font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 0 0 5px var(--bg)}
+  .tbody{padding-top:5px}
+  .tbody h3{font-size:1.25rem;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+  .tbody ul{list-style:none}
+  .tbody li{color:var(--muted);font-size:.97rem;padding-left:18px;position:relative;margin:7px 0}
+  .tbody li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.7}
 
   .guarantee{background:linear-gradient(135deg,rgba(79,140,255,.14),rgba(20,48,110,.18));border:1px solid rgba(79,140,255,.35);border-radius:16px;padding:34px;text-align:center;margin-top:8px}
   .guarantee .eyebrow{color:var(--accent)}
@@ -244,26 +249,44 @@
     <h2>Our 90-day plan</h2>
     <p class="intro">Structured as 90 days, so there's time for results to start without it being a heavy commitment.</p>
     <div class="timeline">
-      <div class="card phase"><div class="step">Phase 1</div><h3>Strategy</h3><ul>
-        <li>Market and competitor research</li>
-        <li>Brand positioning and style</li>
-        <li>Full data analysis of your channel</li>
-        <li>Project management system set up</li>
-        <li>First month of ideas, with thumbnails, titles, and the evidence behind each</li>
-      </ul></div>
-      <div class="card phase"><div class="step">Phase 2</div><h3>Execution</h3><ul>
-        <li>Structuring and storyboarding each video with you</li>
-        <li>Thumbnails created and reviewed</li>
-        <li>Edits and edit reviews</li>
-        <li>Publishing the first videos together on the new system</li>
-        <li>Performance review of every video</li>
-      </ul></div>
-      <div class="card phase"><div class="step">Phase 3</div><h3>Systems</h3><ul>
-        <li>A consistent prep, posting, and analysis cadence</li>
-        <li>Operational gaps fixed and turned into SOPs</li>
-        <li>The next set of ideas and concepts prepared</li>
-        <li>Growth projections mapped</li>
-      </ul></div>
+      <div class="tnode">
+        <div class="tnum">1</div>
+        <div class="tbody">
+          <h3>Strategy</h3>
+          <ul>
+            <li>Market and competitor research</li>
+            <li>Brand positioning and style</li>
+            <li>Full data analysis of your channel</li>
+            <li>Project management system set up</li>
+            <li>First month of ideas, with thumbnails, titles, and the evidence behind each</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tnode">
+        <div class="tnum">2</div>
+        <div class="tbody">
+          <h3>Execution</h3>
+          <ul>
+            <li>Structuring and storyboarding each video with you</li>
+            <li>Thumbnails created and reviewed</li>
+            <li>Edits and edit reviews</li>
+            <li>Publishing the first videos together on the new system</li>
+            <li>Performance review of every video</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tnode">
+        <div class="tnum">3</div>
+        <div class="tbody">
+          <h3>Systems</h3>
+          <ul>
+            <li>A consistent prep, posting, and analysis cadence</li>
+            <li>Operational gaps fixed and turned into SOPs</li>
+            <li>The next set of ideas and concepts prepared</li>
+            <li>Growth projections mapped</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -301,7 +324,7 @@
       <div class="stat"><div class="n">8-figure</div><div class="l">brands worked with</div></div>
       <div class="stat"><div class="n">9-figure</div><div class="l">founders advised</div></div>
     </div>
-    <p class="creators">Strategy and growth for multi-million-subscriber channels including <b>Neil Patel</b>, <b>Kwebbelkop</b>, <b>WillNE</b>, <b>Chris Bumstead</b>, and <b>Daniel Iles</b>.</p>
+    <p class="creators">Strategy and growth for multi-million-subscriber channels including <b>PlayStation</b>, <b>Neil Patel</b>, <b>Kwebbelkop</b>, <b>WillNE</b>, <b>Chris Bumstead</b>, and <b>Daniel Iles</b>.</p>
     <div class="logo-grid">
       <img loading="lazy" src="proof/creator1.png" alt="Channel we've worked with">
       <img loading="lazy" src="proof/creator2.png" alt="Channel we've worked with">
@@ -450,7 +473,7 @@ function msRunCounters(instant){
 }
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub';
+  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub, .tnode';
   var els=[].slice.call(document.querySelectorAll(sel));
   if(reduce){ msRunCounters(true); return; }
   els.forEach(function(el){ el.classList.add('reveal'); });
