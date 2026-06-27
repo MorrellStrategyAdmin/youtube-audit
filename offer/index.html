@@ -167,6 +167,35 @@
   .faq details.qa summary::after{content:"+";color:var(--accent);font-size:1.6rem;font-weight:300;line-height:1;transition:transform .2s ease}
   .faq details.qa[open] summary::after{transform:rotate(45deg)}
   .faq details.qa p{color:var(--muted);font-size:.98rem;padding:0 20px 18px;margin:0}
+
+  /* icons */
+  .ic{width:18px;height:18px;flex:0 0 auto;vertical-align:middle}
+  .ic.ok{color:var(--accent)}
+  .ic.no{color:var(--faint)}
+  /* who: checklist + fit */
+  .checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 26px;margin-top:22px}
+  .check-item{display:flex;align-items:center;gap:10px;font-size:1rem;font-weight:600}
+  .check-item .ic{width:20px;height:20px}
+  .fit .card h3{display:flex;align-items:center;gap:8px}
+  .fit-yes{border-color:rgba(79,140,255,.4)}
+  @media(max-width:560px){.checklist{grid-template-columns:1fr}}
+  /* different: vs comparison */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+  .vs-col{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .vs-us{border-color:rgba(79,140,255,.4);background:linear-gradient(180deg,rgba(79,140,255,.07),transparent)}
+  .vs-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.12rem;margin-bottom:14px}
+  .vs-them .vs-head{color:var(--muted)}
+  .vs-col ul{list-style:none}
+  .vs-col li{position:relative;padding-left:16px;font-size:.97rem;margin:9px 0;color:var(--muted)}
+  .vs-col li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--faint)}
+  .vs-them li{opacity:.8}
+  .vs-us li{color:var(--text)}
+  .vs-us li::before{background:var(--accent)}
+  @media(max-width:560px){.vs{grid-template-columns:1fr}}
+  /* guarantee seal */
+  .seal{width:104px;height:104px;border-radius:50%;border:2px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(79,140,255,.08);box-shadow:0 0 0 7px rgba(79,140,255,.05);margin:0 auto 20px}
+  .seal-top{font-size:1.7rem;font-weight:800;color:var(--accent);line-height:1}
+  .seal-bot{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:3px}
 </style>
 </head>
 <body>
@@ -181,6 +210,8 @@
       <path d="M12124 4120 l-21 -8 -12 -33 -11 -32 0 -1972 0 -1973 19 -23 19 -24 1871 0 1870 0 13 13 13 13 0 1994 0 1994 -21 28 -21 28 -1849 2 -1849 1 -21 -8z"/>
       </g>
     </symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
   </defs>
 </svg>
 
@@ -201,14 +232,14 @@
   <div class="wrap">
     <h2>Who we work with</h2>
     <p class="intro">Established operators who want their channel to build the business, not just rack up views. You're a fit if:</p>
-    <div class="pill-row">
-      <span class="pill">Service business or SaaS</span>
-      <span class="pill">At least $20k/mo in revenue</span>
-      <span class="pill">English-language content</span>
+    <div class="checklist">
+      <div class="check-item"><svg class="ic ok"><use href="#ic-check"/></svg><span>Service business or SaaS</span></div>
+      <div class="check-item"><svg class="ic ok"><use href="#ic-check"/></svg><span>At least $20k/mo in revenue</span></div>
+      <div class="check-item"><svg class="ic ok"><use href="#ic-check"/></svg><span>English-language content</span></div>
     </div>
     <div class="fit">
-      <div class="card yes"><h3>It fits you if</h3><p>You have real expertise and a genuine point of view, and you want that turned into content that reaches the right people.</p></div>
-      <div class="card"><h3>It's not for you if</h3><p>You want faceless videos, AI-written scripts, or reach for the sake of reach.</p></div>
+      <div class="card fit-yes"><h3><svg class="ic ok"><use href="#ic-check"/></svg>It fits you if</h3><p>You have real expertise and a genuine point of view, and you want that turned into content that reaches the right people.</p></div>
+      <div class="card fit-no"><h3><svg class="ic no"><use href="#ic-x"/></svg>It's not for you if</h3><p>You want faceless videos, AI-written scripts, or reach for the sake of reach.</p></div>
     </div>
   </div>
 </section>
@@ -326,6 +357,7 @@
 <section class="block">
   <div class="wrap">
     <div class="guarantee">
+      <div class="seal"><span class="seal-top">100%</span><span class="seal-bot">refund</span></div>
       <p class="eyebrow">Our guarantee</p>
       <p>If you aren't happy with the ideas we suggest, you get a full refund.</p>
     </div>
@@ -357,10 +389,25 @@ window.addEventListener('message',function(ev){if(ev.data&&ev.data.mProofHeight)
 <section class="block">
   <div class="wrap">
     <h2>How we're different</h2>
-    <div class="grid g3">
-      <div class="card"><h3>We diagnose before we prescribe</h3><p>We find the real bottleneck from your channel first, and fix the foundation (targeting, positioning, packaging) before we touch tactics. A great edit on the wrong idea still fails.</p></div>
-      <div class="card"><h3>It's human-led</h3><p>People do the thinking and the creative direction, not an AI writing filler. We use internal systems to produce efficiently, but the strategy stays with us.</p></div>
-      <div class="card"><h3>Every idea comes with evidence</h3><p>Each video idea comes with the data behind it, not a hunch. Each rule we apply exists because of a specific failure we've already seen.</p></div>
+    <div class="vs">
+      <div class="vs-col vs-them">
+        <div class="vs-head"><svg class="ic no"><use href="#ic-x"/></svg>The typical agency</div>
+        <ul>
+          <li>Runs the same playbook on every account</li>
+          <li>Sells you one piece, editing or production</li>
+          <li>Leans on AI-written, generic filler</li>
+          <li>Chases views, not business</li>
+        </ul>
+      </div>
+      <div class="vs-col vs-us">
+        <div class="vs-head"><svg class="ic ok"><use href="#ic-check"/></svg>Morrell Strategy</div>
+        <ul>
+          <li>Diagnoses your real bottleneck first, then fixes the foundation</li>
+          <li>Owns the strategy and ideas, and runs the whole operation</li>
+          <li>Human-led, built on your genuine point of view</li>
+          <li>Every idea backed by data, built to bring in clients</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -422,7 +469,7 @@ function msRunCounters(instant){
 }
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub, .tnode, .flow-step';
+  var sel='section.block h2, .block .intro, .card, .stat, .qa, .result, .pill, .deliverables-lead, .guarantee, .creators, .closer, .cta h2, .case, .proof-sub, .tnode, .flow-step, .check-item, .vs-col';
   var els=[].slice.call(document.querySelectorAll(sel));
   if(reduce){ msRunCounters(true); return; }
   els.forEach(function(el){ el.classList.add('reveal'); });
