@@ -14,6 +14,9 @@
 <meta property="og:image" content="https://morrellstrategy.com/og-image.png">
 <meta property="og:url" content="https://morrellstrategy.com/offer">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -217,9 +220,41 @@
   @media(max-width:640px){.deliver-grid{grid-template-columns:1fr}}
   /* walk away: outcome cards */
   .outcome{border-left:3px solid var(--accent);background:linear-gradient(100deg,rgba(79,140,255,.06),transparent 55%)}
+
+  /* ============ PREMIUM LAYER ============ */
+  :root{--grad:linear-gradient(135deg,#6AA5FF,#3D6BFF)}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;letter-spacing:-.011em}
+  h1,h2,.sec-head{font-family:'Space Grotesk','Inter',sans-serif;letter-spacing:-.032em}
+  /* atmosphere */
+  .ambient{position:fixed;z-index:0;pointer-events:none;border-radius:50%}
+  .ambient.a1{top:-12%;right:-6%;width:46vw;height:46vw;background:radial-gradient(circle,rgba(79,140,255,.15),transparent 68%);filter:blur(80px)}
+  .ambient.a2{bottom:-14%;left:-8%;width:52vw;height:52vw;background:radial-gradient(circle,rgba(46,86,190,.12),transparent 68%);filter:blur(95px)}
+  .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  header.hero, section, footer{position:relative;z-index:1}
+  /* hero */
+  .hero{padding:94px 0 80px}
+  .hero .eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:7px 16px 7px 14px;color:#C7CEDA;font-weight:600;font-size:.8rem;letter-spacing:.02em;text-transform:none}
+  .hero .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#5B9CFF;box-shadow:0 0 12px #5B9CFF}
+  .hero h1{font-size:clamp(2.7rem,6.4vw,4.5rem);line-height:1.03;letter-spacing:-.035em;max-width:17ch;margin-top:22px;font-weight:700}
+  .hero h1 .accent{background:linear-gradient(110deg,#8FB8FF,#3D6BFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p.sub{font-size:clamp(1.05rem,1.5vw,1.26rem);max-width:60ch;color:#9BA4B4;margin:24px auto 34px}
+  /* buttons */
+  .btn{background:var(--grad);color:#06101f;font-weight:700;border-radius:14px;padding:17px 34px;box-shadow:0 12px 44px rgba(79,140,255,.42),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .18s cubic-bezier(.2,.7,.2,1),box-shadow .18s ease}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 18px 56px rgba(79,140,255,.58),inset 0 1px 0 rgba(255,255,255,.35)}
+  /* rhythm + headings */
+  section.block{padding:66px 0}
+  h2,.sec-head{font-size:clamp(1.95rem,3.7vw,2.7rem);font-weight:700;line-height:1.08}
+  /* card polish */
+  .card,.vs-col,.diag-card,.deliver-item,.flow-step{background:rgba(255,255,255,.035)}
+  .card:hover,.flow-step:hover,.diag-card:hover,.deliver-item:hover{border-color:rgba(79,140,255,.45);box-shadow:0 18px 50px rgba(0,0,0,.5),0 0 28px rgba(79,140,255,.08)}
+  .seal{box-shadow:0 0 0 7px rgba(79,140,255,.05),0 0 44px rgba(79,140,255,.28)}
+  footer{background:linear-gradient(180deg,transparent,rgba(79,140,255,.05))}
 </style>
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
+<div class="ambient a1" aria-hidden="true"></div>
+<div class="ambient a2" aria-hidden="true"></div>
 
 <!-- inline logo (defined once) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
