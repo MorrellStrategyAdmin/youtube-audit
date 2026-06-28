@@ -127,7 +127,7 @@
   .site-footer{border-top:1px solid var(--line);margin-top:36px;padding:30px 24px 44px;background:var(--bg)}
   .foot-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
   .foot-brand{display:flex;align-items:center;gap:10px}
-  .foot-brand img{height:26px;width:auto;display:block}
+  .foot-brand img,.foot-brand svg{height:26px;width:auto;display:block}
   .foot-brand span{font-size:0.95rem;font-weight:600;color:var(--text);letter-spacing:-0.01em}
   .foot-links{display:flex;gap:22px}
   .foot-links a{font-size:0.9rem;color:var(--muted);text-decoration:none}
@@ -148,7 +148,8 @@
 <body>
   <div class="hero-fx" aria-hidden="true"><div class="fx-glow"></div><div class="fx-glow two"></div><div class="fx-grid"></div></div>
   <div class="page">
-    <div class="brandmark reveal"><img src="/logo.png" alt="Morrell Strategy" class="brand-logo" /></div>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14306E"/><stop offset="1" stop-color="#3D8BFF"/></linearGradient><symbol id="ms-logo" viewBox="0 0 1600 1439"><g transform="translate(0,1439) scale(0.1,-0.1)" fill="url(#mg)" stroke="none"><path d="M11533 14320 l-33 -7 -32 -26 -33 -25 -76 -123 -77 -124 -87 -145 -88 -145 -92 -145 -92 -145 -58 -95 -58 -95 -64 -110 -65 -109 -27 -41 -28 -40 -50 -80 -49 -80 -46 -75 -45 -75 -89 -142 -89 -141 -60 -98 -60 -97 -51 -86 -51 -86 -116 -185 -116 -185 -91 -145 -91 -145 -54 -90 -55 -90 -87 -143 -88 -143 -25 -39 -25 -39 -99 -163 -99 -163 -52 -80 -52 -80 -64 -105 -63 -105 -68 -110 -67 -110 -79 -130 -79 -130 -103 -165 -103 -165 -47 -75 -47 -75 -106 -166 -106 -165 -31 -60 -31 -59 -27 -22 -27 -23 -11 0 -11 0 -15 38 -14 37 -96 155 -95 155 -35 60 -35 60 -48 74 -47 73 -171 282 -171 281 -81 135 -82 135 -48 75 -48 75 -59 98 -58 98 -39 62 -38 62 -110 185 -111 185 -72 120 -72 120 -82 130 -82 130 -64 105 -63 105 -56 95 -57 95 -39 64 -40 64 -104 166 -104 166 -65 110 -64 110 -19 26 -18 26 -49 84 -49 84 -73 115 -73 115 -160 265 -160 265 -47 80 -47 80 -39 62 -39 62 -69 113 -69 113 -45 70 -45 70 -35 53 -35 53 -36 25 -36 24 -2140 0 -2140 0 -32 -19 -31 -20 -7 -93 -6 -93 3 -7002 3 -7002 18 -18 18 -18 1863 0 1863 0 16 14 17 13 -4 3727 -4 3726 -6 138 -6 138 15 5 14 6 31 -22 30 -21 0 -29 0 -28 43 -54 44 -53 18 -35 18 -35 97 -145 97 -145 48 -80 49 -80 54 -85 55 -85 84 -129 84 -128 45 -77 45 -76 79 -120 79 -120 42 -70 42 -70 55 -85 55 -85 42 -65 42 -65 78 -120 79 -120 76 -125 76 -125 67 -105 68 -105 112 -177 112 -178 111 -172 111 -173 48 -80 48 -80 57 -85 57 -85 63 -105 63 -105 92 -140 92 -140 40 -70 40 -70 115 -175 115 -175 48 -80 47 -80 43 -65 42 -65 109 -172 109 -172 140 -220 140 -221 109 -173 109 -172 56 -85 55 -85 30 -33 30 -32 32 0 32 0 34 38 34 38 54 89 53 90 62 95 62 95 63 105 63 105 42 65 43 65 43 75 43 75 85 131 86 132 95 148 95 148 59 95 58 96 61 100 60 100 55 85 55 85 32 50 32 50 45 70 44 70 64 105 64 105 52 80 51 80 65 105 65 105 103 165 103 165 80 125 81 125 61 100 62 100 118 185 118 185 55 90 55 90 55 85 55 85 32 50 32 50 64 103 64 103 42 67 43 67 69 115 70 115 95 145 94 145 108 170 108 170 61 95 61 95 87 136 87 137 0 9 0 9 34 53 35 53 20 20 21 19 0 29 0 29 20 11 19 10 11 38 10 37 29 35 30 35 11 -11 11 -11 0 -49 0 -49 -3 -1485 -3 -1485 8 -28 9 -27 21 -12 21 -11 1830 2 1831 2 18 17 18 18 8 55 9 54 -6 4647 -5 4647 -29 28 -29 28 -2127 2 -2127 1 -32 -8z"/><path d="M12124 4120 l-21 -8 -12 -33 -11 -32 0 -1972 0 -1973 19 -23 19 -24 1871 0 1870 0 13 13 13 13 0 1994 0 1994 -21 28 -21 28 -1849 2 -1849 1 -21 -8z"/></g></symbol></defs></svg>
+    <div class="brandmark reveal"><svg class="brand-logo" viewBox="0 0 1600 1439" role="img" aria-label="Morrell Strategy"><use href="#ms-logo"/></svg></div>
 
     <h1 class="reveal" data-d="1">Add <span class="accent">$10K to $100K a month</span> to your business through <span class="underlined">YouTube<svg class="ul-svg" viewBox="0 0 320 14" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" vector-effect="non-scaling-stroke" d="M4,8.5 C72,4 144,11 214,7 C268,4 296,9 316,6"/></svg></span> in 90 days.</h1>
 
@@ -198,7 +199,7 @@
   <footer class="site-footer">
     <div class="foot-inner">
       <div class="foot-brand">
-        <img src="/logo.png" alt="Morrell Strategy logo" />
+        <svg viewBox="0 0 1600 1439" role="img" aria-label="Morrell Strategy"><use href="#ms-logo"/></svg>
         <span>Morrell Strategy</span>
       </div>
       <div class="foot-links">
