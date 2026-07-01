@@ -320,10 +320,10 @@
   /* why-youtube hub diagram */
   .hub{position:relative;max-width:960px;margin:30px auto 0;height:min(62vh,520px)}
   .hub-lines{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-  .hub-lines line{stroke:rgba(79,140,255,.32);stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:4 4}
+  .hub-lines path{fill:none;stroke:rgba(79,140,255,.4);stroke-width:1.5;stroke-dasharray:5 5;stroke-linecap:round}
   .hub-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:clamp(116px,14vw,150px);height:clamp(116px,14vw,150px);border-radius:50%;background:radial-gradient(circle at 50% 34%,rgba(79,140,255,.30),rgba(79,140,255,.05));border:1px solid rgba(79,140,255,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-weight:800;font-size:.95rem;box-shadow:0 0 60px rgba(79,140,255,.30)}
   .hub-core .ic{width:22px;height:22px;color:#d4e3ff}
-  .hub-node{position:absolute;transform:translate(-50%,-50%);z-index:2;width:clamp(166px,20vw,206px);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:border-color .2s ease,box-shadow .25s ease}
+  .hub-node{position:absolute;transform:translate(-50%,-50%);z-index:2;width:clamp(166px,20vw,206px);background:#13161f;border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:border-color .2s ease,box-shadow .25s ease}
   .hub-node:hover{border-color:rgba(79,140,255,.5);box-shadow:0 0 34px rgba(79,140,255,.3),0 16px 40px rgba(0,0,0,.5);z-index:3}
   .hub-node h3{font-size:1.02rem;font-weight:700;margin-bottom:4px}
   .hub-node p{color:var(--muted);font-size:.86rem;line-height:1.4}
@@ -395,7 +395,7 @@
     <h2>Why YouTube?</h2>
     <p class="intro">Done right, it pays you back in five ways at once.</p>
     <div class="hub">
-      <svg class="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="50" y2="12"/><line x1="50" y1="50" x2="85" y2="39"/><line x1="50" y1="50" x2="74" y2="87"/><line x1="50" y1="50" x2="26" y2="87"/><line x1="50" y1="50" x2="15" y2="39"/></svg>
+      <svg class="hub-lines" preserveAspectRatio="none" aria-hidden="true"></svg>
       <div class="hub-core"><svg class="ic"><use href="#ic-yt"/></svg><span>Your channel</span></div>
       <div class="hub-node hp1"><h3>A client acquisition engine</h3><p>Booked calls and new clients come straight from the channel, with real revenue you can attribute to it.</p></div>
       <div class="hub-node hp5"><h3>Reduces customer acquisition costs</h3><p>Clients come to you organically, so you rely less on paid ads to bring in new business.</p></div>
@@ -651,6 +651,38 @@ function msRunCounters(instant){
     c.addEventListener('click',toggle);
     c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
   });
+})();
+</script>
+<script>
+(function(){
+  var hub=document.querySelector('.hub'); if(!hub) return;
+  var svg=hub.querySelector('.hub-lines'), core=hub.querySelector('.hub-core');
+  function draw(){
+    if(!svg||!core) return;
+    if(!core.offsetParent || core.getBoundingClientRect().width===0){ svg.innerHTML=''; return; }
+    var hb=hub.getBoundingClientRect();
+    svg.setAttribute('viewBox','0 0 '+hb.width+' '+hb.height);
+    var cr=core.getBoundingClientRect();
+    var ccx=cr.left-hb.left+cr.width/2, ccy=cr.top-hb.top+cr.height/2, coreR=cr.width/2;
+    var d='';
+    hub.querySelectorAll('.hub-node').forEach(function(n){
+      var r=n.getBoundingClientRect();
+      var nx=r.left-hb.left+r.width/2, ny=r.top-hb.top+r.height/2;
+      var dx=nx-ccx, dy=ny-ccy, dist=Math.hypot(dx,dy)||1, ux=dx/dist, uy=dy/dist;
+      var sx=ccx+ux*(coreR+3), sy=ccy+uy*(coreR+3);
+      var hw=r.width/2, hh=r.height/2;
+      var td=Math.min(hw/Math.abs(ux||1e-6), hh/Math.abs(uy||1e-6));
+      var ex=nx-ux*(td+2), ey=ny-uy*(td+2);
+      var mx=(sx+ex)/2, my=(sy+ey)/2, k=dist*0.12;
+      var cx=mx-uy*k, cy=my+ux*k;
+      d+='M'+sx.toFixed(1)+' '+sy.toFixed(1)+' Q'+cx.toFixed(1)+' '+cy.toFixed(1)+' '+ex.toFixed(1)+' '+ey.toFixed(1)+' ';
+    });
+    svg.innerHTML='<path d="'+d.trim()+'"/>';
+  }
+  draw();
+  window.addEventListener('resize',draw,{passive:true});
+  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(draw); }
+  setTimeout(draw,300); setTimeout(draw,900);
 })();
 </script>
 </body>
