@@ -313,15 +313,15 @@
   .hero-faces .cname{font-size:.8rem;color:var(--muted);font-weight:500}
   @media(prefers-reduced-motion:reduce){.hero-clients{animation:none;opacity:1}}
   /* why-youtube hub diagram */
-  .hub{position:relative;max-width:940px;margin:30px auto 0;height:min(46vh,420px)}
+  .hub{position:relative;max-width:960px;margin:30px auto 0;height:min(62vh,520px)}
   .hub-lines{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   .hub-lines line{stroke:rgba(79,140,255,.32);stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:4 4}
   .hub-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:clamp(116px,14vw,150px);height:clamp(116px,14vw,150px);border-radius:50%;background:radial-gradient(circle at 50% 34%,rgba(79,140,255,.30),rgba(79,140,255,.05));border:1px solid rgba(79,140,255,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-weight:800;font-size:.95rem;box-shadow:0 0 60px rgba(79,140,255,.30)}
   .hub-core .ic{width:22px;height:22px;color:#d4e3ff}
-  .hub-node{position:absolute;transform:translate(-50%,-50%);z-index:2;width:clamp(188px,23vw,230px);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+  .hub-node{position:absolute;transform:translate(-50%,-50%);z-index:2;width:clamp(166px,20vw,206px);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
   .hub-node h3{font-size:1.02rem;font-weight:700;margin-bottom:4px}
   .hub-node p{color:var(--muted);font-size:.86rem;line-height:1.4}
-  .n-tl{left:20%;top:22%}.n-tr{left:80%;top:22%}.n-bl{left:20%;top:78%}.n-br{left:80%;top:78%}
+  .hp1{left:50%;top:12%}.hp2{left:85%;top:39%}.hp3{left:74%;top:87%}.hp4{left:26%;top:87%}.hp5{left:15%;top:39%}
   @media(max-width:760px){.hub{height:auto;display:flex;flex-direction:column;gap:12px}.hub-lines,.hub-core{display:none}.hub-node{position:static;transform:none;width:100%}}
 </style>
 </head>
@@ -385,15 +385,16 @@
 <!-- WHY YOUTUBE -->
 <section class="block">
   <div class="wrap">
-    <h2>The one marketing asset you actually own</h2>
-    <p class="intro">One channel, done right, pays you back in four ways at once.</p>
+    <h2>Why YouTube?</h2>
+    <p class="intro">Done right, it pays you back in five ways at once.</p>
     <div class="hub">
-      <svg class="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="20" y2="22"/><line x1="50" y1="50" x2="80" y2="22"/><line x1="50" y1="50" x2="20" y2="78"/><line x1="50" y1="50" x2="80" y2="78"/></svg>
-      <div class="hub-core"><svg class="ic"><use href="#ic-yt"/></svg><span>One channel</span></div>
-      <div class="hub-node n-tl"><h3>Reduces customer acquisition costs</h3><p>Clients come to you organically, so you rely less on paid ads to bring in new business.</p></div>
-      <div class="hub-node n-tr"><h3>It compounds</h3><p>Reach and leads keep growing between uploads, not just on the day you post.</p></div>
-      <div class="hub-node n-bl"><h3>Builds real authority and trust</h3><p>You become the name your market recognizes and takes seriously.</p></div>
-      <div class="hub-node n-br"><h3>It opens doors</h3><p>Clients, talent, partners, and investors all start coming to you.</p></div>
+      <svg class="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="50" y2="12"/><line x1="50" y1="50" x2="85" y2="39"/><line x1="50" y1="50" x2="74" y2="87"/><line x1="50" y1="50" x2="26" y2="87"/><line x1="50" y1="50" x2="15" y2="39"/></svg>
+      <div class="hub-core"><svg class="ic"><use href="#ic-yt"/></svg><span>Your channel</span></div>
+      <div class="hub-node hp1"><h3>A client acquisition engine</h3><p>Booked calls and new clients come straight from the channel, with real revenue you can attribute to it.</p></div>
+      <div class="hub-node hp5"><h3>Reduces customer acquisition costs</h3><p>Clients come to you organically, so you rely less on paid ads to bring in new business.</p></div>
+      <div class="hub-node hp2"><h3>It compounds</h3><p>Reach and leads keep growing between uploads, not just on the day you post.</p></div>
+      <div class="hub-node hp4"><h3>Builds real authority and trust</h3><p>You become the name your market recognizes and takes seriously.</p></div>
+      <div class="hub-node hp3"><h3>It opens doors</h3><p>Clients, talent, partners, and investors all start coming to you.</p></div>
     </div>
   </div>
 </section>
