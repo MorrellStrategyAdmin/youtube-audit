@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morrell Strategy | YouTube ROI Calculator</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:#0A0B0D;color:#E8EDF5;font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:46px 24px 70px}
+  .brandmark{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:#6B7280;font-weight:600;margin-bottom:26px}
+  .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#4F8CFF;font-weight:600;display:block}
+  .sec-head{font-family:'Space Grotesk','Inter',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-top:10px}
+.calc-root{--c-bg:#0A0D12;--c-panel:#12171F;--c-grid:rgba(120,170,235,0.06);--c-line:#232D3A;--c-ink:#E8EDF5;--c-muted:#76828F;--c-dim:#47515F;--c-signal:#4F8CFF;--c-warn:#FF6B4A;--c-amber:#E8C77A;--c-mono:'JetBrains Mono','SF Mono','Roboto Mono',ui-monospace,monospace;
+      background:var(--c-bg);background-image:linear-gradient(var(--c-grid) 1px,transparent 1px),linear-gradient(90deg,var(--c-grid) 1px,transparent 1px);background-size:28px 28px;color:var(--c-ink);font-family:var(--c-mono);border:1px solid var(--c-line);border-radius:8px;padding:34px 30px 36px;margin-top:36px}
+    .calc-root *{box-sizing:border-box}
+    .calc-topbar{border-bottom:1px solid var(--c-line);padding-bottom:16px;margin-bottom:26px}
+    .calc-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+    .calc-brand{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--c-signal)}
+    .calc-title{font-size:26px;font-weight:600;margin:8px 0 0;letter-spacing:-0.01em;color:var(--c-ink)}
+    .calc-meta{font-size:10px;color:var(--c-dim);text-align:right;line-height:1.6}
+    .calc-live{color:var(--c-signal)}
+    .calc-intro{font-size:12px;color:var(--c-muted);margin:12px 0 0;max-width:640px;line-height:1.6}
+    .calc-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:36px}
+    .calc-panel{background:var(--c-panel);border:1px solid var(--c-line);border-radius:3px;padding:20px 22px}
+    .calc-panel-label{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--c-muted);margin-bottom:18px;display:flex;justify-content:space-between}
+    .calc-dim2{color:var(--c-dim)}
+    .calc-field{margin-bottom:18px}
+    .calc-field-head{display:flex;justify-content:space-between;align-items:baseline}
+    .calc-field label{font-size:12px;font-weight:500;letter-spacing:0.04em;color:var(--c-ink);text-transform:uppercase}
+    .calc-code{font-size:10px;color:var(--c-dim);letter-spacing:0.05em}
+    .calc-sub2{font-size:10.5px;color:var(--c-muted);margin-top:3px}
+    .calc-inwrap{display:flex;align-items:center;border:1px solid var(--c-line);border-radius:2px;background:#0A0E14;overflow:hidden;height:42px;margin-top:7px}
+    .calc-prefix{padding-left:12px;color:var(--c-muted);font-size:13px}
+    .calc-suffix{padding-right:12px;color:var(--c-muted);font-size:13px}
+    .calc-inwrap input{flex:1;border:none;outline:none;padding:0 11px;font-family:var(--c-mono);font-size:15px;font-weight:500;color:var(--c-signal);font-variant-numeric:tabular-nums;width:100%;background:transparent}
+    .calc-roi-panel{background:var(--c-panel);border:1px solid var(--c-line);border-top:2px solid var(--c-signal);border-radius:3px;padding:22px 24px;margin-bottom:22px}
+    .calc-roi-head{display:flex;justify-content:space-between;align-items:baseline}
+    .calc-roi-head .l{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--c-muted)}
+    .calc-roi-head .r{font-size:10px;color:var(--c-dim)}
+    .calc-roi-big{font-size:58px;font-weight:700;line-height:1;margin:10px 0 6px;color:var(--c-signal);font-variant-numeric:tabular-nums}
+    .calc-roi-sub{font-size:11.5px;color:var(--c-muted)}
+    .calc-net-row{margin-top:15px;padding-top:14px;border-top:1px solid var(--c-line);display:flex;justify-content:space-between;font-size:12px}
+    .calc-net-row .l{color:var(--c-muted)}
+    .calc-net-row .v{font-weight:600;color:var(--c-signal)}
+    .calc-funnel-label{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--c-muted);margin-bottom:4px}
+    .calc-funnel-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--c-line)}
+    .calc-fr-left{display:flex;gap:10px;align-items:baseline}
+    .calc-fr-idx{font-size:10px;color:var(--c-dim);min-width:18px}
+    .calc-fr-label{font-size:12px;color:var(--c-ink)}
+    .calc-fr-note{font-size:10px;color:var(--c-muted)}
+    .calc-fr-val{font-variant-numeric:tabular-nums;font-weight:600;font-size:14px;color:var(--c-signal)}
+    .calc-readouts{margin-top:18px}
+    .calc-readout{padding:13px 0;border-bottom:1px solid var(--c-line)}
+    .calc-ro-label{font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-muted)}
+    .calc-ro-valrow{display:flex;align-items:baseline;gap:6px;margin-top:5px}
+    .calc-ro-val{font-weight:600;font-size:21px;color:var(--c-ink);line-height:1;letter-spacing:-0.01em;font-variant-numeric:tabular-nums}
+    .calc-ro-val.big{font-size:34px}
+    .calc-ro-val.sig{color:var(--c-signal)}
+    .calc-ro-unit{font-size:11px;color:var(--c-dim)}
+    .calc-note-box{margin-top:20px;padding:14px 16px;border:1px solid var(--c-line);border-left:2px solid var(--c-signal);border-radius:2px;background:var(--c-panel)}
+    .calc-note-box.amber{border-left-color:var(--c-amber);margin-top:14px}
+    .calc-note-title{font-size:11px;font-weight:600;color:var(--c-ink);text-transform:uppercase;letter-spacing:0.04em}
+    .calc-note-body{font-size:11.5px;color:var(--c-muted);margin-top:5px;line-height:1.55}
+    .calc-signal{color:var(--c-signal);font-weight:600}
+    .calc-ul{font-size:11.5px;color:var(--c-muted);margin:8px 0 0;padding-left:16px;line-height:1.7}
+    .calc-disclaimer{margin-top:18px;font-size:10px;color:var(--c-dim);line-height:1.6}
+    .calc-root input[type=number]::-webkit-outer-spin-button,.calc-root input[type=number]::-webkit-inner-spin-button{opacity:0.3;height:34px}
+    .calc-root ::selection{background:var(--c-signal);color:var(--c-bg)}
+    @media (max-width:820px){.calc-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brandmark">Morrell&nbsp;Strategy</div>
+    <span class="eyebrow">Run the numbers</span>
+    <h1 class="sec-head">What's the return?</h1>
+<div class="calc-root">
+        <div class="calc-topbar">
+          <div class="calc-head">
+            <div>
+              <div class="calc-brand">Morrell Strategy</div>
+              <div class="calc-title">YouTube Asset Model</div>
+            </div>
+            <div class="calc-meta">MODEL REV.4<br>UNITS: USD<br><span class="calc-live">● LIVE</span></div>
+          </div>
+          <p class="calc-intro">Projected return when a managed YouTube channel is run as an owned acquisition asset rather than ad spend. Enter parameters to compute.</p>
+        </div>
+        <div class="calc-grid">
+          <div class="calc-panel">
+            <div class="calc-panel-label"><span>Input Parameters</span><span class="calc-dim2">[ 08 ]</span></div>
+            <div class="calc-field"><div class="calc-field-head"><label>Monthly retainer</label><span class="calc-code">x₁</span></div><div class="calc-sub2">DFY YouTube management fee</div><div class="calc-inwrap"><span class="calc-prefix">$</span><input type="number" id="c-retainer" value="5000" step="500" min="0"></div></div>
+            <div class="calc-field"><div class="calc-field-head"><label>Engagement length</label><span class="calc-code">x₂</span></div><div class="calc-sub2">Months under management</div><div class="calc-inwrap"><input type="number" id="c-months" value="6" step="1" min="1"><span class="calc-suffix">mo</span></div></div>
+            <div class="calc-field"><div class="calc-field-head"><label>Steady-state views</label><span class="calc-code">x₃</span></div><div class="calc-sub2">Monthly channel views at full output</div><div class="calc-inwrap"><input type="number" id="c-views" value="30000" step="5000" min="0"></div></div>
+            <div class="calc-field"><div class="calc-field-head"><label>Call book rate</label><span class="calc-code">x₄</span></div><div class="calc-sub2">% of viewers who book a call</div><div class="calc-inwrap"><input type="number" id="c-book" value="0.4" step="0.1" min="0"><span class="calc-suffix">%</span></div></div>
+            <div class="calc-field"><div class="calc-field-head"><label>Call show rate</label><span class="calc-code">x₅</span></div><div class="calc-sub2">% of booked calls that attend</div><div class="calc-inwrap"><input type="number" id="c-show" value="70" step="1" min="0"><span class="calc-suffix">%</span></div></div>
+            <div class="calc-field"><div class="calc-field-head"><label>Close rate</label><span class="calc-code">x₆</span></div><div class="calc-sub2">% of held calls that close</div><div class="calc-inwrap"><input type="number" id="c-close" value="20" step="1" min="0"><span class="calc-suffix">%</span></div></div>
+            <div class="calc-field"><div class="calc-field-head"><label>Avg contract value</label><span class="calc-code">x₇</span></div><div class="calc-sub2">Per closed client</div><div class="calc-inwrap"><span class="calc-prefix">$</span><input type="number" id="c-deal" value="15000" step="1000" min="0"></div></div>
+            <div class="calc-field"><div class="calc-field-head"><label>Gross margin</label><span class="calc-code">x₈</span></div><div class="calc-sub2">On delivered revenue</div><div class="calc-inwrap"><input type="number" id="c-margin" value="70" step="1" min="0"><span class="calc-suffix">%</span></div></div>
+          </div>
+          <div class="calc-out">
+            <div class="calc-roi-panel">
+              <div class="calc-roi-head"><span class="l">Return on Investment</span><span class="r">GP / SPEND</span></div>
+              <div class="calc-roi-big" id="c-roi">0.0×</div>
+              <div class="calc-roi-sub" id="c-gpline">$0 gross profit on $0 spend</div>
+              <div class="calc-net-row"><span class="l">NET RETURN AFTER FEES</span><span class="v" id="c-net">$0</span></div>
+            </div>
+            <div class="calc-funnel-label">Acquisition Funnel</div>
+            <div class="calc-funnel-row"><div class="calc-fr-left"><span class="calc-fr-idx">01</span><div><div class="calc-fr-label">Views generated</div><div class="calc-fr-note" id="c-views-note">6 mo, ramp-adjusted</div></div></div><div class="calc-fr-val" id="c-views-out">0</div></div>
+            <div class="calc-funnel-row"><div class="calc-fr-left"><span class="calc-fr-idx">02</span><div><div class="calc-fr-label">Calls booked</div></div></div><div class="calc-fr-val" id="c-booked">0</div></div>
+            <div class="calc-funnel-row"><div class="calc-fr-left"><span class="calc-fr-idx">03</span><div><div class="calc-fr-label">Calls held</div></div></div><div class="calc-fr-val" id="c-shown">0</div></div>
+            <div class="calc-funnel-row"><div class="calc-fr-left"><span class="calc-fr-idx">04</span><div><div class="calc-fr-label">Clients closed</div><div class="calc-fr-note" id="c-closed-note">$0 CAC each</div></div></div><div class="calc-fr-val" id="c-closed">0</div></div>
+            <div class="calc-readouts">
+              <div class="calc-readout"><div class="calc-ro-label">Revenue generated</div><div class="calc-ro-valrow"><span class="calc-ro-val big" id="c-revenue">$0</span></div></div>
+              <div class="calc-readout"><div class="calc-ro-label">Break-even threshold</div><div class="calc-ro-valrow"><span class="calc-ro-val" id="c-breakeven">0.0</span><span class="calc-ro-unit">clients</span></div></div>
+              <div class="calc-readout"><div class="calc-ro-label">LTV : CAC ratio</div><div class="calc-ro-valrow"><span class="calc-ro-val sig" id="c-ltvcac">0.0 : 1</span></div></div>
+            </div>
+            <div class="calc-note-box">
+              <div class="calc-note-title">Residual asset carry</div>
+              <div class="calc-note-body">Unlike ads, a back catalogue compounds. The library should carry an estimated <span class="calc-signal" id="c-residual">$0</span> in gross profit across the 12 months after the engagement ends, with no further media cost.</div>
+            </div>
+            <div class="calc-note-box amber">
+              <div class="calc-note-title">Excluded variables</div>
+              <div class="calc-note-body">The model captures direct booked calls only. Not counted:</div>
+              <ul class="calc-ul">
+                <li>Lower ad costs, because warm audiences convert cheaper</li>
+                <li>Leads it nurtures that close on other platforms</li>
+                <li>Hiring, since a strong channel pulls in talent</li>
+                <li>Brand equity that lets you raise prices and win better clients</li>
+              </ul>
+            </div>
+            <div class="calc-disclaimer">Estimates, not a guarantee. Outputs vary with the inputs above. Book a call and we'll run it against your real sales data.</div>
+          </div>
+        </div>
+      </div>
+  </div>
+<script>
+      (function(){
+        var signal='#4F8CFF', warn='#FF6B4A';
+        var ids=['c-retainer','c-months','c-views','c-book','c-show','c-close','c-deal','c-margin'];
+        if(!document.getElementById('c-roi')) return;
+        function num(id){ var v=parseFloat(document.getElementById(id).value); return isNaN(v)?0:v; }
+        function USD(x){ return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(isFinite(x)?x:0); }
+        function NUM(x){ return new Intl.NumberFormat('en-US',{maximumFractionDigits:0}).format(isFinite(x)?x:0); }
+        function PCT(x){ return (isFinite(x)?x:0).toFixed(1)+'×'; }
+        function set(id,t){ var e=document.getElementById(id); if(e) e.textContent=t; }
+        function compute(){
+          var retainer=num('c-retainer'),months=num('c-months'),views=num('c-views'),book=num('c-book'),show=num('c-show'),close=num('c-close'),deal=num('c-deal'),margin=num('c-margin'),rampMonths=4;
+          var invest=retainer*months;
+          var totalViews=0;
+          for(var m=1;m<=months;m++){ var ramp=Math.min(1,0.15+(0.85*(m-1))/Math.max(1,rampMonths-1)); totalViews+=views*ramp; }
+          var booked=totalViews*(book/100);
+          var shown=booked*(show/100);
+          var closed=shown*(close/100);
+          var revenue=closed*deal;
+          var grossProfit=revenue*(margin/100);
+          var netReturn=grossProfit-invest;
+          var roi=invest>0?grossProfit/invest:0;
+          var cac=closed>0?invest/closed:0;
+          var ltvCac=cac>0?(deal*(margin/100))/cac:0;
+          var residualViews=views*12*0.6;
+          var residualRevenue=residualViews*(book/100)*(show/100)*(close/100)*deal*(margin/100);
+          var gpPerDeal=deal*(margin/100);
+          var breakEven=gpPerDeal>0?invest/gpPerDeal:0;
+          var roiEl=document.getElementById('c-roi'); roiEl.textContent=PCT(roi); roiEl.style.color=roi>=1?signal:warn;
+          set('c-gpline',USD(grossProfit)+' gross profit on '+USD(invest)+' spend');
+          var netEl=document.getElementById('c-net'); netEl.textContent=USD(netReturn); netEl.style.color=netReturn>=0?signal:warn;
+          set('c-views-out',NUM(totalViews));
+          set('c-views-note',NUM(months)+' mo, ramp-adjusted');
+          set('c-booked',NUM(booked));
+          set('c-shown',NUM(shown));
+          set('c-closed',NUM(closed));
+          set('c-closed-note',USD(cac)+' CAC each');
+          set('c-revenue',USD(revenue));
+          set('c-breakeven',breakEven.toFixed(1));
+          set('c-ltvcac',ltvCac.toFixed(1)+' : 1');
+          set('c-residual',USD(residualRevenue));
+        }
+        ids.forEach(function(id){
+          var e=document.getElementById(id);
+          e.addEventListener('input',compute);
+          e.addEventListener('blur',function(){ if(e.value===''||isNaN(parseFloat(e.value))){ e.value=(id==='c-months'?1:0); } compute(); });
+        });
+        compute();
+      })();
+    </script>
+</body>
+</html>
