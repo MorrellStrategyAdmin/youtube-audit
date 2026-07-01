@@ -323,6 +323,7 @@
   .hub-node p{color:var(--muted);font-size:.86rem;line-height:1.4}
   .hp1{left:50%;top:12%}.hp2{left:85%;top:39%}.hp3{left:74%;top:87%}.hp4{left:26%;top:87%}.hp5{left:15%;top:39%}
   @media(max-width:760px){.hub{height:auto;display:flex;flex-direction:column;gap:12px}.hub-lines,.hub-core{display:none}.hub-node{position:static;transform:none;width:100%}}
+  .card.hl{background:linear-gradient(135deg,rgba(79,140,255,.13),rgba(79,140,255,.03));border-color:rgba(79,140,255,.3)}
 </style>
 </head>
 <body>
@@ -473,8 +474,8 @@ window.addEventListener('message',function(ev){if(ev.data&&ev.data.mProofHeight)
     <div class="pc-loopnote"><span class="lp" aria-hidden="true">&#8635;</span><span>Every video gets <b>reviewed</b>, and what we learn <b>feeds the next one</b>, so the system keeps compounding.</span></div>
     <div class="pc-pm"><span class="pc-ic"><svg class="ic"><use href="#ic-pm"/></svg></span><div><h3>Project management</h3><p>The whole engine run end to end, so nothing depends on you.</p></div></div>
     <div class="grid g2" style="margin-top:14px">
-      <div class="card"><h3><svg class="ic ok" style="width:20px;height:20px;margin-right:8px"><use href="#ic-call"/></svg>Two strategy calls a month</h3><p>Live sessions to plan the next videos, review performance, and adjust the strategy together.</p></div>
-      <div class="card"><h3><svg class="ic ok" style="width:20px;height:20px;margin-right:8px"><use href="#ic-chat"/></svg>One-to-one Slack support</h3><p>Direct access to us in your own channel, not a ticket queue.</p></div>
+      <div class="card hl"><h3><svg class="ic ok" style="width:20px;height:20px;margin-right:8px"><use href="#ic-call"/></svg>Two strategy calls a month</h3><p>Live sessions to plan the next videos, review performance, and adjust the strategy together.</p></div>
+      <div class="card hl"><h3><svg class="ic ok" style="width:20px;height:20px;margin-right:8px"><use href="#ic-chat"/></svg>One-to-one Slack support</h3><p>Direct access to us in your own channel, not a ticket queue.</p></div>
     </div>
   </div>
 </section>
@@ -567,11 +568,10 @@ window.addEventListener('message',function(ev){if(ev.data&&ev.data.mProofHeight)
   <div class="wrap">
     <h2>Next steps</h2>
     <p class="intro">Getting started is quick and simple. Here is exactly how it works.</p>
-    <div class="grid g4">
-      <div class="card"><div class="num">STEP 01</div><h3>Give the go-ahead</h3><p>We confirm and get everything set up to begin.</p></div>
-      <div class="card"><div class="num">STEP 02</div><h3>Onboard in 48 hours</h3><p>A short intake form, your own Slack channel, and view access to your channel.</p></div>
-      <div class="card"><div class="num">STEP 03</div><h3>Set your recurring calls</h3><p>We schedule your strategy calls so we stay in sync from day one.</p></div>
-      <div class="card"><div class="num">STEP 04</div><h3>We get to work</h3><p>Strategy, then execution, then systems across your first 90 days.</p></div>
+    <div class="grid g3">
+      <div class="card"><div class="num">STEP 01</div><h3>Give the go-ahead</h3><p>You decide to move forward and we get you set up.</p></div>
+      <div class="card"><div class="num">STEP 02</div><h3>Schedule your onboarding call</h3><p>We lock in a time in the next day or two.</p></div>
+      <div class="card"><div class="num">STEP 03</div><h3>Onboarding call in 48 hours</h3><p>We present our initial ideas and strategy, then start building the videos: scripts, storyboards, thumbnails, and more.</p></div>
     </div>
   </div>
 </section>
