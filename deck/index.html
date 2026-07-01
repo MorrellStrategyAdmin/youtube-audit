@@ -137,6 +137,16 @@
   .gtee .big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(4rem,12vw,9rem);line-height:0.9;
     letter-spacing:-0.04em;background:linear-gradient(180deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
 
+  /* proof: track-record stats */
+  .statc{background:var(--bg-elev);border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center}
+  .statc .sv{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;color:var(--accent);line-height:1;letter-spacing:-0.02em}
+  .statc .sl{color:var(--muted);font-size:0.82rem;margin-top:8px;line-height:1.35}
+  .card .res{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--accent);letter-spacing:-0.02em;margin-bottom:7px;line-height:1.12}
+  /* proof: screenshot gallery */
+  .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%}
+  .shot{aspect-ratio:16/10;background:var(--bg-elev-2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .shot img{width:100%;height:100%;object-fit:cover;display:block}
+
   .spacer-s{height:14px}
   .spacer-m{height:26px}
   .spacer-l{height:40px}
@@ -245,7 +255,7 @@
 
   /* ---------- responsive ---------- */
   @media (max-width:880px){
-    .g3,.g5,.phases{grid-template-columns:1fr 1fr}
+    .g3,.g4,.g5,.phases,.shots{grid-template-columns:1fr 1fr}
     .slide{padding:6vh 7vw 9vh}
     h1{font-size:clamp(2rem,8vw,3rem)}
   }
@@ -351,9 +361,9 @@
           <line x1="50" y1="50" x2="80" y2="78"/>
         </svg>
         <div class="hub-core"><span class="hub-ic"><svg class="ic"><use href="#ic-yt"/></svg></span><span>One channel</span></div>
-        <div class="hub-node n-tl"><h3>An asset, not ad spend</h3><p>Ads stop the day you stop paying. A video keeps working for years.</p></div>
+        <div class="hub-node n-tl"><h3>Reduces ad costs</h3><p>Clients come to you organically, so you rely less on paid ads, which lowers your cost to acquire each customer.</p></div>
         <div class="hub-node n-tr"><h3>It compounds</h3><p>Reach and leads keep growing between uploads, not just on the day you post.</p></div>
-        <div class="hub-node n-bl"><h3>Real authority</h3><p>You become the name your market already knows and trusts.</p></div>
+        <div class="hub-node n-bl"><h3>Builds real authority and trust</h3><p>You become the name your market recognizes and takes seriously.</p></div>
         <div class="hub-node n-br"><h3>It opens doors</h3><p>Clients, talent, partners, and investors all start coming to you.</p></div>
       </div>
     </div>
@@ -414,6 +424,61 @@
         <li>Then one line per part: Research (find what works), Execution (make every video), Systems (keep it running).</li>
         <div class="take"><b>★ Takeaway #2: the leverage is strategy and ideas.</b> Fix that first, before touching production. Useful to them with or without us.</div>
         <li>About 75 seconds.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROOF · THE TRACK RECORD -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow reveal" data-d="1">Proof</div>
+      <div class="spacer-s"></div>
+      <h2 class="reveal" data-d="2">The track record.</h2>
+      <div class="spacer-l"></div>
+      <div class="grid g4 reveal" data-d="3">
+        <div class="statc"><div class="sv">4B+</div><div class="sl">organic long-form views across clients</div></div>
+        <div class="statc"><div class="sv">45M+</div><div class="sl">subscribers grown</div></div>
+        <div class="statc"><div class="sv">8-figure</div><div class="sl">brands worked with</div></div>
+        <div class="statc"><div class="sv">9-figure</div><div class="sl">founders advised</div></div>
+      </div>
+      <div class="spacer-m"></div>
+      <div class="grid g3 reveal" data-d="4">
+        <div class="card"><div class="res">$3M/mo CEO, from zero</div><p>Six figures in attributable revenue, his first podcast, and what he calls his most valuable hiring funnel, all from a standing start.</p></div>
+        <div class="card"><div class="res">$180k to $565k / month</div><p>Coaching revenue scaled across organic and paid combined.</p></div>
+        <div class="card"><div class="res">$55k / month from YouTube</div><p>Revenue attributed to YouTube for a coaching offer.</p></div>
+      </div>
+    </div>
+    <div class="note">
+      <ul>
+        <li>Hit the numbers fast: 4 billion organic views, 45 million subscribers grown, 8-figure brands, 9-figure founders.</li>
+        <li>Then the cases: a CEO taken from zero while doing $3M a month, a coaching business scaled from $180k to $565k a month, and a $55k a month offer attributed to YouTube.</li>
+        <li>Lead with whichever case is closest to their business. About 30 seconds.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROOF · REAL SCREENSHOTS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow reveal" data-d="1">Proof</div>
+      <div class="spacer-s"></div>
+      <h2 class="reveal" data-d="2">Real screenshots from the channels we run.</h2>
+      <div class="spacer-l"></div>
+      <div class="shots reveal" data-d="3">
+        <div class="shot"><img src="assets/proof/ceo3.png" alt="Client result screenshot"></div>
+        <div class="shot"><img src="assets/proof/coach1.png" alt="Client result screenshot"></div>
+        <div class="shot"><img src="assets/proof/k55.png" alt="Client result screenshot"></div>
+        <div class="shot"><img src="assets/proof/a-channel1.png" alt="Channel analytics screenshot"></div>
+        <div class="shot"><img src="assets/proof/a-13m.png" alt="Channel analytics screenshot"></div>
+        <div class="shot"><img src="assets/proof/a-4.4m.png" alt="Channel analytics screenshot"></div>
+        <div class="shot"><img src="assets/proof/a-ctr.png" alt="Channel analytics screenshot"></div>
+        <div class="shot"><img src="assets/proof/a-avd.png" alt="Channel analytics screenshot"></div>
+      </div>
+    </div>
+    <div class="note">
+      <ul>
+        <li>These are real screenshots from channels we run. Don't read them out, just let them land as evidence.</li>
+        <li>If they lean in, zoom on the one closest to their situation. About 20 seconds.</li>
       </ul>
     </div>
   </section>
