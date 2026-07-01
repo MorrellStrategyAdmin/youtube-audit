@@ -202,8 +202,13 @@
   .seal-bot{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:3px}
   /* problems: diagnosis */
   .diag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
-  .diag-card{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:20px;transition:opacity .6s ease,transform .25s ease,border-color .25s ease}
+  .diag-card{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:20px;cursor:pointer;transition:opacity .6s ease,transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .25s ease}
   .diag-card:hover{transform:translateY(-3px)}
+  .diag-card.marked{border:1px solid rgba(255,92,92,.55)!important;border-left:3px solid #FF5C5C!important;background:linear-gradient(135deg,rgba(255,92,92,.15),rgba(255,92,92,.03))!important;box-shadow:0 0 30px rgba(255,92,92,.2)!important}
+  .diag-card.marked .diag-num{border-color:#FF5C5C}
+  .diag-card.marked .diag-num .ic{color:#FF5C5C}
+  .diag-card.marked h3{color:#FF9A9A}
+  .diag-card:focus-visible{outline:2px solid rgba(255,92,92,.6);outline-offset:2px}
   .diag-num{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}
   .diag-card h3{font-size:1.08rem;font-weight:700;margin-bottom:4px}
   .diag-card p{color:var(--muted);font-size:.95rem}
@@ -633,6 +638,19 @@ function msRunCounters(instant){
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll,{passive:true});
   upd();
+})();
+</script>
+<script>
+(function(){
+  var cards=document.querySelectorAll('.diag-grid .diag-card');
+  cards.forEach(function(c){
+    c.setAttribute('role','button');
+    c.setAttribute('tabindex','0');
+    c.setAttribute('aria-pressed','false');
+    function toggle(){ var on=c.classList.toggle('marked'); c.setAttribute('aria-pressed', on?'true':'false'); }
+    c.addEventListener('click',toggle);
+    c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+  });
 })();
 </script>
 </body>
