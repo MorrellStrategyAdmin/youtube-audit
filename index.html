@@ -196,7 +196,7 @@
     Cal("init", "youtube-audit-call", {origin:"https://cal.com"});
     var vtag=''; try{vtag=localStorage.getItem('ms_first_video')||new URLSearchParams(location.search).get('utm_campaign')||'';}catch(e){}
     var _calcfg={"layout":"month_view","theme":"dark"}; if(vtag){_calcfg["referring-video"]=vtag;}
-    Cal.ns["youtube-audit-call"]("inline", { elementOrSelector:"#my-cal-inline", config: _calcfg, calLink: "dominic-morrell-2/youtube-audit-call" + (vtag ? "?referring-video=" + encodeURIComponent(vtag) : "") });
+    Cal.ns["youtube-audit-call"]("inline", { elementOrSelector:"#my-cal-inline", config: _calcfg, calLink: "dominic-morrell-2/youtube-audit-call" });
     Cal.ns["youtube-audit-call"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
   </script>
   <footer class="site-footer">
