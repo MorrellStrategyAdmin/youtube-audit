@@ -194,7 +194,9 @@
   <script type="text/javascript">
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
     Cal("init", "youtube-audit-call", {origin:"https://cal.com"});
-    Cal.ns["youtube-audit-call"]("inline", { elementOrSelector:"#my-cal-inline", config: {"layout":"month_view","theme":"dark"}, calLink: "dominic-morrell-2/youtube-audit-call" });
+    var vtag=''; try{vtag=localStorage.getItem('ms_first_video')||new URLSearchParams(location.search).get('utm_campaign')||'';}catch(e){}
+    var _calcfg={"layout":"month_view","theme":"dark"}; if(vtag){_calcfg["referring-video"]=vtag;}
+    Cal.ns["youtube-audit-call"]("inline", { elementOrSelector:"#my-cal-inline", config: _calcfg, calLink: "dominic-morrell-2/youtube-audit-call" + (vtag ? "?referring-video=" + encodeURIComponent(vtag) : "") });
     Cal.ns["youtube-audit-call"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
   </script>
   <footer class="site-footer">

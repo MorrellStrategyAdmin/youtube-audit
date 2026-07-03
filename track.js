@@ -48,6 +48,10 @@
     } catch (e) {}
   }
 
+  // First-touch: remember the first video tag that ever brought this device, so a
+  // later booking (even direct, even weeks later) still traces back to that video.
+  try { var _fv = qp('utm_campaign'); if (_fv && !localStorage.getItem('ms_first_video')) localStorage.setItem('ms_first_video', _fv); } catch (e) {}
+
   send({ event_type: 'pageview' });
 
   document.addEventListener('click', function (e) {
