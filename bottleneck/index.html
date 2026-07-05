@@ -423,13 +423,6 @@ function renderResult(){
       <div class="bar"><i style="width:0" data-w="${s}" data-c="${barColor(s)}"></i></div></div>`;
   }).join('');
 
-  // 90-day path: tailored opening line by bottleneck
-  const pathIntro = {
-    reach:"We fix reach first, before anything else.",
-    quality:"We fix the content itself first, so the channel starts to compound.",
-    conversion:"We rebuild the targeting and the content funnel so views turn into customers.",
-    consistency:"We set the strategy and the system first, then a cadence you can hold."
-  }[key];
 
   // CTA by tier
   // CTA only for qualified (A). Unqualified prospects get the roadmap, no CTA.
@@ -462,31 +455,6 @@ function renderResult(){
         <p>${B.fixP}</p>
         <ul>${B.fix.map(f=>`<li>${f}</li>`).join('')}</ul>
       </div>
-
-      ${Q.tier==="A" ? `<div class="section-k">Your 90-day path</div>
-      <p style="color:var(--muted);font-size:14.5px;margin-bottom:12px">${pathIntro}</p>
-      <div class="timeline">
-        <div class="tnode"><div class="tnum">1</div><div class="tbody"><h3>Strategy</h3><ul>
-          <li>Market and competitor research</li>
-          <li>Brand positioning and style</li>
-          <li>Full data analysis of your channel</li>
-          <li>Project management system set up</li>
-          <li>First month of ideas, with thumbnails, titles, and the evidence behind each</li>
-        </ul></div></div>
-        <div class="tnode"><div class="tnum">2</div><div class="tbody"><h3>Execution</h3><ul>
-          <li>Structuring and storyboarding each video with you</li>
-          <li>Thumbnails created and reviewed</li>
-          <li>Edits and edit reviews</li>
-          <li>Publishing the first videos together on the new system</li>
-          <li>Performance review of every video</li>
-        </ul></div></div>
-        <div class="tnode"><div class="tnum">3</div><div class="tbody"><h3>Systems</h3><ul>
-          <li>A consistent prep, posting, and analysis cadence</li>
-          <li>Operational gaps fixed and turned into SOPs</li>
-          <li>The next set of ideas and concepts prepared</li>
-          <li>Growth projections mapped</li>
-        </ul></div></div>
-      </div>` : ``}
 
       <div class="hero-clients">
       <p class="hero-clients-label">We've worked with</p>
