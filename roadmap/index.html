@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<script defer src="/track.js"></script>
 <style>
   :root{
     --bg:#0A0B0D; --bg-elev:#121419; --bg-elev2:#171A20;
@@ -564,6 +565,7 @@ async function submitLead(){
     business: a.business,
     revenue: a.revenue,
     source: "youtube-growth-roadmap",
+    ref_source: (function(){try{return localStorage.getItem('ms_first_source')||new URLSearchParams(location.search).get('utm_source')||'';}catch(e){return '';}})(),
     page: location.href
   };
   // fire-and-forget capture; never block the result on it
