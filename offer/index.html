@@ -305,12 +305,12 @@
   /* hero client faces */
   .hero-clients{opacity:0;animation:fadeUp .8s ease both .72s;margin-top:40px}
   .hero-clients-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:18px}
-  .hero-faces{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px 8px;justify-items:center}
+  .hero-faces{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px 4px;justify-items:center;max-width:560px;margin-left:auto;margin-right:auto}
 @media(max-width:520px){.hero-faces{grid-template-columns:repeat(3,minmax(0,1fr))}}
   .hero-faces .client{display:flex;flex-direction:column;align-items:center;gap:9px;min-width:0}
   .hero-faces .avatar{width:56px;height:56px;border-radius:50%;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:var(--panel2);display:flex;align-items:center;justify-content:center}
   .hero-faces .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-  .hero-faces .cname{font-size:.8rem;color:var(--muted);font-weight:500}
+  .hero-faces .cname{font-size:.72rem;letter-spacing:-0.01em;color:var(--muted);font-weight:500}
   @media(prefers-reduced-motion:reduce){.hero-clients{animation:none;opacity:1}}
 </style>
   <script defer src="/track.js"></script>
