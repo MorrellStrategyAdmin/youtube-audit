@@ -51,6 +51,10 @@
   // First-touch: remember the first video tag that ever brought this device, so a
   // later booking (even direct, even weeks later) still traces back to that video.
   try { var _fv = qp('utm_campaign'); if (_fv && !localStorage.getItem('ms_first_video')) localStorage.setItem('ms_first_video', _fv); } catch (e) {}
+  // First-touch source (instagram / youtube / tiktok / ...): the first real source that
+  // ever brought this device, so a later booking still traces back to it. Prefer an
+  // explicit utm_source (branded links), else the detected referrer; never store 'direct'.
+  try { if (!localStorage.getItem('ms_first_source')) { var _fs = qp('utm_source') || BASE.ref_source; if (_fs && _fs !== 'direct') localStorage.setItem('ms_first_source', _fs); } } catch (e) {}
 
   send({ event_type: 'pageview' });
 
