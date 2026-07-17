@@ -240,6 +240,25 @@ function submit(){
   if(firstErr){ es.classList.add('show'); firstErr.scrollIntoView({behavior:'smooth',block:'center'}); return; }
   es.classList.remove('show');
 
+  // Ordered, human-labelled copy of the whole application. The CRM trigger renders
+  // this into a note on the card so answers are readable at a glance.
+  const qa = [
+    ["WhatsApp", val("whatsapp")],
+    ["Instagram", val("instagram")||"(not given)"],
+    ["Timezone", val("timezone")],
+    ["Experience", pick("experience")],
+    ["Premiere Pro", pick("premiere")],
+    ["After Effects", pick("aftereffects")],
+    ["Portfolio", val("portfolio")],
+    ["Daily output", val("daily_output")],
+    ["Turnaround (one reel)", val("turnaround")],
+    ["Full-time", pick("fulltime_ok")],
+    ["Other commitments", val("commitments")],
+    ["Start", val("start")],
+    ["Monthly rate (USD)", val("rate")],
+    ["Notes", val("notes")||"(none)"]
+  ];
+
   const payload = {
     role: CONFIG.role, role_label: CONFIG.role_label,
     name: val("name"), email: val("email"), whatsapp: val("whatsapp"), location: val("timezone"),
@@ -250,7 +269,7 @@ function submit(){
       premiere: pick("premiere"), aftereffects: pick("aftereffects"),
       daily_output: val("daily_output"), turnaround: val("turnaround"),
       fulltime_ok: pick("fulltime_ok"), commitments: val("commitments"), start: val("start"),
-      rate: val("rate"), notes: val("notes")
+      rate: val("rate"), notes: val("notes"), qa
     },
     source: "hiring-form",
     ref_source: (localStorage.getItem('ms_first_source')||""),
