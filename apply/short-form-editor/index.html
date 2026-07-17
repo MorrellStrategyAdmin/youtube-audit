@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Short-Form Editor · Apply | Morrell Strategy</title>
-<meta property="og:title" content="We're hiring a short-form editor" />
-<meta property="og:description" content="Edit short-form video for real creators. Portfolio and a 60-second intro required. Serious applicants only." />
+<title>Short-Form Editor (CapCut) · Apply | Morrell Strategy</title>
+<meta property="og:title" content="We're hiring a CapCut editor" />
+<meta property="og:description" content="Minimal-style short-form editing. Portfolio in the style required. Serious applicants only." />
 <link rel="icon" href="/favicon-32.png" sizes="32x32" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,20 +53,19 @@
   .field .hint{display:block;font-size:12.5px;color:var(--faint);margin:-3px 0 8px;font-weight:400}
   .field input,.field textarea{width:100%;background:var(--bg-elev2);border:1px solid var(--line);border-radius:11px;color:var(--text);
        padding:13px 15px;font-family:var(--sans);font-size:15.5px;transition:border-color .15s;resize:vertical}
-  .field textarea{min-height:82px;line-height:1.5}
+  .field textarea{min-height:78px;line-height:1.5}
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent-line)}
   .field input::placeholder,.field textarea::placeholder{color:var(--faint)}
-  .field.err input,.field.err textarea,.field.err .checks{border-color:var(--bad)!important}
-  .field.err .checks{border-radius:11px}
+  .field.err input,.field.err textarea,.field.err .opts{border-color:var(--bad)!important}
 
-  .checks{display:flex;flex-wrap:wrap;gap:9px}
-  .chk{display:inline-flex;align-items:center;gap:8px;background:var(--bg-elev2);border:1px solid var(--line);color:var(--text);
-       padding:10px 14px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
-  .chk:hover{border-color:var(--line-strong)}
-  .chk .box{width:16px;height:16px;border-radius:5px;border:2px solid var(--line-strong);position:relative;transition:.15s}
-  .chk.sel{border-color:var(--accent-line);background:var(--accent-soft)}
-  .chk.sel .box{border-color:var(--accent);background:var(--accent)}
-  .chk.sel .box:after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #04060B;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .opts{display:flex;flex-wrap:wrap;gap:9px}
+  .opt{display:inline-flex;align-items:center;gap:9px;background:var(--bg-elev2);border:1px solid var(--line);color:var(--text);
+       padding:11px 15px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
+  .opt:hover{border-color:var(--line-strong)}
+  .opt .dot2{width:15px;height:15px;border-radius:50%;border:2px solid var(--line-strong);position:relative;transition:.15s}
+  .opt.sel{border-color:var(--accent-line);background:var(--accent-soft)}
+  .opt.sel .dot2{border-color:var(--accent);background:var(--accent)}
+  .opt.sel .dot2:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--bg-elev2)}
 
   .btn{font-family:var(--display);font-weight:600;font-size:15.5px;border:none;border-radius:11px;padding:15px 22px;cursor:pointer;transition:opacity .15s,transform .05s;width:100%}
   .btn:active{transform:scale(.99)}
@@ -95,22 +94,15 @@
   <div class="demo-tag" id="demoTag" style="display:none">preview mode · nothing is submitted</div>
 
 <script>
-/* =======================================================================
-   CONFIG: the only block to change when you deploy.
+/* CONFIG: the only block to change when you deploy.
    endpoint "" = preview mode (nothing leaves the page).
-   Set endpoint to the apply-candidate URL to go live:
-     https://gjfrarupnpsfiolpgtdc.supabase.co/functions/v1/apply-candidate
-   ======================================================================= */
+   Live: https://gjfrarupnpsfiolpgtdc.supabase.co/functions/v1/apply-candidate */
 const CONFIG = {
   endpoint:   "https://gjfrarupnpsfiolpgtdc.supabase.co/functions/v1/apply-candidate",
   anonKey:    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqZnJhcnVwbnBzZmlvbHBndGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3Njg0NjEsImV4cCI6MjA5ODM0NDQ2MX0.sGW9weCJD02awUeZ482x-WByksTDi1vpwgKrFNjV0xQ",
   role:       "short-form-editor",
-  role_label: "Short-Form Editor",
-  keyword:    "banana"
+  role_label: "Short-Form Editor"
 };
-
-const SOFTWARE = ["Premiere Pro","After Effects","CapCut","DaVinci Resolve","Final Cut","Other"];
-const SKILLS   = ["Hook edits","Captions / subtitles","Sound design","Motion graphics / animation","B-roll sourcing","Colour grading","Thumbnail design"];
 
 function field(id,label,{type="text",required=true,hint="",ph=""}={}){
   const tag = type==="textarea"
@@ -122,11 +114,11 @@ function field(id,label,{type="text",required=true,hint="",ph=""}={}){
     ${tag}
   </div>`;
 }
-function checks(id,label,opts,hint=""){
-  return `<div class="field" data-for="${id}" data-multi="1">
+function choice(id,label,opts,hint=""){
+  return `<div class="field" data-for="${id}" data-single="1">
     <label>${label}<span class="req">*</span></label>
     ${hint?`<span class="hint">${hint}</span>`:''}
-    <div class="checks">${opts.map(o=>`<button type="button" class="chk" data-v="${o}"><span class="box"></span>${o}</button>`).join('')}</div>
+    <div class="opts">${opts.map(o=>`<button type="button" class="opt" data-v="${o}"><span class="dot2"></span>${o}</button>`).join('')}</div>
   </div>`;
 }
 
@@ -134,10 +126,10 @@ function renderForm(){
   document.getElementById('app').innerHTML = `
     <div class="card fade">
       <div class="eyebrow">Morrell Strategy · Now hiring</div>
-      <h1>Short-Form Video Editor</h1>
-      <p class="lead">We edit short-form video (Reels, Shorts, TikTok) for real creators and brands. We're looking for an editor who makes people <b>stop scrolling</b>. Sharp hooks, tight pacing, clean captions and sound.</p>
-      <p class="lead">This is paid, ongoing work. The bar is high and the application is quick if you're good.</p>
-      <div class="bar-note"><b>Two things are required:</b> a portfolio, and a 60-second video intro. A reused, generic intro won't get watched. Read the questions properly. One of them checks that you did.</div>
+      <h1>Short-Form Editor (CapCut)</h1>
+      <p class="lead">We're hiring an editor for short-form on TikTok and Instagram. The style is deliberately minimal: <b>simple captions, clean cuts, usually no music and no animation</b>.</p>
+      <p class="lead">If that's your lane and you're fast, this is quick to apply. Paid, ongoing work.</p>
+      <div class="bar-note">Two things matter most: a <b>portfolio with work in this minimal style</b>, and how fast you turn a reel around. Off-style or flashy work won't count, so link the most relevant samples you have.</div>
     </div>
 
     <div class="err-summary" id="errSummary">A few required questions are missing. They're marked in red below.</div>
@@ -146,48 +138,41 @@ function renderForm(){
       <div class="sec-k">About you</div>
       ${field("name","Full name",{ph:"First and last"})}
       ${field("email","Email",{type:"email",ph:"you@email.com"})}
+      ${field("instagram","Instagram handle",{ph:"@yourhandle"})}
       ${field("whatsapp","WhatsApp number (with country code)",{type:"tel",ph:"+44 …"})}
-      ${field("location","Where are you based? (city + time zone)",{ph:"e.g. Lisbon, GMT+0"})}
+      ${field("timezone","What timezone are you in?",{ph:"e.g. GMT+0, EST, GMT+5:30"})}
     </div>
 
     <div class="card">
-      <div class="sec-k">Your work</div>
-      ${field("portfolio","Portfolio link (your best work)",{type:"url",ph:"https://…"})}
-      ${field("sample","Link to ONE short you edited that you're proud of",{type:"url",ph:"YouTube Short / Reel / TikTok URL"})}
-      ${field("sample_role","On that video, what exactly did you do?",{type:"textarea",hint:"e.g. hook, pacing, captions, sound design, motion, colour, or all of it"})}
-      ${checks("software","What do you edit in?",SOFTWARE)}
-      ${checks("skills","What can you do to a strong standard?",SKILLS)}
+      <div class="sec-k">CapCut and your work</div>
+      ${choice("capcut","Are you confident editing in CapCut?",["Yes, it's my main tool","Yes, comfortable in it","No"])}
+      ${field("portfolio","Portfolio link",{type:"url",ph:"https://…",hint:"Prioritise videos in this minimal style: simple captions, clean cuts, no music or animation. Off-style work won't be considered."})}
+      ${field("sample","Link one reel you edited in this style",{type:"url",ph:"TikTok / Reel URL"})}
+      ${field("sample_role","On that reel, what exactly did you do?",{type:"textarea",hint:"Be honest. Cuts, captions, pacing, sourcing footage, all of it, or just part."})}
     </div>
 
     <div class="card">
       <div class="sec-k">How you work</div>
-      ${field("turnaround","Realistic turnaround for one 60-90s short from raw, and how many shorts a week you can deliver",{type:"textarea"})}
-      ${field("experience","How long have you edited short-form, and for which creators or niches? (links if you can)",{type:"textarea"})}
+      ${field("turnaround","How fast can you turn a 30-90 second reel around from raw, in this style? And how many a week can you take on?",{type:"textarea"})}
       ${field("availability","Full-time or freelance? When can you start? Any other commitments?",{type:"textarea"})}
     </div>
 
     <div class="card">
-      <div class="sec-k">Pay</div>
-      ${field("comp_expectation","What are you looking for? (per short, or monthly, as a number or range)",{ph:"e.g. £25 per short, or £1,500/mo"})}
-    </div>
-
-    <div class="card">
-      <div class="sec-k">Prove you read this</div>
-      ${field("video_intro","60-second video intro (Loom or unlisted link)",{type:"url",ph:"https://loom.com/…",hint:"Who you are, why this role, and say the brief's keyword out loud. This is the single biggest signal we look at."})}
-      ${field("keyword","What's the keyword in this brief?",{hint:"One word. If you skimmed, you'll miss it."})}
+      <div class="sec-k">Rate (USD)</div>
+      ${field("rate","Your rate: per reel in USD, and your monthly retainer (USD)",{type:"textarea",ph:"e.g. $25 per reel; $1,500/month retainer"})}
     </div>
 
     <div class="card">
       <div class="sec-k">Anything else</div>
       ${field("notes","Optional, anything you want us to know",{type:"textarea",required:false})}
       <button class="btn btn-primary" id="submitBtn" style="margin-top:8px">Send application</button>
-      <p class="microcopy">We reply to everyone who makes the shortlist. Shortlisted editors get a short paid trial task.</p>
+      <p class="microcopy">We reply to everyone who makes the shortlist. Shortlisted editors get a short paid trial edit.</p>
     </div>`;
 
-  // checkbox toggles
-  document.querySelectorAll('.chk').forEach(c=>c.addEventListener('click',()=>{
-    c.classList.toggle('sel');
-    c.closest('.field').classList.remove('err');
+  document.querySelectorAll('[data-single] .opt').forEach(o=>o.addEventListener('click',()=>{
+    o.parentElement.querySelectorAll('.opt').forEach(s=>s.classList.remove('sel'));
+    o.classList.add('sel');
+    o.closest('.field').classList.remove('err');
   }));
   document.querySelectorAll('.field input,.field textarea').forEach(el=>{
     el.addEventListener('input',()=>el.closest('.field').classList.remove('err'));
@@ -196,21 +181,21 @@ function renderForm(){
   if(!CONFIG.endpoint) document.getElementById('demoTag').style.display='block';
 }
 
-const TEXT_REQ = ["name","email","whatsapp","location","portfolio","sample","sample_role","turnaround","experience","comp_expectation","availability","video_intro","keyword"];
-const MULTI_REQ = ["software","skills"];
+const TEXT_REQ = ["name","email","instagram","whatsapp","timezone","portfolio","sample","sample_role","turnaround","availability","rate"];
+const SINGLE_REQ = ["capcut"];
 
 function submit(){
   let firstErr=null;
   const val = id => (document.getElementById(id)?.value||"").trim();
-  const picks = id => [...document.querySelectorAll(`[data-for="${id}"] .chk.sel`)].map(c=>c.dataset.v);
+  const pick = id => document.querySelector(`[data-for="${id}"] .opt.sel`)?.dataset.v || "";
 
   TEXT_REQ.forEach(id=>{
     const f=document.querySelector(`[data-for="${id}"]`);
     if(!val(id)){ f.classList.add('err'); firstErr=firstErr||f; }
   });
-  MULTI_REQ.forEach(id=>{
+  SINGLE_REQ.forEach(id=>{
     const f=document.querySelector(`[data-for="${id}"]`);
-    if(picks(id).length===0){ f.classList.add('err'); firstErr=firstErr||f; }
+    if(!pick(id)){ f.classList.add('err'); firstErr=firstErr||f; }
   });
 
   const es=document.getElementById('errSummary');
@@ -219,13 +204,13 @@ function submit(){
 
   const payload = {
     role: CONFIG.role, role_label: CONFIG.role_label,
-    name: val("name"), email: val("email"), whatsapp: val("whatsapp"), location: val("location"),
-    comp_expectation: val("comp_expectation"),
-    links: { portfolio: val("portfolio"), sample: val("sample"), video_intro: val("video_intro") },
+    name: val("name"), email: val("email"), whatsapp: val("whatsapp"), location: val("timezone"),
+    comp_expectation: val("rate"),
+    links: { portfolio: val("portfolio"), sample: val("sample") },
     answers: {
-      sample_role: val("sample_role"), software: picks("software"), skills: picks("skills"),
-      turnaround: val("turnaround"), experience: val("experience"), availability: val("availability"),
-      keyword: val("keyword"), notes: val("notes")
+      instagram: val("instagram"), capcut: pick("capcut"), sample_role: val("sample_role"),
+      turnaround: val("turnaround"), availability: val("availability"),
+      rate: val("rate"), notes: val("notes")
     },
     source: "hiring-form",
     ref_source: (localStorage.getItem('ms_first_source')||""),
@@ -249,7 +234,7 @@ function showThanks(){
     <div class="card thanks fade">
       <div class="big"></div>
       <h1>Application in.</h1>
-      <p class="lead">Thanks, we read every one. If you make the shortlist we'll message your WhatsApp with a short paid trial task: a quick edit of raw footage we provide.</p>
+      <p class="lead">Thanks, we read every one. If you make the shortlist we'll message your WhatsApp with a short paid trial: a quick edit of raw footage we provide, in this style.</p>
     </div>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
