@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Short-Form Editor (CapCut) · Apply | Morrell Strategy</title>
-<meta property="og:title" content="We're hiring a CapCut editor" />
-<meta property="og:description" content="Minimal-style short-form editing. Portfolio in the style required. Serious applicants only." />
+<title>Short-Form Video Editor (Full-Time) · Apply | Morrell Strategy</title>
+<meta property="og:title" content="We're hiring a full-time short-form editor" />
+<meta property="og:description" content="Full-time Premiere Pro editor for short-form. Portfolio in our style required." />
 <link rel="icon" href="/favicon-32.png" sizes="32x32" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,16 +40,28 @@
   .lead{color:var(--muted);font-size:16px}
   .lead + .lead{margin-top:12px}
   .lead b{color:var(--text);font-weight:600}
+  .lead.sm{font-size:14.5px}
 
   .bar-note{margin-top:20px;padding:14px 16px;border-radius:11px;background:var(--bg-elev2);border:1px solid var(--line);border-left:3px solid var(--warn);font-size:14px;color:var(--muted)}
   .bar-note b{color:var(--text);font-weight:600}
 
   .sec-k{font-family:var(--display);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:16px}
 
+  /* references */
+  .refs{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+  .ref{display:flex;align-items:center;gap:12px;padding:13px 15px;background:var(--bg-elev2);border:1px solid var(--line);border-radius:12px;color:var(--text);text-decoration:none;transition:border-color .15s,background .15s}
+  .ref:hover{border-color:var(--accent-line);background:#1B1F26}
+  .ref .play{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center}
+  .ref .play svg{margin-left:2px}
+  .ref .rl{font-size:15px;font-weight:500}
+  .ref .rl small{display:block;font-size:12.5px;color:var(--faint);font-weight:400;margin-top:1px}
+  .refs .placeholder{padding:14px;border:1px dashed var(--line-strong);border-radius:12px;color:var(--faint);font-size:13.5px}
+
   .field{margin-bottom:18px}
   .field:last-child{margin-bottom:0}
   .field label{display:block;font-size:14px;color:var(--text);margin-bottom:7px;font-weight:500}
   .field .req{color:var(--accent);margin-left:2px}
+  .field .opt{color:var(--faint);margin-left:6px;font-weight:400;font-size:12.5px}
   .field .hint{display:block;font-size:12.5px;color:var(--faint);margin:-3px 0 8px;font-weight:400}
   .field input,.field textarea{width:100%;background:var(--bg-elev2);border:1px solid var(--line);border-radius:11px;color:var(--text);
        padding:13px 15px;font-family:var(--sans);font-size:15.5px;transition:border-color .15s;resize:vertical}
@@ -59,13 +71,13 @@
   .field.err input,.field.err textarea,.field.err .opts{border-color:var(--bad)!important}
 
   .opts{display:flex;flex-wrap:wrap;gap:9px}
-  .opt{display:inline-flex;align-items:center;gap:9px;background:var(--bg-elev2);border:1px solid var(--line);color:var(--text);
+  .choice-opt{display:inline-flex;align-items:center;gap:9px;background:var(--bg-elev2);border:1px solid var(--line);color:var(--text);
        padding:11px 15px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
-  .opt:hover{border-color:var(--line-strong)}
-  .opt .dot2{width:15px;height:15px;border-radius:50%;border:2px solid var(--line-strong);position:relative;transition:.15s}
-  .opt.sel{border-color:var(--accent-line);background:var(--accent-soft)}
-  .opt.sel .dot2{border-color:var(--accent);background:var(--accent)}
-  .opt.sel .dot2:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--bg-elev2)}
+  .choice-opt:hover{border-color:var(--line-strong)}
+  .choice-opt .dot2{width:15px;height:15px;border-radius:50%;border:2px solid var(--line-strong);position:relative;transition:.15s}
+  .choice-opt.sel{border-color:var(--accent-line);background:var(--accent-soft)}
+  .choice-opt.sel .dot2{border-color:var(--accent);background:var(--accent)}
+  .choice-opt.sel .dot2:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--bg-elev2)}
 
   .btn{font-family:var(--display);font-weight:600;font-size:15.5px;border:none;border-radius:11px;padding:15px 22px;cursor:pointer;transition:opacity .15s,transform .05s;width:100%}
   .btn:active{transform:scale(.99)}
@@ -104,12 +116,22 @@ const CONFIG = {
   role_label: "Short-Form Editor"
 };
 
-function field(id,label,{type="text",required=true,hint="",ph=""}={}){
+/* Reference edits that show the style. Fill from Dominic's links: {url, label, note}. */
+const REFERENCES = [
+  { url: "https://www.instagram.com/reel/Day1pO9kkAJ/", label: "Reference 1", note: "Instagram reel" },
+  { url: "https://www.instagram.com/reel/Dar3lWViWBf/", label: "Reference 2", note: "Instagram reel" },
+  { url: "https://www.instagram.com/reel/DaWUEc3Ja08/", label: "Reference 3", note: "Instagram reel" },
+  { url: "https://www.instagram.com/reel/DaMlFk3N90N/", label: "Reference 4", note: "Instagram reel" },
+  { url: "https://www.instagram.com/reel/DZ_2wOKOGZj/", label: "Reference 5", note: "Instagram reel" },
+  { url: "https://www.instagram.com/reel/DZVszBphL1F/", label: "Reference 6", note: "Instagram reel" }
+];
+
+function field(id,label,{type="text",required=true,hint="",ph="",optional=false}={}){
   const tag = type==="textarea"
     ? `<textarea id="${id}" placeholder="${ph}"></textarea>`
     : `<input id="${id}" type="${type}" placeholder="${ph}" />`;
   return `<div class="field" data-for="${id}">
-    <label>${label}${required?'<span class="req">*</span>':''}</label>
+    <label>${label}${required?'<span class="req">*</span>':(optional?'<span class="opt">optional</span>':'')}</label>
     ${hint?`<span class="hint">${hint}</span>`:''}
     ${tag}
   </div>`;
@@ -118,18 +140,31 @@ function choice(id,label,opts,hint=""){
   return `<div class="field" data-for="${id}" data-single="1">
     <label>${label}<span class="req">*</span></label>
     ${hint?`<span class="hint">${hint}</span>`:''}
-    <div class="opts">${opts.map(o=>`<button type="button" class="opt" data-v="${o}"><span class="dot2"></span>${o}</button>`).join('')}</div>
+    <div class="opts">${opts.map(o=>`<button type="button" class="choice-opt" data-v="${o}"><span class="dot2"></span>${o}</button>`).join('')}</div>
   </div>`;
+}
+function refsHTML(){
+  if(!REFERENCES.length) return '<div class="placeholder">Reference links go here.</div>';
+  return REFERENCES.map((r,i)=>`<a class="ref" href="${r.url}" target="_blank" rel="noopener">
+    <span class="play"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="rl">${r.label||('Reference '+(i+1))}${r.note?`<small>${r.note}</small>`:''}</span>
+  </a>`).join('');
 }
 
 function renderForm(){
   document.getElementById('app').innerHTML = `
     <div class="card fade">
       <div class="eyebrow">Morrell Strategy · Now hiring</div>
-      <h1>Short-Form Editor (CapCut)</h1>
-      <p class="lead">We're hiring an editor for short-form on TikTok and Instagram. The style is deliberately minimal: <b>simple captions, clean cuts, usually no music and no animation</b>.</p>
-      <p class="lead">If that's your lane and you're fast, this is quick to apply. Paid, ongoing work.</p>
-      <div class="bar-note">Two things matter most: a <b>portfolio with work in this minimal style</b>, and how fast you turn a reel around. Off-style or flashy work won't count, so link the most relevant samples you have.</div>
+      <h1>Short-Form Video Editor (Full-Time)</h1>
+      <p class="lead">We're hiring a full-time short-form editor for TikTok and Instagram. You'd cut reels for the creators and brands we work with, in <b>Premiere Pro</b> (After Effects is a plus).</p>
+      <p class="lead">This is a full-time, ongoing role, around 8 hours a day, 5 days a week, and more is welcome. The references below show the exact style you'd be editing.</p>
+      <div class="bar-note">Two things we look at hardest: a <b>portfolio close to this style</b>, and that you can do this <b>full-time</b>. Price yourself for a full-time role.</div>
+    </div>
+
+    <div class="card">
+      <div class="sec-k">The style you'd be editing</div>
+      <p class="lead sm">These are the edits we're after. Your portfolio should be close to this.</p>
+      <div class="refs" id="refs">${refsHTML()}</div>
     </div>
 
     <div class="err-summary" id="errSummary">A few required questions are missing. They're marked in red below.</div>
@@ -138,39 +173,42 @@ function renderForm(){
       <div class="sec-k">About you</div>
       ${field("name","Full name",{ph:"First and last"})}
       ${field("email","Email",{type:"email",ph:"you@email.com"})}
-      ${field("instagram","Instagram handle",{ph:"@yourhandle"})}
       ${field("whatsapp","WhatsApp number (with country code)",{type:"tel",ph:"+44 …"})}
+      ${field("instagram","Instagram handle",{required:false,optional:true,ph:"@yourhandle"})}
       ${field("timezone","What timezone are you in?",{ph:"e.g. GMT+0, EST, GMT+5:30"})}
     </div>
 
     <div class="card">
-      <div class="sec-k">CapCut and your work</div>
-      ${choice("capcut","Are you confident editing in CapCut?",["Yes, it's my main tool","Yes, comfortable in it","No"])}
-      ${field("portfolio","Portfolio link",{type:"url",ph:"https://…",hint:"Prioritise videos in this minimal style: simple captions, clean cuts, no music or animation. Off-style work won't be considered."})}
-      ${field("sample","Link one reel you edited in this style",{type:"url",ph:"TikTok / Reel URL"})}
-      ${field("sample_role","On that reel, what exactly did you do?",{type:"textarea",hint:"Be honest. Cuts, captions, pacing, sourcing footage, all of it, or just part."})}
+      <div class="sec-k">Software and your work</div>
+      ${choice("experience","How long have you been editing short-form videos for?",["Less than 1 year","1 to 2 years","2 to 4 years","4+ years"])}
+      ${choice("premiere","Are you confident editing in Premiere Pro?",["Yes, it's my main tool","Yes, comfortable in it","No"])}
+      ${choice("aftereffects","Do you use After Effects?",["Yes, regularly","A little","No"])}
+      ${field("portfolio","Portfolio link",{type:"url",ph:"https://…",hint:"Show work that's close to the style in the references above. Off-style work won't count for much."})}
     </div>
 
     <div class="card">
-      <div class="sec-k">How you work</div>
-      ${field("turnaround","How fast can you turn a 30-90 second reel around from raw, in this style? And how many a week can you take on?",{type:"textarea"})}
-      ${field("availability","Full-time or freelance? When can you start? Any other commitments?",{type:"textarea"})}
+      <div class="sec-k">Working full-time with us</div>
+      ${field("daily_output","How many reels or short-form videos could you realistically edit per day? A range is fine.",{hint:"Bearing in mind the reference videos that we've provided."})}
+      ${field("turnaround","If we give you one reel, what's your expected turnaround time?")}
+      ${choice("fulltime_ok","Can you commit to this full-time?",["Yes","No"])}
+      ${field("commitments","Any other commitments right now?",{type:"textarea"})}
+      ${field("start","When can you start?")}
     </div>
 
     <div class="card">
-      <div class="sec-k">Rate (USD)</div>
-      ${field("rate","Your rate: per reel in USD, and your monthly retainer (USD)",{type:"textarea",ph:"e.g. $25 per reel; $1,500/month retainer"})}
+      <div class="sec-k">Rate</div>
+      ${field("rate","What monthly rate are you looking for, for this full-time role? (USD)")}
     </div>
 
     <div class="card">
       <div class="sec-k">Anything else</div>
       ${field("notes","Optional, anything you want us to know",{type:"textarea",required:false})}
-      <button class="btn btn-primary" id="submitBtn" style="margin-top:8px">Send application</button>
-      <p class="microcopy">We reply to everyone who makes the shortlist. Shortlisted editors get a short paid trial edit.</p>
+      <div class="bar-note" style="border-left-color:var(--accent);margin-top:0;margin-bottom:18px">Here's what happens next. We expect a lot of applications and can't reply to everyone, so we only reach out to the shortlist. If you make it, we'll message you on WhatsApp and ask you to do a short trial edit on footage we provide.</div>
+      <button class="btn btn-primary" id="submitBtn">Send application</button>
     </div>`;
 
-  document.querySelectorAll('[data-single] .opt').forEach(o=>o.addEventListener('click',()=>{
-    o.parentElement.querySelectorAll('.opt').forEach(s=>s.classList.remove('sel'));
+  document.querySelectorAll('[data-single] .choice-opt').forEach(o=>o.addEventListener('click',()=>{
+    o.parentElement.querySelectorAll('.choice-opt').forEach(s=>s.classList.remove('sel'));
     o.classList.add('sel');
     o.closest('.field').classList.remove('err');
   }));
@@ -181,13 +219,13 @@ function renderForm(){
   if(!CONFIG.endpoint) document.getElementById('demoTag').style.display='block';
 }
 
-const TEXT_REQ = ["name","email","instagram","whatsapp","timezone","portfolio","sample","sample_role","turnaround","availability","rate"];
-const SINGLE_REQ = ["capcut"];
+const TEXT_REQ = ["name","email","whatsapp","timezone","portfolio","daily_output","turnaround","commitments","start","rate"];
+const SINGLE_REQ = ["experience","premiere","aftereffects","fulltime_ok"];
 
 function submit(){
   let firstErr=null;
   const val = id => (document.getElementById(id)?.value||"").trim();
-  const pick = id => document.querySelector(`[data-for="${id}"] .opt.sel`)?.dataset.v || "";
+  const pick = id => document.querySelector(`[data-for="${id}"] .choice-opt.sel`)?.dataset.v || "";
 
   TEXT_REQ.forEach(id=>{
     const f=document.querySelector(`[data-for="${id}"]`);
@@ -206,10 +244,12 @@ function submit(){
     role: CONFIG.role, role_label: CONFIG.role_label,
     name: val("name"), email: val("email"), whatsapp: val("whatsapp"), location: val("timezone"),
     comp_expectation: val("rate"),
-    links: { portfolio: val("portfolio"), sample: val("sample") },
+    links: { portfolio: val("portfolio") },
     answers: {
-      instagram: val("instagram"), capcut: pick("capcut"), sample_role: val("sample_role"),
-      turnaround: val("turnaround"), availability: val("availability"),
+      instagram: val("instagram"), experience: pick("experience"),
+      premiere: pick("premiere"), aftereffects: pick("aftereffects"),
+      daily_output: val("daily_output"), turnaround: val("turnaround"),
+      fulltime_ok: pick("fulltime_ok"), commitments: val("commitments"), start: val("start"),
       rate: val("rate"), notes: val("notes")
     },
     source: "hiring-form",
@@ -234,7 +274,7 @@ function showThanks(){
     <div class="card thanks fade">
       <div class="big"></div>
       <h1>Application in.</h1>
-      <p class="lead">Thanks, we read every one. If you make the shortlist we'll message your WhatsApp with a short paid trial: a quick edit of raw footage we provide, in this style.</p>
+      <p class="lead">Thanks. We get a lot of applications, so we only reach out to the shortlist. If you make it, we'll message you on WhatsApp about a short trial edit, on footage we provide in this style.</p>
     </div>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
