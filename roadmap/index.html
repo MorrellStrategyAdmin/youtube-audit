@@ -220,7 +220,7 @@ const QUESTIONS = [
 const STATE = { step:-1, answers:{}, lead:{}, sent:false, partialSent:false };
 const app = document.getElementById('app');
 const progressBar = document.getElementById('progressBar');
-const TOTAL = QUESTIONS.length + 2; // intro + capture + questions ; result not counted
+const TOTAL = QUESTIONS.length + 3; // intro + ig + youtube + questions + contact ; result not counted
 
 if (CONFIG.endpoint === "") document.getElementById('demoTag').style.display = 'block';
 
@@ -244,8 +244,10 @@ function setProgress(){
 function render(){
   setProgress();
   if (STATE.step === -1) return renderIntro();
-  if (STATE.step === 0) return renderCapture();
-  if (STATE.step >= 1 && STATE.step <= QUESTIONS.length) return renderQuestion(STATE.step-1);
+  if (STATE.step === 0) return renderIg();
+  if (STATE.step === 1) return renderYouTube();
+  if (STATE.step >= 2 && STATE.step <= QUESTIONS.length + 1) return renderQuestion(STATE.step - 2);
+  if (STATE.step === QUESTIONS.length + 2) return renderContact();
   return renderResult();
 }
 
@@ -275,17 +277,47 @@ function renderQuestion(i){
       </div>
       <div class="nav">
         <button class="btn btn-ghost" onclick="back()">← Back</button>
-        <button class="btn btn-primary" ${cur?'':'disabled'} onclick="${i===QUESTIONS.length-1?'finish()':'next()'}">${i===QUESTIONS.length-1?'See my roadmap':'Continue'}</button>
+        <button class="btn btn-primary" ${cur?'':'disabled'} onclick="next()">Continue</button>
       </div>
     </div>`;
 }
 
-function renderCapture(){
+function renderIg(){
   const L = STATE.lead;
   app.innerHTML = `
     <div class="card fade">
-      <div class="q-count">First, where should we send it?</div>
-      <div class="q-title">Where can we reach you?</div>
+      <div class="q-count">Let's start</div>
+      <div class="q-title">What's your Instagram?</div>
+      <div class="field">
+        <label>Instagram handle</label>
+        <input id="f_ig" placeholder="@yourhandle" value="${L.ig||''}" oninput="onLead()" />
+      </div>
+      <button class="btn btn-primary btn-block" id="submitBtn" ${igValid()?'':'disabled'} onclick="submitIgPartial()">Continue</button>
+      <p class="microcopy left">So we know who we're building this for. Your roadmap takes about 60 seconds.</p>
+      <div class="nav"><button class="btn btn-ghost" onclick="back()">← Back</button><span></span></div>
+    </div>`;
+}
+function renderYouTube(){
+  const L = STATE.lead;
+  app.innerHTML = `
+    <div class="card fade">
+      <div class="q-count">Your channel</div>
+      <div class="q-title">What's your YouTube channel?</div>
+      <div class="field">
+        <label>YouTube channel <span style="color:var(--faint)">(optional)</span></label>
+        <input id="f_channel" placeholder="youtube.com/@yourchannel" value="${L.channel||''}" oninput="onLead()" />
+      </div>
+      <button class="btn btn-primary btn-block" onclick="next()">Continue</button>
+      <p class="microcopy left">So we can take a look at where you're starting from. Leave it blank if you'd rather not.</p>
+      <div class="nav"><button class="btn btn-ghost" onclick="back()">← Back</button><span></span></div>
+    </div>`;
+}
+function renderContact(){
+  const L = STATE.lead;
+  app.innerHTML = `
+    <div class="card fade">
+      <div class="q-count">Last step</div>
+      <div class="q-title">Where should we send your roadmap?</div>
       <div class="field">
         <label>First name</label>
         <input id="f_name" placeholder="Your first name" value="${L.name||''}" oninput="onLead()" />
@@ -294,16 +326,8 @@ function renderCapture(){
         <label>Email</label>
         <input id="f_email" type="email" placeholder="you@company.com" value="${L.email||''}" oninput="onLead()" />
       </div>
-      <div class="field">
-        <label>Instagram handle</label>
-        <input id="f_ig" placeholder="@yourhandle" value="${L.ig||''}" oninput="onLead()" />
-      </div>
-      <div class="field">
-        <label>YouTube channel <span style="color:var(--faint)">(optional)</span></label>
-        <input id="f_channel" placeholder="youtube.com/@yourchannel" value="${L.channel||''}" oninput="onLead()" />
-      </div>
-      <button class="btn btn-primary btn-block" id="submitBtn" ${leadValid()?'':'disabled'} onclick="submitLeadEarly()">Continue to my roadmap</button>
-      <p class="microcopy left">Answer 8 quick questions next and we'll build your roadmap, then send a copy here. If you're a fit, someone from our team reaches out on Instagram with your next step. No spam.</p>
+      <button class="btn btn-primary btn-block" id="submitBtn" ${contactValid()?'':'disabled'} onclick="finish()">Show my roadmap</button>
+      <p class="microcopy left">We'll send your roadmap here. If you're a fit, someone from our team reaches out on Instagram with your next step. No spam.</p>
       <div class="nav"><button class="btn btn-ghost" onclick="back()">← Back</button><span></span></div>
     </div>`;
 }
@@ -543,19 +567,24 @@ function next(){ STATE.step++; render(); window.scrollTo({top:0,behavior:'smooth
 function back(){ if(STATE.step>-1){STATE.step--; render(); window.scrollTo({top:0,behavior:'smooth'});} }
 
 function onLead(){
-  STATE.lead.name = val('f_name');
-  STATE.lead.email = val('f_email');
-  STATE.lead.ig = val('f_ig');
-  STATE.lead.channel = val('f_channel');
-  const b = document.getElementById('submitBtn');
-  if (b) b.disabled = !leadValid();
+  // Only touch fields present on the current step, so navigating between steps
+  // never wipes a value collected on another step.
+  const n=document.getElementById('f_name');    if(n)  STATE.lead.name=n.value;
+  const e=document.getElementById('f_email');   if(e)  STATE.lead.email=e.value;
+  const ig=document.getElementById('f_ig');     if(ig) STATE.lead.ig=ig.value;
+  const ch=document.getElementById('f_channel');if(ch) STATE.lead.channel=ch.value;
+  const b=document.getElementById('submitBtn');
+  if (b){
+    if (STATE.step===0) b.disabled = !igValid();
+    else if (STATE.step===QUESTIONS.length+2) b.disabled = !contactValid();
+  }
 }
 function val(id){const e=document.getElementById(id);return e?e.value:''}
-function leadValid(){
+function igValid(){ return (STATE.lead.ig||'').trim().replace(/^@+/,'').length >= 2; }
+function contactValid(){
   const n=(STATE.lead.name||'').trim();
   const e=(STATE.lead.email||'').trim();
-  const ig=(STATE.lead.ig||'').trim().replace(/^@+/,'');
-  return n.length>0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && ig.length>=2;
+  return n.length>0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 }
 
 function refSource(){
@@ -588,19 +617,22 @@ function postLead(payload){
     console.log("[roadmap · demo capture] would POST:", payload);
   }
 }
-// Early capture: as soon as we have name + email + Instagram, save a PARTIAL lead so a
-// drop-off is never lost, then go into the questions. Fires once per session.
-function submitLeadEarly(){
-  if(!leadValid()) return;
+// Early capture: as soon as we have the Instagram handle, save a PARTIAL lead so a
+// drop-off is never lost (the handle is how the setter reaches out), then continue.
+// Fires once per session. Name + email are collected at the end instead.
+function submitIgPartial(){
+  if(!igValid()) return;
   if(!STATE.partialSent){
     STATE.partialSent = true;
-    postLead(Object.assign(baseLead(), { complete:false }));
+    postLead(Object.assign(baseLead(), { complete:false }));  // Instagram only at this point
   }
   next();
 }
-// Finish: all questions answered. Send the COMPLETE lead (tier + answers), which
-// upgrades the partial into a full pipeline lead and pings the setter, then show it.
+// Finish: all questions answered and name + email given. Send the COMPLETE lead, which
+// links to the Instagram partial, upgrades it to a full pipeline lead, pings the setter,
+// then shows the roadmap.
 function finish(){
+  if(!contactValid()) return;
   const a = STATE.answers;
   const { scores, key } = diagnose(a);
   const Q = qualify(a);
@@ -614,7 +646,7 @@ function finish(){
     complete: true
   }));
   STATE.sent = true;
-  STATE.step = QUESTIONS.length + 1;
+  STATE.step = QUESTIONS.length + 3;
   render();
   window.scrollTo({top:0,behavior:'smooth'});
 }
