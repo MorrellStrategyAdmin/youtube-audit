@@ -220,7 +220,7 @@ const QUESTIONS = [
 const STATE = { step:-1, answers:{}, lead:{}, sent:false, partialSent:false };
 const app = document.getElementById('app');
 const progressBar = document.getElementById('progressBar');
-const TOTAL = QUESTIONS.length + 3; // intro + ig + youtube + questions + contact ; result not counted
+const TOTAL = QUESTIONS.length + 2; // intro + ig + questions + contact ; result not counted
 
 if (CONFIG.endpoint === "") document.getElementById('demoTag').style.display = 'block';
 
@@ -245,9 +245,8 @@ function render(){
   setProgress();
   if (STATE.step === -1) return renderIntro();
   if (STATE.step === 0) return renderIg();
-  if (STATE.step === 1) return renderYouTube();
-  if (STATE.step >= 2 && STATE.step <= QUESTIONS.length + 1) return renderQuestion(STATE.step - 2);
-  if (STATE.step === QUESTIONS.length + 2) return renderContact();
+  if (STATE.step >= 1 && STATE.step <= QUESTIONS.length) return renderQuestion(STATE.step - 1);
+  if (STATE.step === QUESTIONS.length + 1) return renderContact();
   return renderResult();
 }
 
@@ -294,21 +293,6 @@ function renderIg(){
       </div>
       <button class="btn btn-primary btn-block" id="submitBtn" ${igValid()?'':'disabled'} onclick="submitIgPartial()">Continue</button>
       <p class="microcopy left">So we know who we're building this for. Your roadmap takes about 60 seconds.</p>
-      <div class="nav"><button class="btn btn-ghost" onclick="back()">← Back</button><span></span></div>
-    </div>`;
-}
-function renderYouTube(){
-  const L = STATE.lead;
-  app.innerHTML = `
-    <div class="card fade">
-      <div class="q-count">Your channel</div>
-      <div class="q-title">What's your YouTube channel?</div>
-      <div class="field">
-        <label>YouTube channel <span style="color:var(--faint)">(optional)</span></label>
-        <input id="f_channel" placeholder="youtube.com/@yourchannel" value="${L.channel||''}" oninput="onLead()" />
-      </div>
-      <button class="btn btn-primary btn-block" onclick="next()">Continue</button>
-      <p class="microcopy left">So we can take a look at where you're starting from. Leave it blank if you'd rather not.</p>
       <div class="nav"><button class="btn btn-ghost" onclick="back()">← Back</button><span></span></div>
     </div>`;
 }
@@ -576,7 +560,7 @@ function onLead(){
   const b=document.getElementById('submitBtn');
   if (b){
     if (STATE.step===0) b.disabled = !igValid();
-    else if (STATE.step===QUESTIONS.length+2) b.disabled = !contactValid();
+    else if (STATE.step===QUESTIONS.length+1) b.disabled = !contactValid();
   }
 }
 function val(id){const e=document.getElementById(id);return e?e.value:''}
@@ -653,7 +637,7 @@ function finish(){
     complete: true
   }));
   STATE.sent = true;
-  STATE.step = QUESTIONS.length + 3;
+  STATE.step = QUESTIONS.length + 2;
   render();
   window.scrollTo({top:0,behavior:'smooth'});
 }
