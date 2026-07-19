@@ -217,10 +217,10 @@ const QUESTIONS = [
       {v:"250p",   t:"$250k+"} ]}
 ];
 
-const STATE = { step:-1, answers:{}, lead:{}, sent:false };
+const STATE = { step:-1, answers:{}, lead:{}, sent:false, partialSent:false };
 const app = document.getElementById('app');
 const progressBar = document.getElementById('progressBar');
-const TOTAL = QUESTIONS.length + 2; // intro + questions + capture ; result not counted
+const TOTAL = QUESTIONS.length + 2; // intro + capture + questions ; result not counted
 
 if (CONFIG.endpoint === "") document.getElementById('demoTag').style.display = 'block';
 
@@ -244,8 +244,8 @@ function setProgress(){
 function render(){
   setProgress();
   if (STATE.step === -1) return renderIntro();
-  if (STATE.step >= 0 && STATE.step < QUESTIONS.length) return renderQuestion(STATE.step);
-  if (STATE.step === QUESTIONS.length) return renderCapture();
+  if (STATE.step === 0) return renderCapture();
+  if (STATE.step >= 1 && STATE.step <= QUESTIONS.length) return renderQuestion(STATE.step-1);
   return renderResult();
 }
 
@@ -275,7 +275,7 @@ function renderQuestion(i){
       </div>
       <div class="nav">
         <button class="btn btn-ghost" onclick="back()">← Back</button>
-        <button class="btn btn-primary" ${cur?'':'disabled'} onclick="next()">Continue</button>
+        <button class="btn btn-primary" ${cur?'':'disabled'} onclick="${i===QUESTIONS.length-1?'finish()':'next()'}">${i===QUESTIONS.length-1?'See my roadmap':'Continue'}</button>
       </div>
     </div>`;
 }
@@ -284,7 +284,7 @@ function renderCapture(){
   const L = STATE.lead;
   app.innerHTML = `
     <div class="card fade">
-      <div class="q-count">Last step</div>
+      <div class="q-count">First, where should we send it?</div>
       <div class="q-title">Where can we reach you?</div>
       <div class="field">
         <label>First name</label>
@@ -302,8 +302,8 @@ function renderCapture(){
         <label>YouTube channel <span style="color:var(--faint)">(optional)</span></label>
         <input id="f_channel" placeholder="youtube.com/@yourchannel" value="${L.channel||''}" oninput="onLead()" />
       </div>
-      <button class="btn btn-primary btn-block" id="submitBtn" ${leadValid()?'':'disabled'} onclick="submitLead()">Show my roadmap</button>
-      <p class="microcopy left">Enter your details to see your roadmap. If you're a fit, someone from our team will reach out with your next step. No spam.</p>
+      <button class="btn btn-primary btn-block" id="submitBtn" ${leadValid()?'':'disabled'} onclick="submitLeadEarly()">Continue to my roadmap</button>
+      <p class="microcopy left">Answer 8 quick questions next and we'll build your roadmap, then send a copy here. If you're a fit, someone from our team reaches out on Instagram with your next step. No spam.</p>
       <div class="nav"><button class="btn btn-ghost" onclick="back()">← Back</button><span></span></div>
     </div>`;
 }
@@ -558,27 +558,24 @@ function leadValid(){
   return n.length>0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && ig.length>=2;
 }
 
-async function submitLead(){
-  if(!leadValid()) return;
-  const a = STATE.answers;
-  const { scores, key } = diagnose(a);
-  const Q = qualify(a);
-  const payload = {
-    name: STATE.lead.name.trim(),
-    email: STATE.lead.email.trim(),
-    instagram: "@"+STATE.lead.ig.trim().replace(/^@+/,''),
+function refSource(){
+  try{ return localStorage.getItem('ms_first_source') || new URLSearchParams(location.search).get('utm_source') || ''; }
+  catch(e){ return ''; }
+}
+// Shared contact fields, collected up front (name + email + Instagram, near the start).
+function baseLead(){
+  return {
+    name: (STATE.lead.name||'').trim(),
+    email: (STATE.lead.email||'').trim(),
+    instagram: "@"+(STATE.lead.ig||'').trim().replace(/^@+/,''),
     channel: (STATE.lead.channel||'').trim(),
-    answers: a,
-    real_bottleneck: key,
-    scores,
-    tier: Q.tier,
-    business: a.business,
-    revenue: a.revenue,
     source: "youtube-growth-roadmap",
-    ref_source: (function(){try{return localStorage.getItem('ms_first_source')||new URLSearchParams(location.search).get('utm_source')||'';}catch(e){return '';}})(),
+    ref_source: refSource(),
     page: location.href
   };
-  // fire-and-forget capture; never block the result on it
+}
+// fire-and-forget capture; never block the flow on it
+function postLead(payload){
   if (CONFIG.endpoint){
     try{
       fetch(CONFIG.endpoint,{
@@ -588,8 +585,34 @@ async function submitLead(){
       }).catch(()=>{});
     }catch(e){}
   } else {
-    console.log("[BOTTLENECK · demo capture] would POST:", payload);
+    console.log("[roadmap · demo capture] would POST:", payload);
   }
+}
+// Early capture: as soon as we have name + email + Instagram, save a PARTIAL lead so a
+// drop-off is never lost, then go into the questions. Fires once per session.
+function submitLeadEarly(){
+  if(!leadValid()) return;
+  if(!STATE.partialSent){
+    STATE.partialSent = true;
+    postLead(Object.assign(baseLead(), { complete:false }));
+  }
+  next();
+}
+// Finish: all questions answered. Send the COMPLETE lead (tier + answers), which
+// upgrades the partial into a full pipeline lead and pings the setter, then show it.
+function finish(){
+  const a = STATE.answers;
+  const { scores, key } = diagnose(a);
+  const Q = qualify(a);
+  postLead(Object.assign(baseLead(), {
+    answers: a,
+    real_bottleneck: key,
+    scores,
+    tier: Q.tier,
+    business: a.business,
+    revenue: a.revenue,
+    complete: true
+  }));
   STATE.sent = true;
   STATE.step = QUESTIONS.length + 1;
   render();
