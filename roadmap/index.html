@@ -571,7 +571,7 @@ function diagnose(a){
 const BOTTLENECK = {
   reach:{ name:"Reach", scoreKey:"reach",
     real:"<b>reach</b>",
-    exp:a=>`Your content is landing well enough that the people who click tend to stay, but you're only averaging ${LABEL.viewsText[a.views]}. That gap almost always means the same thing - that not enough of the right people are seeing your videos in the first place. For a ${LABEL.biz[a.business]}, reach comes down to two things, proven ideas and packaging good enough to earn the click. Get those right and the views (then ${LABEL.buyer[a.business]}) start to follow.`,
+    exp:a=>`Your content is landing well enough that the people who click tend to stay, but you're only averaging ${LABEL.viewsText[a.views]}. That gap almost always means the same thing - that not enough of the right people are seeing your videos in the first place. For a ${LABEL.biz[a.business]}, reach comes down to two things, proven ideas and packaging good enough to earn the click. Get those right and the views start to follow, and the customers with them.`,
     fixP:"Reach comes from proven ideas and packaging good enough to get clicks.",
     fix:["Work from proven demand instead of guessing. Study the outliers in and around your niche, where channels under 50k subs give the cleanest signal, and pull out the winning topics, formats, titles and thumbnails.",
          "Then go further than copying them. Find the topics, problems and outcomes your ideal viewer wants that nobody has covered well yet, and look past the obvious problem to the second and third-order ones underneath.",
@@ -599,7 +599,7 @@ const BOTTLENECK = {
          "Match your editing, scripting and format to the exact audience you want to keep. Heavy edits suit a different viewer than a slow, dense breakdown, so build for the person who buys from you.",
          "Keep testing new formats instead of settling into one. Formats that feel fresh to your niche stand out, so treat a few videos a month as experiments and keep the ones that work.",
          "Run every idea through three checks. Could AI have written it, how many times has the niche seen it already, and is there anything genuinely different about yours? Cut anything generic."],
-    good:a=>({lead:"A good video grabs attention in the first thirty seconds and holds it for the remaining runtime.", eg:`The open interrupts the pattern, then quickly gives them proof of why to listen, the promise of what they'll get, and the plan for how you'll deliver it, all while echoing the title and thumbnail so they know they're in the right place. From there it is built for the exact person you want watching. ${a.business==="ecom"||a.business==="creator"?"It looks and moves the way that viewer expects, tight where it needs to be, nothing that drags.":"It carries real substance, a specific mechanism or breakdown they could not get from a chatbot in five minutes."} Beyond the intro, the points are genuinely different from each other and delivered in varied ways rather than the same framework every time, ordered so each one builds anticipation for the next, with clean segues and editing and visuals that fit. The viewer is learning comfortably the whole way, never overwhelmed or buried in jargon, and none of it reads like a chatbot wrote it.`}),
+    good:a=>({lead:"A good video grabs attention in the first thirty seconds and holds it for the remaining runtime.", eg:`The open interrupts the pattern, then quickly gives them proof of why to listen, the promise of what they'll get, and the plan for how you'll deliver it, all while echoing the title and thumbnail so they know they're in the right place. From there it is built for the exact person you want watching. ${a.business==="ecom"||a.business==="creator"?"It looks and moves the way that viewer expects, tight where it needs to be, nothing that drags.":"It carries real substance, a specific mechanism or breakdown they could not get from a chatbot in five minutes."} Beyond the intro, the points are genuinely different from each other and delivered in varied ways rather than the same framework every time, ordered so each one builds anticipation for the next, with clean segues and editing and visuals that fit. The viewer is learning comfortably throughout, never overwhelmed or buried in jargon, and none of it reads like a chatbot wrote it.`}),
     mistake:"The most common mistake here is blaming reach when the real problem is retention. People see low views and rush to fix their titles and thumbnails, when the solution is to improve viewer satisfaction. A video that keeps people watching gets pushed to more people on its own. One that doesn't, won't, no matter how many thumbnails you test.",
     solved:"You've solved content quality when your intro retention is above 60% for most niches and your retention graph looks healthily flat. Once the audience's satisfaction is there, YouTube handles the reach for you." },
   conversion:{ name:"Conversion", scoreKey:"conversion",
@@ -762,11 +762,11 @@ function counterPositionSection(){
   const cluster = [[120,96],[141,82],[164,90],[181,104],[150,110],[134,120],[160,128],[178,117],[126,114],[152,96],[171,106],[145,131],[190,101],[131,103],[157,120],[143,88]];
   const dots = cluster.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.3" fill="var(--faint)" opacity="0.55"/>`).join('');
   const patterns = [
-    ["Timing reversal","Tell people to hold off on the obvious move until an unexpected condition is met."],
-    ["Volume paradox","Show how doing more of what everyone chases actually makes their key metric worse."],
-    ["Priority inversion","Point out that the thing your niche obsesses over barely matters, and name the quiet thing that does."],
-    ["Process flip","Take the standard playbook everyone runs and deliberately do the opposite."],
-    ["Hidden mechanism","Reveal that the thing works, but not for the reason everyone assumes."]
+    ["Timing reversal","Everyone rushes in. You tell them exactly when to wait instead."],
+    ["Volume paradox","Doing more of what everyone chases actually makes it worse, and you show why."],
+    ["Priority inversion","The thing your niche fixates on barely matters. You name the one that does."],
+    ["Process flip","Take the playbook everyone runs and do the opposite, on purpose."],
+    ["Hidden mechanism","It works, but not for the reason people assume. You show what really drives it."]
   ];
   const rows = patterns.map((p,i)=>`
         <div class="cpat-row">
@@ -872,7 +872,7 @@ function gearSection(){
     ["Lighting","Amaran 100x S key light plus fill and accent / back lights, on Amaran stands with a softbox (Lightdome SE)"],
     ["Software",`OBS or Loom for screen recording${scr}`],
     ["Footage",`Frame.io to share and organise footage with your editor${frameChip}`],
-    ["Planning",`Notion to run the whole content operation${notionChip}`]
+    ["Planning",`Notion to run your content operation${notionChip}`]
   ];
   const rows = arr => arr.map(r=>`<div class="grow"><div class="gk">${r[0]}</div><div class="gv">${r[1]}</div></div>`).join('');
   return `
@@ -928,7 +928,7 @@ function contentPipeline(){
     thumb:'<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="10" r="1.5" fill="currentColor"/><path d="M5 17l4.5-4 3 2.5L16 12l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
     publish:'<path d="M12 15V4M8 8l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M5 15v4h14v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
   };
-  const steps = [["idea","Ideate"],["script","Script"],["film","Film"],["edit","Edit"],["thumb","Thumbnail"],["publish","Publish"]];
+  const steps = [["idea","Ideate"],["thumb","Thumbnail"],["script","Script"],["film","Film"],["edit","Edit"],["publish","Publish"]];
   const cells = steps.map(s=>`<div class="pstep"><span class="pi"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">${IC[s[0]]}</svg></span><span class="pl">${s[1]}</span></div>`).join('');
   return `
       <div class="pipe">${cells}</div>
@@ -945,24 +945,24 @@ function diyDfySection(){
     "Write every script from a blank page",
     "Hire, train and manage editors and a thumbnail designer",
     "Work out your positioning and channel strategy on your own",
-    "Hold two videos a week on top of running your business",
+    "Publish two videos a week on top of running your business",
     "Wait months to learn whether any of it works"
   ];
   const dfy = [
-    "We find the proven ideas, sourced from real outliers",
+    "We find the proven ideas, based on our winning ingredients",
     "We package every video, the title and the thumbnail",
     "We script each video in your voice",
-    "We run the whole production line, editing included",
+    "We run production end to end, editing included",
     "We set the strategy, positioning and content plan",
     "We keep it shipping every week, to the same standard",
-    "We bring a playbook that's already done it, so you skip the guesswork"
+    "We implement our proven playbook, so you skip the guesswork"
   ];
   const li = (icon,arr)=>arr.map(t=>`<div class="dvd-li">${icon}<span>${t}</span></div>`).join('');
   return `
       <p class="mix-intro">Everything above is doable on your own. Here's what that actually takes, next to what we take off your plate.</p>
       <div class="dvd">
         <div class="dvd-col diy"><div class="dvd-head">On your own<span class="lbl">DIY</span></div>${li(X,diy)}</div>
-        <div class="dvd-col dfy"><div class="dvd-head">With Morrell Strategy<span class="lbl">Done for you</span></div>${li(CH,dfy)}</div>
+        <div class="dvd-col dfy"><div class="dvd-head">With MS<span class="lbl">Done for you</span></div>${li(CH,dfy)}</div>
       </div>`;
 }
 
@@ -1010,7 +1010,7 @@ function renderResult(){
   if (Q.tier==="A"){
     ctaHTML = `<div class="cta">
       <h2>You're exactly who we build for.</h2>
-      <p>It starts with a free, live audit of your channel. We'll find the real bottleneck, show you a clear picture, and give you a plan you can use, then talk through what working with us would look like.${Q.bigOperator?" At your scale, the advisory Strategy track is on the table too.":""}</p>
+      <p>It starts with a free, live audit of your channel. We'll look at what's holding your growth back, then walk you through how we'd fix it together.${Q.bigOperator?" At your scale, the advisory Strategy track is on the table too.":""}</p>
       <div class="cta-proof"><span><b>4B+</b> organic views</span><span><b>45M+</b> subscribers</span><span>built for <b>$1M+/mo</b> operators</span></div>
       <div id="cal-inline" class="cal-embed"></div>
       <a class="btn btn-ghost btn-block cal-fallback" href="${CONFIG.calLink}" target="_blank" rel="noopener">Prefer a new tab? Open the calendar →</a>
