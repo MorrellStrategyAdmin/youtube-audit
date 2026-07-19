@@ -797,14 +797,14 @@ function counterPositionSection(){
 
 // 3) Cadence: revenue vs videos/week, sweet spot at 2
 function cadenceChart(){
-  const pts = [[48,160.9],[109,89.9],[170,37.4],[231,45.9],[292,65.8]];
+  const pts = [[48,163.7],[109,92.7],[170,51.6],[231,45.9],[292,42.3]];
   const line = smoothPath(pts);
   const area = line + ` L292,168 L48,168 Z`;
   const ticks = [[109,'1'],[170,'2'],[231,'3'],[292,'4']].map(t=>
     `<text x="${t[0]}" y="184" text-anchor="middle" class="ax-lb"${t[1]==='2'?' style="fill:var(--accent)"':''}>${t[1]}</text>`).join('');
   return `
     <div class="chart">
-      <svg viewBox="0 0 320 206" role="img" aria-label="Revenue climbs sharply up to two videos a week, then flattens and dips as quality drops.">
+      <svg viewBox="0 0 320 206" role="img" aria-label="Revenue climbs sharply up to two videos a week, then flattens as each extra video adds less.">
         <defs><linearGradient id="cadGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent)" stop-opacity="0.26"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/>
         </linearGradient></defs>
@@ -813,8 +813,8 @@ function cadenceChart(){
         <line x1="48" y1="168" x2="300" y2="168" stroke="var(--line-strong)" stroke-width="1"/>
         <path class="fade-in" d="${area}" fill="url(#cadGrad)"/>
         <path class="draw" d="${line}" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" pathLength="100" style="filter:drop-shadow(0 0 6px var(--hud-glow))"/>
-        <line x1="170" y1="37.4" x2="170" y2="168" stroke="var(--accent-line)" stroke-width="1" stroke-dasharray="3 3"/>
-        <circle cx="170" cy="37.4" r="9" fill="var(--accent)" opacity="0.16"/><circle cx="170" cy="37.4" r="4.5" fill="var(--accent)"/>
+        <line x1="170" y1="51.6" x2="170" y2="168" stroke="var(--accent-line)" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="170" cy="51.6" r="9" fill="var(--accent)" opacity="0.16"/><circle cx="170" cy="51.6" r="4.5" fill="var(--accent)"/>
         <text x="170" y="14" text-anchor="middle" class="peak-lb">SWEET SPOT</text>
         <text x="50" y="15" class="ax-lb">↑ revenue</text>
         ${ticks}
@@ -1066,7 +1066,7 @@ function renderResult(){
 
       <div class="section-k">How often to post</div>
       <div class="chartwrap">${cadenceChart()}
-        <p class="chart-note"><b>Two videos a week is the sweet spot.</b> Returns climb fast up to two. Push past it and quality usually slips, so each extra video adds less than it costs you. Nail two genuinely great videos a week before you even think about more.</p>
+        <p class="chart-note"><b>Two videos a week is the sweet spot.</b> Returns climb fast up to two, then flatten out. Push past it and quality usually slips, so each extra video adds less than the last. Nail two genuinely great videos a week before you even think about more.</p>
       </div>
 
       <div class="section-k">Run it like a system</div>
