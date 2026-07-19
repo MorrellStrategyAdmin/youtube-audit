@@ -636,8 +636,15 @@ function finish(){
   const a = STATE.answers;
   const { scores, key } = diagnose(a);
   const Q = qualify(a);
+  // Human-readable answers (question text + the chosen option), in quiz order, so the
+  // CRM can show all of them as a note on the deal.
+  const answersLabeled = QUESTIONS.map(q=>{
+    const opt = q.opts.find(o=>o.v===a[q.id]);
+    return { q: q.q, a: opt ? opt.t : (a[q.id]||'') };
+  });
   postLead(Object.assign(baseLead(), {
     answers: a,
+    answers_labeled: answersLabeled,
     real_bottleneck: key,
     scores,
     tier: Q.tier,
