@@ -94,6 +94,131 @@
   .bar{height:7px;background:var(--line);border-radius:99px;overflow:hidden}
   .bar > i{display:block;height:100%;border-radius:99px;transition:width .8s cubic-bezier(.4,0,.2,1)}
 
+  /* funnel content-mix donut */
+  .mix-intro{color:var(--muted);font-size:14.5px;line-height:1.55;margin-bottom:14px}
+  .funnelmix{display:flex;align-items:center;gap:24px;background:var(--bg-elev2);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+  @media(max-width:520px){.funnelmix{flex-direction:column;gap:18px;align-items:center}}
+  .fl-chart{flex:0 0 auto;line-height:0}
+  .fl-arc{transition:stroke-dasharray .9s cubic-bezier(.4,0,.2,1)}
+  .fl-cap{fill:var(--faint);font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.02em}
+  .fl-legend{flex:1 1 auto;display:flex;flex-direction:column;gap:14px;min-width:0;width:100%}
+  .fl-row{display:grid;grid-template-columns:auto 1fr auto;column-gap:11px;row-gap:3px;align-items:center}
+  .fl-dot{width:11px;height:11px;border-radius:3px}
+  .fl-name{font-family:var(--display);font-weight:600;font-size:14.5px;color:var(--text)}
+  .fl-pct{justify-self:end;font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--text)}
+  .fl-sub{grid-column:2 / 4;font-size:13px;color:var(--muted);line-height:1.45}
+
+  /* ============================ HUD RESULT AESTHETIC ============================ */
+  :root{
+    --hud-line:rgba(79,140,255,0.55);
+    --hud-glow:rgba(79,140,255,0.55);
+    --hud-mono:'Space Grotesk',ui-monospace,'SF Mono','JetBrains Mono',Menlo,monospace;
+    --grid1:#4F8CFF; --grid2:#3FB98C; --grid3:#E0A64F;
+  }
+  /* ambient drifting grid, only behind the result view */
+  body.result-mode::before{
+    content:'';position:fixed;inset:-40px;z-index:0;pointer-events:none;
+    background:
+      linear-gradient(var(--hud-line) 1px,transparent 1px) 0 0/58px 58px,
+      linear-gradient(90deg,var(--hud-line) 1px,transparent 1px) 0 0/58px 58px;
+    opacity:.14;
+    -webkit-mask-image:radial-gradient(ellipse 120% 78% at 50% 10%,#000 0%,transparent 76%);
+            mask-image:radial-gradient(ellipse 120% 78% at 50% 10%,#000 0%,transparent 76%);
+    animation:hud-drift 42s linear infinite;
+  }
+  @keyframes hud-drift{to{transform:translate3d(58px,58px,0)}}
+  body.result-mode .wrap{position:relative;z-index:1}
+
+  /* result card = primary HUD panel: corner brackets */
+  .result-card{position:relative}
+  .result-card::before,.result-card::after{
+    content:'';position:absolute;width:18px;height:18px;pointer-events:none;opacity:.6;z-index:2;
+  }
+  .result-card::before{top:-1px;left:-1px;border-top:1px solid var(--hud-glow);border-left:1px solid var(--hud-glow);border-top-left-radius:18px}
+  .result-card::after{bottom:-1px;right:-1px;border-bottom:1px solid var(--hud-glow);border-right:1px solid var(--hud-glow);border-bottom-right-radius:18px}
+
+  /* section headers read as instrument labels: mono, node dot, accent rail */
+  .result-card .section-k{
+    font-family:var(--hud-mono);font-size:11.5px;letter-spacing:.13em;font-weight:600;
+    display:flex;align-items:center;gap:9px;color:var(--muted);
+    padding-bottom:9px;border-bottom:1px solid var(--line);position:relative;
+  }
+  .result-card .section-k::before{
+    content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 10px var(--hud-glow);flex:0 0 auto;
+  }
+  .result-card .section-k::after{
+    content:'';position:absolute;left:0;bottom:-1px;height:1px;width:46px;
+    background:linear-gradient(90deg,var(--accent),transparent);
+  }
+  .result-card .score-row .val,.fl-pct{font-family:var(--hud-mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+  /* eyebrow divider that opens the "fundamentals" block */
+  .hud-divider{display:flex;align-items:center;gap:12px;margin:34px 0 4px}
+  .hud-divider .ln{flex:1 1 auto;height:1px;background:linear-gradient(90deg,transparent,var(--line-strong),transparent)}
+  .hud-divider .lb{font-family:var(--hud-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+
+  /* shared framed panel with corner brackets for feature blocks */
+  .hud-panel{position:relative;background:var(--bg-elev2);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .hud-panel::before,.hud-panel::after{content:'';position:absolute;width:11px;height:11px;pointer-events:none;opacity:.5}
+  .hud-panel::before{top:-1px;left:-1px;border-top:1px solid var(--hud-glow);border-left:1px solid var(--hud-glow);border-top-left-radius:12px}
+  .hud-panel::after{bottom:-1px;right:-1px;border-bottom:1px solid var(--hud-glow);border-right:1px solid var(--hud-glow);border-bottom-right-radius:12px}
+  .hud-cap{font-family:var(--hud-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+  /* chart draw-on */
+  .draw{stroke-dasharray:100;stroke-dashoffset:100;animation:draw 1.15s cubic-bezier(.4,0,.2,1) .15s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .fade-in{opacity:0;animation:fadein .6s ease .5s forwards}
+  @keyframes fadein{to{opacity:1}}
+
+  /* ---- 8 ingredients grid ---- */
+  .ingredients{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  @media(max-width:520px){.ingredients{grid-template-columns:1fr}}
+  .ing{position:relative;background:var(--bg-elev2);border:1px solid var(--line);border-radius:10px;padding:13px 14px 14px}
+  .ing:hover{border-color:var(--accent-line)}
+  .ing .ix{font-family:var(--hud-mono);font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.04em}
+  .ing .nm{font-family:var(--display);font-weight:600;font-size:15px;color:var(--text);margin:3px 0 5px}
+  .ing .ds{font-size:13px;color:var(--muted);line-height:1.5}
+
+  /* ---- counter-position scatter ---- */
+  .cposition{display:flex;flex-direction:column;gap:16px;margin-top:12px}
+  .cpos-chart{position:relative}
+  .cpat{display:grid;grid-template-columns:1fr;gap:9px}
+  .cpat-row{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start}
+  .cpat-row .ci{font-family:var(--hud-mono);font-size:11px;font-weight:600;color:var(--accent);padding-top:2px;white-space:nowrap}
+  .cpat-row .cn{font-family:var(--display);font-weight:600;font-size:14px;color:var(--text)}
+  .cpat-row .cd{font-size:13px;color:var(--muted);line-height:1.45}
+
+  /* ---- cadence + compounding charts ---- */
+  .chartwrap{margin-top:12px}
+  .chart-note{display:flex;gap:8px;align-items:baseline;margin-top:11px;font-size:13.5px;color:var(--muted);line-height:1.5}
+  .chart-note b{color:var(--text);font-weight:600}
+  .chart svg{display:block;width:100%;height:auto}
+  .ax-lb{font-family:var(--hud-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;fill:var(--faint)}
+  .peak-lb{font-family:var(--hud-mono);font-size:10px;font-weight:600;fill:var(--accent)}
+
+  /* ---- gear lists ---- */
+  .gear{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  @media(max-width:640px){.gear{grid-template-columns:1fr}}
+  .gcard{position:relative;background:var(--bg-elev2);border:1px solid var(--line);border-radius:12px;padding:16px 16px 6px}
+  .gcard.pro{border-color:var(--accent-line);background:linear-gradient(180deg,var(--accent-soft),transparent 60%),var(--bg-elev2)}
+  .gcard::before,.gcard::after{content:'';position:absolute;width:11px;height:11px;pointer-events:none;opacity:.5}
+  .gcard::before{top:-1px;left:-1px;border-top:1px solid var(--hud-glow);border-left:1px solid var(--hud-glow);border-top-left-radius:12px}
+  .gcard::after{bottom:-1px;right:-1px;border-bottom:1px solid var(--hud-glow);border-right:1px solid var(--hud-glow);border-bottom-right-radius:12px}
+  .ghead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;padding-bottom:11px;border-bottom:1px solid var(--line)}
+  .ghead .gt{font-family:var(--display);font-weight:600;font-size:16px;color:var(--text)}
+  .ghead .gtier{font-family:var(--hud-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);border:1px solid var(--line);border-radius:5px;padding:3px 7px}
+  .gcard.pro .gtier{color:var(--accent);border-color:var(--accent-line)}
+  .grow{display:grid;grid-template-columns:74px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--row-line,rgba(255,255,255,0.05))}
+  .grow:last-child{border-bottom:none}
+  .grow .gk{font-family:var(--hud-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);padding-top:2px}
+  .grow .gv{font-size:14px;color:var(--text);line-height:1.45}
+  .grow .gv .sub{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+  .logos{display:inline-flex;gap:6px;margin-top:6px}
+  .logochip{display:inline-flex;align-items:center;gap:6px;background:var(--bg-elev3,#1E212B);border:1px solid var(--line);border-radius:6px;padding:4px 8px 4px 6px}
+  .logochip svg{width:14px;height:14px;display:block}
+  .logochip span{font-family:var(--hud-mono);font-size:11px;color:var(--muted);letter-spacing:.01em}
+
   .fix{background:var(--bg-elev2);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:12px}
   .fix p{color:var(--muted);font-size:14.5px;margin-bottom:10px}
   .moves{position:relative;margin-top:16px}
@@ -243,6 +368,7 @@ function setProgress(){
 
 function render(){
   setProgress();
+  document.body.classList.toggle('result-mode', STATE.step >= QUESTIONS.length + 2);
   if (STATE.step === -1) return renderIntro();
   if (STATE.step === 0) return renderIg();
   if (STATE.step >= 1 && STATE.step <= QUESTIONS.length) return renderQuestion(STATE.step - 1);
@@ -450,11 +576,247 @@ function qualify(a){
 
 /* ------------------------------ PROOF --------------------------------- */
 
+/* --------------------------- FUNNEL MIX DONUT ------------------------- */
+/* The content mix we recommend aiming for: 40% top, 40% middle, 20% bottom.
+   Descriptions mirror the "what good looks like" copy so the language stays
+   consistent across the page. Segments render as an animated SVG donut. */
+// Funnel mix is driven by the REACH and CONVERSION they reported, not the
+// headline bottleneck (a consistency or content-quality bottleneck says nothing
+// about funnel shape). Reach problem -> heavily top of funnel; getting views but
+// not converting -> even 40/40/20; neither a real issue -> a light 60/30/10.
+const FUNNEL_MIX = {
+  reachSevere: {top:80, mid:15, bot:5,  why:"Almost no one is seeing your videos yet, so nearly everything should be top of funnel: videos built to get seen and pull new people in. The middle and bottom come later, once there's an audience to convert."},
+  reach:       {top:70, mid:20, bot:10, why:"Getting seen is your main constraint right now, so weight heavily toward top of funnel. Keep a little middle and bottom, but reach is the priority until the views are there."},
+  conversion:  {top:40, mid:40, bot:20, why:"You're getting the views, they're just not turning into customers yet. That's a funnel gap, so spread evenly across top, middle and bottom and build the content that actually converts."},
+  balanced:    {top:60, mid:30, bot:10, why:"Your reach and conversion both look healthy, so keep feeding the top of funnel to grow, with a lighter middle and bottom to keep turning viewers into customers."},
+  newChannel:  {top:60, mid:30, bot:10, why:"You're just getting started, so we'd begin with a balanced mix: mostly top of funnel to build an audience, with some middle and bottom so you're building a funnel from day one. Once you're posting and we can see your reach and conversion, we'd tune this to you."}
+};
+function funnelMixFor(a){
+  // Not posting yet: we don't know their goals or numbers, so no reach read. Start balanced.
+  if (a.views === 'na') return FUNNEL_MIX.newChannel;
+  const poorReach = ['u500','500_2k'].includes(a.views);
+  const severeReach = a.views === 'u500';
+  const poorConversion = ['none','under10'].includes(a.ytrev) || a.targeting==='wrong';
+  if (poorReach) return severeReach ? FUNNEL_MIX.reachSevere : FUNNEL_MIX.reach;
+  if (poorConversion) return FUNNEL_MIX.conversion;
+  return FUNNEL_MIX.balanced;
+}
+function funnelDonut(mix){
+  mix = mix || FUNNEL_MIX.balanced;
+  const segs = [
+    {label:"Top of funnel",    pct:mix.top, color:"var(--accent)", sub:"Broad reach videos that bring the right people in."},
+    {label:"Middle of funnel", pct:mix.mid, color:"var(--good)",   sub:"Specific breakdowns of how you get results."},
+    {label:"Bottom of funnel", pct:mix.bot, color:"var(--warn)",   sub:"Proof: client interviews, case studies, transformations."}
+  ];
+  const GAP = 1.5;                 // trailing gap after each segment (pathLength units)
+  let acc = 0;
+  const arcs = segs.map(s=>{
+    const draw = Math.max(s.pct - GAP, 0.5);
+    const da = `${draw} ${100 - draw}`;
+    const off = -acc;              // start at the cumulative mark; rotate -90 puts 0 at top
+    acc += s.pct;
+    return `<circle class="fl-arc" cx="100" cy="100" r="70" pathLength="100" fill="none"
+      stroke="${s.color}" stroke-width="26" stroke-linecap="butt"
+      stroke-dasharray="0 100" data-da="${da}" stroke-dashoffset="${off}"
+      transform="rotate(-90 100 100)"></circle>`;
+  }).join('');
+  const legend = segs.map(s=>`
+      <div class="fl-row">
+        <span class="fl-dot" style="background:${s.color}"></span>
+        <span class="fl-name">${s.label}</span>
+        <span class="fl-pct">${s.pct}%</span>
+        <span class="fl-sub">${s.sub}</span>
+      </div>`).join('');
+  return `
+    <div class="funnelmix">
+      <div class="fl-chart">
+        <svg viewBox="0 0 200 200" width="168" height="168" role="img"
+             aria-label="Recommended content mix: ${mix.top} percent top of funnel, ${mix.mid} percent middle of funnel, ${mix.bot} percent bottom of funnel.">
+          <circle cx="100" cy="100" r="70" pathLength="100" fill="none" stroke="var(--line)" stroke-width="26"></circle>
+          ${arcs}
+          <text x="100" y="95" text-anchor="middle" class="fl-cap">Target</text>
+          <text x="100" y="114" text-anchor="middle" class="fl-cap">mix</text>
+        </svg>
+      </div>
+      <div class="fl-legend">${legend}</div>
+    </div>`;
+}
+
+/* ----------------------- FUNDAMENTALS (answer-agnostic) --------------- */
+/* These sections show for everyone who finishes the quiz, whatever their
+   bottleneck. They teach the core principles behind a channel that sells. */
+
+// Catmull-Rom spline -> smooth SVG path, reused by both charts.
+function smoothPath(p){
+  if(p.length<2) return '';
+  let d = `M${p[0][0]},${p[0][1]}`;
+  for(let i=0;i<p.length-1;i++){
+    const p0=p[i-1]||p[i], p1=p[i], p2=p[i+1], p3=p[i+2]||p[i+1];
+    const c1x=p1[0]+(p2[0]-p0[0])/6, c1y=p1[1]+(p2[1]-p0[1])/6;
+    const c2x=p2[0]-(p3[0]-p1[0])/6, c2y=p2[1]-(p3[1]-p1[1])/6;
+    d += ` C${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2[0]},${p2[1]}`;
+  }
+  return d;
+}
+
+const LOGO = {
+  obs:`<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12,24C5.383,24,0,18.617,0,12S5.383,0,12,0s12,5.383,12,12S18.617,24,12,24z M12,1.109 C5.995,1.109,1.11,5.995,1.11,12C1.11,18.005,5.995,22.89,12,22.89S22.89,18.005,22.89,12C22.89,5.995,18.005,1.109,12,1.109z M6.182,5.99c0.352-1.698,1.503-3.229,3.05-3.996c-0.269,0.273-0.595,0.483-0.844,0.78c-1.02,1.1-1.48,2.692-1.199,4.156 c0.355,2.235,2.455,4.06,4.732,4.028c1.765,0.079,3.485-0.937,4.348-2.468c1.848,0.063,3.645,1.017,4.7,2.548 c0.54,0.799,0.962,1.736,0.991,2.711c-0.342-1.295-1.202-2.446-2.375-3.095c-1.135-0.639-2.529-0.802-3.772-0.425 c-1.56,0.448-2.849,1.723-3.293,3.293c-0.377,1.25-0.216,2.628,0.377,3.772c-0.825,1.429-2.315,2.449-3.932,2.756 c-1.244,0.261-2.551,0.059-3.709-0.464c1.036,0.302,2.161,0.355,3.191-0.011c1.381-0.457,2.522-1.567,3.024-2.935 c0.556-1.49,0.345-3.261-0.591-4.54c-0.7-1.007-1.803-1.717-3.002-1.969c-0.38-0.068-0.764-0.098-1.148-0.134 c-0.611-1.231-0.834-2.66-0.528-3.996L6.182,5.99z"/></svg>`,
+  loom:`<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 10.665h-7.018l6.078-3.509-1.335-2.312-6.078 3.509 3.508-6.077L16.843.94l-3.508 6.077V0h-2.67v7.018L7.156.94 4.844 2.275l3.509 6.077-6.078-3.508L.94 7.156l6.078 3.509H0v2.67h7.017L.94 16.844l1.335 2.313 6.077-3.508-3.509 6.077 2.312 1.335 3.509-6.078V24h2.67v-7.017l3.508 6.077 2.312-1.335-3.509-6.078 6.078 3.509 1.335-2.313-6.077-3.508h7.017v-2.67H24zm-12 4.966a3.645 3.645 0 1 1 0-7.29 3.645 3.645 0 0 1 0 7.29z"/></svg>`
+};
+
+// 1) The 8 Ideation Ingredients (canonical Morrell IP)
+function ingredientsSection(){
+  const items = [
+    ["Topic","The named, concrete subjects that show up in your title, your thumbnail, and the video itself."],
+    ["Claim + mechanism","The transformation you promise the viewer, plus the specific way the video proves and delivers it."],
+    ["Information density","How much genuinely new signal there is in every minute of runtime."],
+    ["Format","The emotional level, the length, and the structure (or the deliberate lack of one)."],
+    ["Sophistication","The level of expertise the video assumes, and the prior knowledge it needs from the viewer."],
+    ["Value vs the status quo","Whether your take deepens how the topic is already covered, or just repeats it."],
+    ["Originality","How distinct your thesis is from everything that already exists on the subject."],
+    ["Zeitgeist &amp; timing","The hardest and most important: demand surfacing right now that supply hasn't caught up to."]
+  ];
+  const cards = items.map((it,i)=>`
+      <div class="ing">
+        <div class="ix">${String(i+1).padStart(2,'0')}</div>
+        <div class="nm">${it[0]}</div>
+        <div class="ds">${it[1]}</div>
+      </div>`).join('');
+  return `
+      <p class="mix-intro">Every idea we greenlight is scored against these eight. You don't need all of them. The best videos bet hard on two or three, and don't worry about the rest.</p>
+      <div class="ingredients">${cards}</div>`;
+}
+
+// 2) Counter-position: the saturated-middle scatter + the five patterns
+function counterPositionSection(){
+  const cluster = [[120,96],[141,82],[164,90],[181,104],[150,110],[134,120],[160,128],[178,117],[126,114],[152,96],[171,106],[145,131],[190,101],[131,103],[157,120],[143,88]];
+  const dots = cluster.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.3" fill="var(--faint)" opacity="0.55"/>`).join('');
+  const patterns = [
+    ["Timing reversal","“Don't do the obvious thing until an unexpected condition is true.”"],
+    ["Volume paradox","“Doing more of what everyone chases actually makes your key metric worse. Here's why.”"],
+    ["Priority inversion","“The thing your whole niche obsesses over barely matters. This quieter thing is what moves it.”"],
+    ["Process flip","“Everyone runs the standard playbook. Do the opposite, on purpose.”"],
+    ["Hidden mechanism","“It works, but not for the reason everyone thinks. Here's what's really going on.”"]
+  ];
+  const rows = patterns.map((p,i)=>`
+        <div class="cpat-row">
+          <div class="ci">0${i+1}</div>
+          <div><div class="cn">${p[0]}</div><div class="cd">${p[1]}</div></div>
+        </div>`).join('');
+  return `
+      <p class="mix-intro">Most channels crowd into the middle of their niche, all making the same video with the same take. You can't win there. A counter-position is a stance that's true but cuts against what everyone else is saying, and it's the fastest way to become the channel people actually remember.</p>
+      <div class="hud-panel cpos-chart">
+        <div class="hud-cap">Positioning map</div>
+        <svg viewBox="0 0 320 200" role="img" aria-label="Competitors crowded in the saturated middle, with your channel positioned distinctly apart from the cluster.">
+          <line x1="160" y1="16" x2="160" y2="168" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4"/>
+          <line x1="34" y1="108" x2="286" y2="108" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4"/>
+          <ellipse cx="156" cy="108" rx="60" ry="46" fill="rgba(154,160,168,0.05)" stroke="var(--line-strong)" stroke-width="1" stroke-dasharray="4 4"/>
+          ${dots}
+          <text x="156" y="176" text-anchor="middle" class="ax-lb">the saturated middle</text>
+          <g class="fade-in">
+            <line x1="205" y1="92" x2="248" y2="58" stroke="var(--accent-line)" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="262" cy="48" r="14" fill="var(--accent)" opacity="0.15"/>
+            <circle cx="262" cy="48" r="17" fill="none" stroke="var(--accent-line)" stroke-width="1"/>
+            <circle cx="262" cy="48" r="6.5" fill="var(--accent)"/>
+            <text x="262" y="26" text-anchor="middle" class="peak-lb">YOU</text>
+          </g>
+        </svg>
+      </div>
+      <div class="cpat">${rows}</div>`;
+}
+
+// 3) Cadence: revenue vs videos/week, sweet spot at 2
+function cadenceChart(){
+  const pts = [[48,160.9],[109,89.9],[170,37.4],[231,45.9],[292,65.8]];
+  const line = smoothPath(pts);
+  const area = line + ` L292,168 L48,168 Z`;
+  const ticks = [[109,'1'],[170,'2'],[231,'3'],[292,'4']].map(t=>
+    `<text x="${t[0]}" y="184" text-anchor="middle" class="ax-lb"${t[1]==='2'?' style="fill:var(--accent)"':''}>${t[1]}</text>`).join('');
+  return `
+    <div class="chart">
+      <svg viewBox="0 0 320 206" role="img" aria-label="Revenue climbs sharply up to two videos a week, then flattens and dips as quality drops.">
+        <defs><linearGradient id="cadGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent)" stop-opacity="0.26"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/>
+        </linearGradient></defs>
+        ${[54,96,138].map(y=>`<line x1="48" y1="${y}" x2="292" y2="${y}" stroke="var(--line)" stroke-width="1"/>`).join('')}
+        <line x1="48" y1="20" x2="48" y2="168" stroke="var(--line-strong)" stroke-width="1"/>
+        <line x1="48" y1="168" x2="300" y2="168" stroke="var(--line-strong)" stroke-width="1"/>
+        <path class="fade-in" d="${area}" fill="url(#cadGrad)"/>
+        <path class="draw" d="${line}" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" pathLength="100" style="filter:drop-shadow(0 0 6px var(--hud-glow))"/>
+        <line x1="170" y1="37.4" x2="170" y2="168" stroke="var(--accent-line)" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="170" cy="37.4" r="9" fill="var(--accent)" opacity="0.16"/><circle cx="170" cy="37.4" r="4.5" fill="var(--accent)"/>
+        <text x="170" y="14" text-anchor="middle" class="peak-lb">SWEET SPOT</text>
+        <text x="50" y="15" class="ax-lb">↑ revenue</text>
+        ${ticks}
+        <text x="170" y="199" text-anchor="middle" class="ax-lb">videos per week</text>
+      </svg>
+    </div>`;
+}
+
+// 4) Compounding: leads + revenue over time, exponential
+function compoundingChart(){
+  const pts = [[40,168],[105,159.6],[170,141.7],[235,104],[300,24]];
+  const line = smoothPath(pts);
+  const area = line + ` L300,168 L40,168 Z`;
+  const nodes = [[92,161.8],[144,150.5],[196,129.9],[248,92.4]];
+  const dots = nodes.map(n=>`<g class="fade-in"><line x1="${n[0]}" y1="${n[1]}" x2="${n[0]+30}" y2="${n[1]}" stroke="var(--good)" stroke-width="1.4" opacity="0.35"/><circle cx="${n[0]}" cy="${n[1]}" r="3.3" fill="var(--good)"/></g>`).join('');
+  return `
+    <div class="chart">
+      <svg viewBox="0 0 320 200" role="img" aria-label="Leads and revenue compounding upward over time as every published video keeps generating returns.">
+        <defs><linearGradient id="compGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--good)" stop-opacity="0.3"/><stop offset="1" stop-color="var(--good)" stop-opacity="0"/>
+        </linearGradient></defs>
+        <line x1="40" y1="18" x2="40" y2="168" stroke="var(--line-strong)" stroke-width="1"/>
+        <line x1="40" y1="168" x2="308" y2="168" stroke="var(--line-strong)" stroke-width="1"/>
+        <path class="fade-in" d="${area}" fill="url(#compGrad)"/>
+        <path class="draw" d="${line}" fill="none" stroke="var(--good)" stroke-width="2.4" stroke-linecap="round" pathLength="100" style="filter:drop-shadow(0 0 6px rgba(63,185,140,0.5))"/>
+        ${dots}
+        <circle cx="300" cy="24" r="9" fill="var(--good)" opacity="0.16"/><circle cx="300" cy="24" r="4.5" fill="var(--good)"/>
+        <text x="46" y="14" class="ax-lb">↑ leads + revenue</text>
+        <text x="304" y="184" text-anchor="end" class="ax-lb">time →</text>
+      </svg>
+    </div>`;
+}
+
+// 5) Gear lists: essentials + premium, with OBS / Loom logos
+function gearSection(){
+  const scr = `<span class="logos"><span class="logochip">${LOGO.obs}<span>OBS</span></span><span class="logochip">${LOGO.loom}<span>Loom</span></span></span>`;
+  const essentials = [
+    ["Camera","Sony ZV-E10 II with the kit lens"],
+    ["Audio","A DJI Mic or Rode Wireless, a wireless lavalier so you can film anywhere"],
+    ["Support","A basic tripod"],
+    ["Storage","A fast SD card"],
+    ["Lighting","One key light: an Amaran 100x S with a light stand and a softbox, like the Lightdome SE"],
+    ["Software",`Screen recording, both free${scr}`]
+  ];
+  const premium = [
+    ["Camera","Sony FX3 (or similar) with the 24-70mm f/2.8 GM II lens"],
+    ["Audio","Shure SM7B or SM7dB on a Rode boom arm, not a desk stand"],
+    ["Support","A sturdy tripod"],
+    ["Storage","A fast SD card"],
+    ["Lighting","Amaran 100x S key light plus fill and accent / back lights, on Amaran stands with a softbox (Lightdome SE)"],
+    ["Software",`Screen recording, both free${scr}`]
+  ];
+  const rows = arr => arr.map(r=>`<div class="grow"><div class="gk">${r[0]}</div><div class="gv">${r[1]}</div></div>`).join('');
+  return `
+    <div class="gear">
+      <div class="gcard">
+        <div class="ghead"><span class="gt">The starter kit</span><span class="gtier">Essentials</span></div>
+        ${rows(essentials)}
+      </div>
+      <div class="gcard pro">
+        <div class="ghead"><span class="gt">The studio setup</span><span class="gtier">Premium</span></div>
+        ${rows(premium)}
+      </div>
+    </div>`;
+}
+
 /* ------------------------------ RESULT -------------------------------- */
 function renderResult(){
   const a = STATE.answers;
   const { scores, key } = diagnose(a);
   const B = BOTTLENECK[key];
+  const mix = funnelMixFor(a);
   const good = B.good(a);
   const Q = qualify(a);
   const name = (STATE.lead.name||"").trim() || "there";
@@ -490,7 +852,7 @@ function renderResult(){
 
 
   app.innerHTML = `
-    <div class="card fade">
+    <div class="card fade result-card">
       <div class="eyebrow">Your roadmap</div>
       <h1>${escapeHTML(name)}, here's your roadmap to more clients or customers from YouTube.</h1>
 
@@ -502,6 +864,10 @@ function renderResult(){
 
       <div class="section-k">Where you're starting from</div>
       <div class="scores">${scoresHTML}</div>
+
+      <div class="section-k">The content mix to aim for</div>
+      <p class="mix-intro">This is the content mix we'd point you toward, based on the reach and conversion you told us about. ${mix.why}</p>
+      ${funnelDonut(mix)}
 
       <div class="section-k">Your first moves</div>
       <div class="fix">
@@ -517,6 +883,28 @@ function renderResult(){
 
       <div class="section-k">You've solved this when</div>
       <div class="callout solved">${B.solved}</div>
+
+      <div class="hud-divider"><span class="ln"></span><span class="lb">The fundamentals · for every channel</span><span class="ln"></span></div>
+
+      <div class="section-k">The 8 ingredients of a great idea</div>
+      ${ingredientsSection()}
+
+      <div class="section-k">Find your counter-position</div>
+      ${counterPositionSection()}
+
+      <div class="section-k">How often to post</div>
+      <div class="chartwrap">${cadenceChart()}
+        <p class="chart-note"><b>Two videos a week is the sweet spot.</b> Returns climb fast up to two. Push past it and quality usually slips, so each extra video adds less than the drop it causes. Get to two genuinely great videos a week before you even think about more.</p>
+      </div>
+
+      <div class="section-k">Why it's worth it</div>
+      <div class="chartwrap">${compoundingChart()}
+        <p class="chart-note"><b>YouTube compounds.</b> Every video keeps working for months, sometimes years, pulling in leads and customers long after you hit publish. The library stacks up, the audience grows, and the returns build on each other. It's the closest thing to an appreciating asset your business can own.</p>
+      </div>
+
+      <div class="section-k">The gear you actually need</div>
+      <p class="mix-intro">You can start with far less than you think. Here's the kit we'd point you to, whether you're keeping it lean or building a proper studio.</p>
+      ${gearSection()}
 
       <div class="hero-clients">
       <p class="hero-clients-label">We've worked with</p>
@@ -534,11 +922,14 @@ function renderResult(){
       <p class="microcopy">This roadmap is generated from your answers, so treat it as a starting point rather than a full read of your channel.</p>
     </div>`;
 
-  // animate bars
+  // animate bars + funnel donut
   requestAnimationFrame(()=>{
     document.querySelectorAll('.bar > i').forEach(el=>{
       el.style.background = el.getAttribute('data-c');
       el.style.width = el.getAttribute('data-w') + '%';
+    });
+    document.querySelectorAll('.fl-arc').forEach(el=>{
+      el.style.strokeDasharray = el.getAttribute('data-da');
     });
   });
 }
