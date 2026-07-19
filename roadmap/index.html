@@ -214,10 +214,43 @@
   .grow .gk{font-family:var(--hud-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);padding-top:2px}
   .grow .gv{font-size:14px;color:var(--text);line-height:1.45}
   .grow .gv .sub{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
-  .logos{display:inline-flex;gap:6px;margin-top:6px}
+  .logos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
   .logochip{display:inline-flex;align-items:center;gap:6px;background:var(--bg-elev3,#1E212B);border:1px solid var(--line);border-radius:6px;padding:4px 8px 4px 6px}
   .logochip svg{width:14px;height:14px;display:block}
   .logochip span{font-family:var(--hud-mono);font-size:11px;color:var(--muted);letter-spacing:.01em}
+  .logochip.paid{position:relative}
+  .logochip .tag{font-family:var(--hud-mono);font-size:8px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);border-left:1px solid var(--line);padding-left:5px;margin-left:1px}
+
+  /* ===== v2 aesthetic pass: richer callouts + more diagrams ===== */
+  /* lead emphasis inside long text blocks (breaks up the wall) */
+  .reframe .exp b, .good .eg b{color:var(--text);font-weight:600}
+  .good .lead{font-family:var(--display);font-weight:600;font-size:15.5px;color:var(--text)}
+
+  /* mistakes -> distinct "avoid" cards with an icon */
+  .donts2{display:flex;flex-direction:column;gap:9px}
+  .dont{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--bg-elev2);border:1px solid var(--line);border-left:2px solid var(--warn);border-radius:10px;padding:12px 15px}
+  .dont .dx{width:18px;height:18px;flex:0 0 auto;color:var(--warn);margin-top:1px}
+  .dont .dt{font-size:14px;color:var(--muted);line-height:1.5}
+  .dont .dt b{color:var(--text);font-weight:600}
+
+  /* solved -> finish-line marker */
+  .solved2{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:linear-gradient(90deg,rgba(63,185,140,0.09),transparent 70%);border:1px solid var(--line);border-left:2px solid var(--good);border-radius:11px;padding:15px 17px}
+  .solved2 .sx{width:30px;height:30px;flex:0 0 auto;color:var(--good)}
+  .solved2 .st{font-size:14.5px;color:var(--text);line-height:1.55}
+  .solved2 .st b{color:var(--good);font-weight:600}
+
+  /* retention chart accents */
+  .ret-zone{fill:var(--accent);opacity:.08}
+  .ret-base{stroke:var(--faint);stroke-width:1;stroke-dasharray:3 3;opacity:.55}
+
+  /* content pipeline strip */
+  .pipe{display:flex;align-items:stretch;gap:12px;margin-top:12px;overflow-x:auto;padding-bottom:4px}
+  .pstep{flex:1 0 66px;position:relative;background:var(--bg-elev2);border:1px solid var(--line);border-radius:9px;padding:11px 8px 10px;text-align:center}
+  .pstep .pi{width:19px;height:19px;color:var(--accent);margin:0 auto 6px;display:block}
+  .pstep .pl{font-family:var(--hud-mono);font-size:9.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);line-height:1.3}
+  .pstep:not(:last-child)::after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:12px;z-index:1}
+  .pipe-note{display:flex;align-items:center;gap:8px;margin-top:11px;font-size:13.5px;color:var(--muted);line-height:1.5}
+  .pipe-note b{color:var(--text);font-weight:600}
 
   .fix{background:var(--bg-elev2);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:12px}
   .fix p{color:var(--muted);font-size:14.5px;margin-bottom:10px}
@@ -692,11 +725,11 @@ function counterPositionSection(){
   const cluster = [[120,96],[141,82],[164,90],[181,104],[150,110],[134,120],[160,128],[178,117],[126,114],[152,96],[171,106],[145,131],[190,101],[131,103],[157,120],[143,88]];
   const dots = cluster.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.3" fill="var(--faint)" opacity="0.55"/>`).join('');
   const patterns = [
-    ["Timing reversal","“Don't do the obvious thing until an unexpected condition is true.”"],
-    ["Volume paradox","“Doing more of what everyone chases actually makes your key metric worse. Here's why.”"],
-    ["Priority inversion","“The thing your whole niche obsesses over barely matters. This quieter thing is what moves it.”"],
-    ["Process flip","“Everyone runs the standard playbook. Do the opposite, on purpose.”"],
-    ["Hidden mechanism","“It works, but not for the reason everyone thinks. Here's what's really going on.”"]
+    ["Timing reversal","Tell people to hold off on the obvious move until an unexpected condition is met."],
+    ["Volume paradox","Show how doing more of what everyone chases actually makes their key metric worse."],
+    ["Priority inversion","Point out that the thing your niche obsesses over barely matters, and name the quiet thing that does."],
+    ["Process flip","Take the standard playbook everyone runs and deliberately do the opposite."],
+    ["Hidden mechanism","Reveal that the thing works, but not for the reason everyone assumes."]
   ];
   const rows = patterns.map((p,i)=>`
         <div class="cpat-row">
@@ -780,14 +813,17 @@ function compoundingChart(){
 
 // 5) Gear lists: essentials + premium, with OBS / Loom logos
 function gearSection(){
-  const scr = `<span class="logos"><span class="logochip">${LOGO.obs}<span>OBS</span></span><span class="logochip">${LOGO.loom}<span>Loom</span></span></span>`;
+  const FRAME = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9.1l5.2 2.9-5.2 2.9z" fill="currentColor"/></svg>`;
+  const chip = (logo,name,tag)=>`<span class="logochip${tag==='paid'?' paid':''}">${logo}<span>${name}</span>${tag?`<span class="tag">${tag}</span>`:''}</span>`;
+  const scr = `<span class="logos">${chip(LOGO.obs,'OBS','free')}${chip(LOGO.loom,'Loom','paid')}</span>`;
+  const frameChip = `<span class="logos">${chip(FRAME,'Frame.io','paid')}</span>`;
   const essentials = [
     ["Camera","Sony ZV-E10 II with the kit lens"],
     ["Audio","A DJI Mic or Rode Wireless, a wireless lavalier so you can film anywhere"],
     ["Support","A basic tripod"],
     ["Storage","A fast SD card"],
     ["Lighting","One key light: an Amaran 100x S with a light stand and a softbox, like the Lightdome SE"],
-    ["Software",`Screen recording, both free${scr}`]
+    ["Software",`OBS or Loom for screen recording${scr}`]
   ];
   const premium = [
     ["Camera","Sony FX3 (or similar) with the 24-70mm f/2.8 GM II lens"],
@@ -795,7 +831,8 @@ function gearSection(){
     ["Support","A sturdy tripod"],
     ["Storage","A fast SD card"],
     ["Lighting","Amaran 100x S key light plus fill and accent / back lights, on Amaran stands with a softbox (Lightdome SE)"],
-    ["Software",`Screen recording, both free${scr}`]
+    ["Software",`OBS or Loom for screen recording${scr}`],
+    ["Footage",`Frame.io to share and organise footage with your editor${frameChip}`]
   ];
   const rows = arr => arr.map(r=>`<div class="grow"><div class="gk">${r[0]}</div><div class="gv">${r[1]}</div></div>`).join('');
   return `
@@ -809,6 +846,53 @@ function gearSection(){
         ${rows(premium)}
       </div>
     </div>`;
+}
+
+// bold the first sentence of a text block, to break up long paragraphs
+function boldFirst(t){ const m=String(t).match(/^(.+?[.?!])(\s+)([\s\S]+)$/); return m?`<b>${m[1]}</b>${m[2]}${m[3]}`:t; }
+
+// 6) Retention curve: healthy vs weak, hook zone highlighted
+function retentionChart(){
+  const healthy = smoothPath([[44,24],[64,56],[82,73],[146,84],[223,95],[300,103]]);
+  const weak = smoothPath([[44,24],[58,74],[78,116],[140,146],[300,158]]);
+  const area = healthy + ` L300,168 L44,168 Z`;
+  return `
+    <div class="chart">
+      <svg viewBox="0 0 320 206" role="img" aria-label="A healthy retention curve holds most viewers past the first 30 seconds; a weak one drops off fast.">
+        <defs><linearGradient id="retGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent)" stop-opacity="0.22"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/>
+        </linearGradient></defs>
+        <rect class="ret-zone" x="44" y="24" width="31" height="144"/>
+        ${[54,96,138].map(y=>`<line x1="44" y1="${y}" x2="300" y2="${y}" stroke="var(--line)" stroke-width="1"/>`).join('')}
+        <line x1="44" y1="20" x2="44" y2="168" stroke="var(--line-strong)" stroke-width="1"/>
+        <line x1="44" y1="168" x2="304" y2="168" stroke="var(--line-strong)" stroke-width="1"/>
+        <line class="ret-base" x1="44" y1="81.6" x2="300" y2="81.6"/>
+        <path class="fade-in" d="${weak}" fill="none" stroke="var(--bad)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3 4" opacity="0.65"/>
+        <path class="fade-in" d="${area}" fill="url(#retGrad)"/>
+        <path class="draw" d="${healthy}" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" pathLength="100" style="filter:drop-shadow(0 0 6px var(--hud-glow))"/>
+        <text x="46" y="15" class="ax-lb">↑ still watching</text>
+        <text x="298" y="77" text-anchor="end" class="ax-lb">60%</text>
+        <text x="59" y="184" text-anchor="middle" class="peak-lb">first 30s</text>
+        <text x="304" y="184" text-anchor="end" class="ax-lb">video length →</text>
+      </svg>
+    </div>`;
+}
+
+// 7) Content pipeline: the weekly production line
+function contentPipeline(){
+  const IC = {
+    idea:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.5h6c0-1.2.4-1.9 1-2.5A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>',
+    script:'<path d="M6 3h9l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12h7M9 16h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+    film:'<rect x="3" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15 10l6-3v10l-6-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+    edit:'<path d="M4 8h9M4 16h2M11 16h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="15" cy="8" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="16" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    thumb:'<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="10" r="1.5" fill="currentColor"/><path d="M5 17l4.5-4 3 2.5L16 12l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+    publish:'<path d="M12 15V4M8 8l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M5 15v4h14v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
+  };
+  const steps = [["idea","Ideate"],["script","Script"],["film","Film"],["edit","Edit"],["thumb","Thumbnail"],["publish","Publish"]];
+  const cells = steps.map(s=>`<div class="pstep"><span class="pi"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">${IC[s[0]]}</svg></span><span class="pl">${s[1]}</span></div>`).join('');
+  return `
+      <div class="pipe">${cells}</div>
+      <p class="pipe-note"><b>This is the whole job, every week.</b> The channels that win turn it into a repeatable line run by a small team, so a video ships whether or not you feel like it. The kit below is what keeps the quality high while you do.</p>`;
 }
 
 /* ------------------------------ RESULT -------------------------------- */
@@ -859,7 +943,7 @@ function renderResult(){
       <div class="reframe">
         <div class="k">Your fastest path to more clients or customers right now</div>
         <div class="real">Start with ${B.real}.</div>
-        <p class="exp">${B.exp(a)}</p>
+        <p class="exp">${boldFirst(B.exp(a))}</p>
       </div>
 
       <div class="section-k">Where you're starting from</div>
@@ -876,15 +960,20 @@ function renderResult(){
       </div>
 
       <div class="section-k">What good looks like</div>
-      <div class="good"><p class="lead">${good.lead}</p><p class="eg">${good.eg}</p></div>
+      <div class="good"><p class="lead">${good.lead}</p><p class="eg">${boldFirst(good.eg)}</p></div>
 
       <div class="section-k">${Array.isArray(B.mistake)?"The mistakes to avoid":"The mistake to avoid"}</div>
-      <div class="callout mistake">${Array.isArray(B.mistake)?`<ul class="donts">${B.mistake.map(m=>`<li>${m}</li>`).join('')}</ul>`:B.mistake}</div>
+      <div class="donts2">${(Array.isArray(B.mistake)?B.mistake:[B.mistake]).map(m=>`<div class="dont"><svg class="dx" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4l9.4 16.6H2.6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4.2M12 17.4h.01" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg><div class="dt">${boldFirst(m)}</div></div>`).join('')}</div>
 
       <div class="section-k">You've solved this when</div>
-      <div class="callout solved">${B.solved}</div>
+      <div class="solved2"><svg class="sx" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4.5M6 5.2h11l-2.4 3.9L17 13H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="st">${boldFirst(B.solved)}</div></div>
 
       <div class="hud-divider"><span class="ln"></span><span class="lb">The fundamentals · for every channel</span><span class="ln"></span></div>
+
+      <div class="section-k">How the algorithm rewards you</div>
+      <div class="chartwrap">${retentionChart()}
+        <p class="chart-note"><b>Retention is the whole game.</b> When people keep watching, YouTube shows the video to more people, so reach is earned by holding attention, not chasing it. Win the first 30 seconds, keep the graph flat, and the algorithm does the rest.</p>
+      </div>
 
       <div class="section-k">The 8 ingredients of a great idea</div>
       ${ingredientsSection()}
@@ -897,14 +986,17 @@ function renderResult(){
         <p class="chart-note"><b>Two videos a week is the sweet spot.</b> Returns climb fast up to two. Push past it and quality usually slips, so each extra video adds less than the drop it causes. Get to two genuinely great videos a week before you even think about more.</p>
       </div>
 
-      <div class="section-k">Why it's worth it</div>
-      <div class="chartwrap">${compoundingChart()}
-        <p class="chart-note"><b>YouTube compounds.</b> Every video keeps working for months, sometimes years, pulling in leads and customers long after you hit publish. The library stacks up, the audience grows, and the returns build on each other. It's the closest thing to an appreciating asset your business can own.</p>
-      </div>
+      <div class="section-k">Run it like a system</div>
+      ${contentPipeline()}
 
       <div class="section-k">The gear you actually need</div>
       <p class="mix-intro">You can start with far less than you think. Here's the kit we'd point you to, whether you're keeping it lean or building a proper studio.</p>
       ${gearSection()}
+
+      <div class="section-k">Why it's worth it</div>
+      <div class="chartwrap">${compoundingChart()}
+        <p class="chart-note"><b>YouTube compounds.</b> Every video keeps working for months, sometimes years, pulling in leads and customers long after you hit publish. The library stacks up, the audience grows, and the returns build on each other. It's the closest thing to an appreciating asset your business can own.</p>
+      </div>
 
       <div class="hero-clients">
       <p class="hero-clients-label">We've worked with</p>
