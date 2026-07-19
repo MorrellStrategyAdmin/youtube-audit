@@ -676,7 +676,7 @@ function funnelDonut(mix){
   const segs = [
     {label:"Top of funnel",    pct:mix.top, color:"var(--accent)", sub:"Broad reach videos that bring the right people in."},
     {label:"Middle of funnel", pct:mix.mid, color:"var(--good)",   sub:"Specific breakdowns of how you get results."},
-    {label:"Bottom of funnel", pct:mix.bot, color:"var(--warn)",   sub:"Proof: client interviews, case studies, transformations."}
+    {label:"Bottom of funnel", pct:mix.bot, color:"var(--warn)",   sub:"Proof, like client interviews and case studies."}
   ];
   const GAP = 1.5;                 // trailing gap after each segment (pathLength units)
   let acc = 0;
@@ -744,7 +744,7 @@ function ingredientsSection(){
     ["Sophistication","The level of expertise the video assumes, and the prior knowledge it needs from the viewer."],
     ["Value vs the status quo","Whether your take deepens how the topic is already covered, or just repeats it."],
     ["Originality","How distinct your thesis is from everything that already exists on the subject."],
-    ["Zeitgeist &amp; timing","The hardest and most important: demand surfacing right now that supply hasn't caught up to."]
+    ["Zeitgeist &amp; timing","The hardest and most important one, demand that's surfacing right now before supply has caught up."]
   ];
   const cards = items.map((it,i)=>`
       <div class="ing">
@@ -753,7 +753,7 @@ function ingredientsSection(){
         <div class="ds">${it[1]}</div>
       </div>`).join('');
   return `
-      <p class="mix-intro">Every idea we greenlight is scored against these eight. You don't need all of them. The best videos bet hard on two or three, and don't worry about the rest.</p>
+      <p class="mix-intro">Every idea we greenlight is scored against these eight. The best videos pick two or three and go all-in on them.</p>
       <div class="ingredients">${cards}</div>`;
 }
 
@@ -861,7 +861,7 @@ function gearSection(){
     ["Audio","A DJI Mic or Rode Wireless, a wireless lavalier so you can film anywhere"],
     ["Support","A basic tripod"],
     ["Storage","A fast SD card"],
-    ["Lighting","One key light: an Amaran 100x S with a light stand and a softbox, like the Lightdome SE"],
+    ["Lighting","One key light, an Amaran 100x S, with a light stand and a softbox like the Lightdome SE"],
     ["Software",`OBS or Loom for screen recording${scr}`]
   ];
   const premium = [
@@ -932,7 +932,7 @@ function contentPipeline(){
   const cells = steps.map(s=>`<div class="pstep"><span class="pi"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">${IC[s[0]]}</svg></span><span class="pl">${s[1]}</span></div>`).join('');
   return `
       <div class="pipe">${cells}</div>
-      <p class="pipe-note"><b>This is the whole job, every week.</b> The channels that win turn it into a repeatable line run by a small team, so a video ships whether or not you feel like it. The kit below is what keeps the quality high while you do.</p>`;
+      <p class="pipe-note"><b>Every video runs through this, every week.</b> The channels that win turn it into a repeatable line run by a small team, so a video ships whether or not you feel like it. The kit below is what keeps the quality high while you do.</p>`;
 }
 
 // 8) DIY vs Done-for-you: the work we take off their plate (tier A close)
@@ -1053,9 +1053,9 @@ function renderResult(){
 
       <div class="hud-divider"><span class="ln"></span><span class="lb">The fundamentals · for every channel</span><span class="ln"></span></div>
 
-      <div class="section-k">How the algorithm rewards you</div>
+      <div class="section-k">Why retention comes first</div>
       <div class="chartwrap">${retentionChart()}
-        <p class="chart-note"><b>Retention is the whole game.</b> When people keep watching, YouTube shows the video to more people, so reach is earned by holding attention, not chasing it. Win the first 30 seconds, keep the graph flat, and the algorithm does the rest.</p>
+        <p class="chart-note"><b>Keep people watching and YouTube shows the video to more of them.</b> Win the first 30 seconds and keep the retention graph flat, and the views follow.</p>
       </div>
 
       <div class="section-k">The 8 ingredients of a great idea</div>
@@ -1066,7 +1066,7 @@ function renderResult(){
 
       <div class="section-k">How often to post</div>
       <div class="chartwrap">${cadenceChart()}
-        <p class="chart-note"><b>Two videos a week is the sweet spot.</b> Returns climb fast up to two. Push past it and quality usually slips, so each extra video adds less than the drop it causes. Get to two genuinely great videos a week before you even think about more.</p>
+        <p class="chart-note"><b>Two videos a week is the sweet spot.</b> Returns climb fast up to two. Push past it and quality usually slips, so each extra video adds less than it costs you. Nail two genuinely great videos a week before you even think about more.</p>
       </div>
 
       <div class="section-k">Run it like a system</div>
