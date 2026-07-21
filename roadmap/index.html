@@ -589,8 +589,8 @@ const BOTTLENECK = {
              "Do not pick topics or formats that are not relevant to your ideal buyer just because they are trending or going viral.",
              "Do not copy other people's videos directly. Always consider how you can build upon their original ideas and add unique layers, both in the title and thumbnail and in the video itself. You should never be regurgitating the same points or giving the same level of value that already exists on the platform."],
     solved:"You've solved reach when a new video can find its own audience without you sending it anywhere. When someone who has never heard of you clicks, watches, and comes back for the next one, the channel has started to compound." },
-  quality:{ name:"Content quality", scoreKey:"quality",
-    real:"<b>content quality</b>",
+  quality:{ name:"Viewer satisfaction", scoreKey:"quality",
+    real:"<b>viewer satisfaction</b>",
     exp:a=>`People are finding your videos, but ${a.retention==="weak"?"they're dropping off early":"the watch time isn't there yet"}, so the algorithm has no reason to keep pushing them out. Usually it's a weak script, editing that doesn't fit the audience, or an idea anyone could pull from a chatbot in five minutes. ${a.process==="yes"?"Your process for picking topics is solid, so this is about the craft inside the video itself.":"You also told me the topics and packaging aren't coming from a real process yet, which is usually where this starts."} For a ${LABEL.biz[a.business]}, the video has to hold ${LABEL.buyer[a.business]} specifically, not a general crowd.`,
     fixP:"Make the video good enough that people stay. That's what gets you shown to more of them.",
     fix:["Open the first 30 seconds with a Pattern interrupt to grab attention, then give them Proof for why they should listen, the Promise of what they'll get, and the Plan for how you'll deliver it. Echo your title and thumbnail so they know they clicked the right thing, and aim to hold 60% or more through the intro.",
@@ -601,7 +601,7 @@ const BOTTLENECK = {
          "Run every idea through three checks. Could AI have written it, how many times has the niche seen it already, and is there anything genuinely different about yours? Cut anything generic."],
     good:a=>({lead:"A good video grabs attention in the first thirty seconds and holds it for the remaining runtime.", eg:`The open interrupts the pattern, then quickly gives them proof of why to listen, the promise of what they'll get, and the plan for how you'll deliver it, all while echoing the title and thumbnail so they know they're in the right place. From there it is built for the exact person you want watching. ${a.business==="ecom"||a.business==="creator"?"It looks and moves the way that viewer expects, tight where it needs to be, nothing that drags.":"It carries real substance, a specific mechanism or breakdown they could not get from a chatbot in five minutes."} Beyond the intro, the points are genuinely different from each other and delivered in varied ways rather than the same framework every time, ordered so each one builds anticipation for the next, with clean segues and editing and visuals that fit. The viewer is learning comfortably throughout, never overwhelmed or buried in jargon, and none of it reads like a chatbot wrote it.`}),
     mistake:"The most common mistake here is blaming reach when the real problem is retention. People see low views and rush to fix their titles and thumbnails, when the solution is to improve viewer satisfaction. A video that keeps people watching gets pushed to more people on its own. One that doesn't, won't, no matter how many thumbnails you test.",
-    solved:"You've solved content quality when your intro retention is above 60% for most niches and your retention graph looks healthily flat. Once the audience's satisfaction is there, YouTube handles the reach for you." },
+    solved:"You've solved viewer satisfaction when your intro retention is above 60% for most niches and your retention graph looks healthily flat. Once the audience's satisfaction is there, YouTube handles the reach for you." },
   conversion:{ name:"Conversion", scoreKey:"conversion",
     real:"<b>conversion</b>",
     exp:a=>`You're getting the views, but ${a.targeting==="wrong"?"they're coming from the wrong crowd":a.targeting==="mix"?"only some of them are the crowd who would actually buy":"they aren't turning into revenue yet"}, and YouTube is bringing in ${LABEL.ytrevText[a.ytrev]}. The people who would buy aren't being guided anywhere, and there's no content funnel, nothing in the middle or the bottom for a serious prospect to watch before they're ready to talk to you.`,
@@ -988,7 +988,7 @@ function renderResult(){
 
   const dims = [
     {k:"reach",name:"Reach"},
-    {k:"quality",name:"Content quality"},
+    {k:"quality",name:"Viewer satisfaction"},
     {k:"conversion",name:"Conversion"},
     {k:"consistency",name:"Consistency"}
   ];
