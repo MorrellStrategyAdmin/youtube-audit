@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Client Onboarding | Morrell Strategy</title>
+<meta property="og:title" content="Welcome aboard — let's get you set up" />
+<meta property="og:description" content="A few quick questions so we've got everything we need to start building your channel." />
+<link rel="icon" href="/favicon-32.png" sizes="32x32" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0A0B0D; --bg-elev:#121419; --bg-elev2:#1A1E25;
+    --text:#F4F5F7; --muted:#C2C7CF; --faint:#828892;
+    --line:rgba(255,255,255,0.10); --line-strong:rgba(255,255,255,0.18);
+    --accent:#4F8CFF; --accent-soft:rgba(79,140,255,0.14); --accent-line:rgba(79,140,255,0.34);
+    --good:#3FB98C; --bad:#F0766A;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --display:'Space Grotesk','Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
+  body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 18px 56px}
+  a{color:var(--accent)}
+  .wrap{width:100%;max-width:600px;margin:0 auto;position:relative;z-index:1}
+
+  /* ambient background: drifting grid + soft glow orbs + floating particles */
+  .bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  #particles{position:absolute;inset:0;width:100%;height:100%}
+  .bg-grid{position:absolute;inset:-60px;
+    background:linear-gradient(rgba(79,140,255,.5) 1px,transparent 1px) 0 0/62px 62px,
+               linear-gradient(90deg,rgba(79,140,255,.5) 1px,transparent 1px) 0 0/62px 62px;
+    opacity:.09;
+    -webkit-mask-image:radial-gradient(ellipse 92% 74% at 50% 26%,#000 0%,transparent 80%);
+            mask-image:radial-gradient(ellipse 92% 74% at 50% 26%,#000 0%,transparent 80%);
+    animation:grid-drift 46s linear infinite}
+  @keyframes grid-drift{to{transform:translate3d(62px,62px,0)}}
+  .bg-orb{position:absolute;border-radius:50%;filter:blur(72px);opacity:.5;will-change:transform}
+  .orb1{width:440px;height:440px;left:-130px;top:-90px;background:radial-gradient(circle,rgba(79,140,255,.55),transparent 70%);animation:orb1 27s ease-in-out infinite alternate}
+  .orb2{width:400px;height:400px;right:-130px;top:22%;background:radial-gradient(circle,rgba(63,185,140,.40),transparent 70%);animation:orb2 33s ease-in-out infinite alternate}
+  .orb3{width:500px;height:500px;left:26%;bottom:-190px;background:radial-gradient(circle,rgba(110,130,255,.38),transparent 70%);animation:orb3 30s ease-in-out infinite alternate}
+  @keyframes orb1{to{transform:translate(80px,64px)}}
+  @keyframes orb2{to{transform:translate(-72px,52px)}}
+  @keyframes orb3{to{transform:translate(64px,-72px)}}
+  @media (prefers-reduced-motion:reduce){.bg-grid,.bg-orb{animation:none}}
+
+  .topbar{display:flex;align-items:center;gap:10px;justify-content:center;margin:6px 0 22px}
+  .topbar .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .topbar span{font-family:var(--display);font-weight:600;letter-spacing:.06em;font-size:13px;color:var(--muted);text-transform:uppercase}
+
+  .progress{height:4px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:26px;opacity:0;transition:opacity .3s}
+  .progress.show{opacity:1}
+  .progress > i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+  .card{background:var(--bg-elev);border:1px solid var(--line);border-radius:18px;padding:36px 32px;min-height:280px;display:flex;flex-direction:column;position:relative;box-shadow:0 26px 70px rgba(0,0,0,.5)}
+  @media(max-width:520px){.card{padding:28px 22px}}
+
+  h1{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.15;letter-spacing:-0.01em;margin-bottom:14px}
+  .lead{color:var(--muted);font-size:16.5px;line-height:1.55;margin-bottom:30px}
+
+  .qnum{font-family:var(--display);font-size:13px;color:var(--accent);font-weight:600;letter-spacing:.02em;margin-bottom:14px}
+  .qtitle{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.32;letter-spacing:-0.01em;margin-bottom:10px;white-space:pre-line}
+  .qdesc{color:var(--muted);font-size:15px;line-height:1.55;margin-bottom:22px;white-space:pre-line}
+  .qbody{flex:1 1 auto}
+
+  input,textarea{width:100%;background:var(--bg-elev2);border:1px solid var(--line-strong);border-radius:12px;color:var(--text);
+       padding:15px 16px;font-family:var(--sans);font-size:16px;transition:border-color .15s;resize:vertical}
+  textarea{min-height:120px;line-height:1.55}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent-line);background:#1E232B}
+  input::placeholder,textarea::placeholder{color:var(--faint)}
+
+  .options{display:flex;flex-direction:column;gap:11px}
+  .opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--bg-elev2);border:1px solid var(--line-strong);color:var(--text);
+       padding:16px 17px;border-radius:12px;font-family:var(--sans);font-size:16px;line-height:1.4;cursor:pointer;transition:border-color .15s,background .15s,transform .05s}
+  .opt:hover{border-color:var(--accent-line);background:#1E232B}
+  .opt:active{transform:scale(.995)}
+  .opt .mark{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--line-strong);transition:border-color .15s,background .15s;position:relative}
+  .opt.sel{border-color:var(--accent-line);background:var(--accent-soft)}
+  .opt.sel .mark{border-color:var(--accent);background:var(--accent)}
+  .opt.sel .mark:after{content:"";position:absolute;inset:4px;border-radius:50%;background:#0A0B0D}
+
+  .err{display:none;color:var(--bad);font-size:13.5px;margin-top:12px}
+  .err.show{display:block}
+
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:26px}
+  .btn{font-family:var(--display);font-weight:600;font-size:15.5px;border:none;border-radius:12px;padding:14px 26px;cursor:pointer;transition:opacity .15s,transform .05s,background .15s}
+  .btn:active{transform:scale(.985)}
+  .btn-primary{background:var(--accent);color:#04060B}
+  .btn-primary:hover{opacity:.92}
+  .btn-ghost{background:transparent;color:var(--muted);padding:14px 6px;font-weight:500}
+  .btn-ghost:hover{color:var(--text)}
+  .btn-primary.block{width:100%}
+  .spacer{flex:1 1 auto}
+
+  .done{text-align:center;padding:26px 4px;margin:auto 0}
+  .done .check{width:58px;height:58px;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent-line);
+       display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+  .done .check svg{width:28px;height:28px;stroke:var(--accent)}
+  .done h2{font-family:var(--display);font-weight:700;font-size:25px;margin-bottom:12px;letter-spacing:-0.01em}
+  .done p{color:var(--muted);font-size:16px;line-height:1.55;max-width:400px;margin:0 auto}
+</style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="bg-orb orb1"></div>
+    <div class="bg-orb orb2"></div>
+    <div class="bg-orb orb3"></div>
+    <div class="bg-grid"></div>
+    <canvas id="particles"></canvas>
+  </div>
+  <div class="wrap">
+    <div class="topbar"><i class="dot"></i><span>Client Onboarding</span></div>
+    <div class="progress" id="progress"><i id="bar"></i></div>
+    <div class="card" id="card"></div>
+  </div>
+
+<script>
+  var CONFIG = {
+    endpoint: "https://gjfrarupnpsfiolpgtdc.supabase.co/functions/v1/onboarding-capture",
+    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqZnJhcnVwbnBzZmlvbHBndGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3Njg0NjEsImV4cCI6MjA5ODM0NDQ2MX0.sGW9weCJD02awUeZ482x-WByksTDi1vpwgKrFNjV0xQ"
+  };
+
+  // Exact questions, types and options mirrored from the YouTube Strategy Onboarding form.
+  // Name / email / channel are NOT asked — this is sent by automation to a known client,
+  // so name + channel ride in on the link (?name=…&youtube=…) and submit silently.
+  var STEPS = [
+    { key:'goal',        type:'text',     required:true, title:'What is your main goal from content? Only pick ONE and try to be as SPECIFIC as possible', desc:'Revenue number, subscriber count, views, number of opportunities, etc' },
+    { key:'unique',      type:'textarea', required:true, title:'What makes you or your content unique? Please write full sentences.', desc:'A certain skillset, belief system, vibe, etc. (Skillset Ex: Wholesalers usually use cold calling, we use Google PPC ads)' },
+    { key:'competitors', type:'textarea', required:true, title:'Drop 3-5 competitors you want us to analyze', desc:'All within your niche' },
+    { key:'topics',      type:'textarea', required:true, title:'Drop 3-5 keywords/topics that are core to your brand', desc:'BAD EX: Motivating, Aesthetic, Empowering.\nGOOD EX: Real Estate Tax Strategy, Affordable Fashion, Dropservicing' },
+    { key:'icp',         type:'textarea', required:true, title:"Please provide a link to your ICP document, offer document (or alternative). If you don't have them, please let us know." },
+    { key:'ads',         type:'textarea', required:true, title:'Have you ever bought followers or ran ads to your videos? If so, how much?', desc:'Not a big deal, just going to help us understand what we are working with.' },
+    { key:'comms',       type:'radio',    required:true, title:'Whats your ideal way to communicate in your content?', desc:'Pick the one that you feel like will help you come across most like yourself on camera',
+      options:['Full Script','Adlib (80% Script, you add details)','Storyboard (small summaries of sections for the video)','Hook + Topic (Then you can rant; we can trim fat in the edit)'] },
+    { key:'revenue',     type:'radio',    required:true, title:'What is your preferred method of tracking revenue from organic content?',
+      options:['Hyros','Trackyo','No tracking yet / not needed','No tracking yet, but I want to set it up'] },
+    { key:'format',      type:'textarea', required:true, title:'What kind of content do you see yourself making? (sustainably) \n\nFor example: news reactions, scripted talking head' },
+    { key:'aspiration',  type:'text',     required:true, title:'In one sentence: what do you want to be? \n\nFor example: "Alex Hormozi of Real Estate"\n\nThis gives us tangible insight into how you\'d like to be perceived.' },
+    { key:'notes',       type:'textarea', required:false, title:'Anything else you want to let us know?' }
+  ];
+
+  var answers = {};
+  // The automation link personalises who this is:
+  // /onboarding?name=Alex&youtube=<channel> (email optional). These submit silently.
+  (function(){
+    var p = new URLSearchParams(location.search);
+    ['name','email','youtube'].forEach(function(k){ if(p.get(k)) answers[k] = p.get(k).trim(); });
+  })();
+
+  var idx = -1; // -1 = intro screen
+  var card = document.getElementById('card');
+  var progress = document.getElementById('progress');
+  var bar = document.getElementById('bar');
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function setProgress(){
+    if(idx < 0){ progress.classList.remove('show'); return; }
+    progress.classList.add('show');
+    bar.style.width = Math.round((idx / STEPS.length) * 100) + '%';
+  }
+
+  function renderIntro(){
+    setProgress();
+    var first = (answers.name || '').split(' ')[0];
+    card.innerHTML =
+      '<h1>' + (first ? 'Welcome aboard, ' + esc(first) + '.' : 'Welcome aboard.') + ' Let’s get you set up.</h1>' +
+      '<p class="lead">A few quick questions so we’ve got everything we need to start building your channel. Takes about three minutes.</p>' +
+      '<button class="btn btn-primary block" id="start">Start</button>';
+    document.getElementById('start').addEventListener('click', function(){ idx = 0; render(); });
+  }
+
+  function controlHTML(step){
+    var v = answers[step.key] || '';
+    if(step.type === 'textarea'){
+      return '<textarea name="'+step.key+'" placeholder="Type your answer…">'+esc(v)+'</textarea>';
+    }
+    if(step.type === 'radio'){
+      return '<div class="options">' + step.options.map(function(o){
+        var sel = (answers[step.key] === o) ? ' sel' : '';
+        return '<button type="button" class="opt'+sel+'" data-val="'+esc(o)+'"><span class="mark"></span><span>'+esc(o)+'</span></button>';
+      }).join('') + '</div>';
+    }
+    return '<input name="'+step.key+'" type="text" value="'+esc(v)+'" placeholder="Type your answer…" autocomplete="off" />';
+  }
+
+  function renderStep(){
+    var step = STEPS[idx];
+    setProgress();
+    var isLast = idx === STEPS.length - 1;
+    var nextLabel = isLast ? 'Submit' : 'Next';
+    var html =
+      '<div class="qbody">' +
+        '<div class="qnum">Question '+(idx+1)+' of '+STEPS.length+'</div>' +
+        '<div class="qtitle">'+esc(step.title)+'</div>' +
+        (step.desc ? '<div class="qdesc">'+esc(step.desc)+'</div>' : '') +
+        '<div id="control">'+controlHTML(step)+'</div>' +
+        '<div class="err" id="err"></div>' +
+      '</div>' +
+      '<div class="nav">' +
+        '<button class="btn btn-ghost" id="back">← Back</button>' +
+        '<div class="spacer"></div>' +
+        (step.type === 'radio' && !isLast ? '' : '<button class="btn btn-primary" id="next">'+nextLabel+'</button>') +
+      '</div>';
+    card.innerHTML = html;
+
+    document.getElementById('back').addEventListener('click', goBack);
+    var nextBtn = document.getElementById('next');
+    if(nextBtn) nextBtn.addEventListener('click', goNext);
+
+    if(step.type === 'radio'){
+      card.querySelectorAll('.opt').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          answers[step.key] = btn.getAttribute('data-val');
+          card.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('sel'); });
+          btn.classList.add('sel');
+          setTimeout(goNext, 240);
+        });
+      });
+    } else {
+      var input = card.querySelector('[name="'+step.key+'"]');
+      if(input){
+        input.focus();
+        if(step.type !== 'textarea'){
+          input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); goNext(); } });
+        }
+      }
+    }
+  }
+
+  function collectCurrent(){
+    var step = STEPS[idx];
+    if(!step || step.type === 'radio') return;
+    var el = card.querySelector('[name="'+step.key+'"]');
+    if(el) answers[step.key] = el.value.trim();
+  }
+
+  function validateCurrent(){
+    var step = STEPS[idx];
+    var errEl = document.getElementById('err');
+    var v = answers[step.key] || '';
+    if(step.required && !v){
+      if(errEl){ errEl.textContent = 'This one’s required.'; errEl.classList.add('show'); }
+      return false;
+    }
+    return true;
+  }
+
+  function goNext(){
+    collectCurrent();
+    if(!validateCurrent()) return;
+    if(idx === STEPS.length - 1){ submit(); return; }
+    idx++; render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack(){
+    collectCurrent();
+    if(idx === 0){ idx = -1; render(); return; }
+    idx--; render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function render(){ if(idx < 0) renderIntro(); else renderStep(); }
+
+  function submit(){
+    bar.style.width = '100%';
+    card.innerHTML = '<div class="done"><h2 style="font-family:var(--display)">Sending…</h2></div>';
+    fetch(CONFIG.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+CONFIG.anonKey, 'apikey':CONFIG.anonKey },
+      body: JSON.stringify(answers)
+    })
+    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return { ok:r.ok && j.ok, j:j }; }); })
+    .then(function(res){
+      if(!res.ok) throw new Error((res.j && res.j.error) || 'send failed');
+      var first = (answers.name || '').split(' ')[0];
+      card.innerHTML =
+        '<div class="done">' +
+          '<div class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>' +
+          '<h2>You’re all set.</h2>' +
+          '<p>Thanks'+(first ? ' '+esc(first) : '')+'. We’ve got everything we need to get started, and we’ll be in touch shortly.</p>' +
+        '</div>';
+    })
+    .catch(function(){
+      card.innerHTML =
+        '<div class="done">' +
+          '<h2>Something went wrong.</h2>' +
+          '<p>That didn’t send. Give it another go in a moment.</p>' +
+          '<button class="btn btn-primary" id="retry" style="margin-top:20px">Try again</button>' +
+        '</div>';
+      document.getElementById('retry').addEventListener('click', function(){ idx = STEPS.length - 1; render(); });
+    });
+  }
+
+  render();
+</script>
+<script>
+  // Floating glow particles. Light-touch: ~area-scaled count, soft radial glow,
+  // slow upward drift with a gentle twinkle. Honours reduced-motion (static frame).
+  (function(){
+    var c = document.getElementById('particles');
+    if(!c || !c.getContext) return;
+    var ctx = c.getContext('2d');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = 0, H = 0, parts = [];
+    var COLORS = ['79,140,255', '63,185,140', '110,130,255'];
+    function resize(){
+      W = c.clientWidth; H = c.clientHeight;
+      c.width = W * dpr; c.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function seed(){
+      var n = Math.max(24, Math.min(64, Math.round(W * H / 22000)));
+      parts = [];
+      for(var i = 0; i < n; i++){
+        parts.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: Math.random() * 1.7 + 0.6,
+          vx: (Math.random() - 0.5) * 0.12,
+          vy: -(Math.random() * 0.26 + 0.05),
+          a: Math.random() * 0.5 + 0.15,
+          col: COLORS[(Math.random() * COLORS.length) | 0],
+          tw: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    function frame(){
+      ctx.clearRect(0, 0, W, H);
+      for(var i = 0; i < parts.length; i++){
+        var p = parts[i];
+        p.tw += 0.02;
+        var a = p.a * (0.55 + 0.45 * Math.sin(p.tw));
+        var rr = p.r * 4;
+        var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rr);
+        g.addColorStop(0, 'rgba(' + p.col + ',' + a + ')');
+        g.addColorStop(1, 'rgba(' + p.col + ',0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(p.x, p.y, rr, 0, Math.PI * 2); ctx.fill();
+        if(!reduce){
+          p.x += p.vx; p.y += p.vy;
+          if(p.y < -12){ p.y = H + 12; p.x = Math.random() * W; }
+          if(p.x < -12) p.x = W + 12; else if(p.x > W + 12) p.x = -12;
+        }
+      }
+      if(!reduce) requestAnimationFrame(frame);
+    }
+    function start(){ resize(); seed(); frame(); }
+    var rt;
+    window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ resize(); seed(); if(reduce) frame(); }, 150); });
+    start();
+  })();
+</script>
+</body>
+</html>
