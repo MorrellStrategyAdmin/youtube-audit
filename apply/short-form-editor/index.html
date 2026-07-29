@@ -222,7 +222,7 @@ function renderForm(){
 const TEXT_REQ = ["name","email","whatsapp","timezone","portfolio","daily_output","turnaround","commitments","start","rate"];
 const SINGLE_REQ = ["experience","premiere","aftereffects","fulltime_ok"];
 
-function submit(){
+async function submit(){
   let firstErr=null;
   const val = id => (document.getElementById(id)?.value||"").trim();
   const pick = id => document.querySelector(`[data-for="${id}"] .choice-opt.sel`)?.dataset.v || "";
@@ -276,15 +276,30 @@ function submit(){
     page: location.href
   };
 
-  if(CONFIG.endpoint){
-    fetch(CONFIG.endpoint,{
+  // Demo mode (no endpoint configured): nothing to send, just confirm.
+  if(!CONFIG.endpoint){ showThanks(); return; }
+
+  // Only show the thank-you screen once the server has actually accepted the
+  // application. The button locks while sending; on ANY failure the answers stay
+  // on screen and the applicant is asked to try again, so a submission can never
+  // vanish silently.
+  const btn=document.getElementById('submitBtn');
+  const btnLabel=btn.textContent;
+  btn.disabled=true; btn.textContent='Sending…';
+  try{
+    const res=await fetch(CONFIG.endpoint,{
       method:"POST",
       headers:{ "Content-Type":"application/json",
         ...(CONFIG.anonKey?{"Authorization":"Bearer "+CONFIG.anonKey,"apikey":CONFIG.anonKey}:{}) },
       body: JSON.stringify(payload)
-    }).catch(()=>{});
+    });
+    let j={}; try{ j=await res.json(); }catch(_){ }
+    if(!res.ok || j.ok===false) throw new Error((j&&j.error)||("HTTP "+res.status));
+    showThanks();
+  }catch(err){
+    btn.disabled=false; btn.textContent=btnLabel;
+    showSendError();
   }
-  showThanks();
 }
 
 function showThanks(){
@@ -296,6 +311,19 @@ function showThanks(){
       <p class="lead">Thank you for your application. Due to high volume of applications, we may not contact you if unsuccessful. If you are shortlisted for a trial edit, we will reach out via WhatsApp.</p>
     </div>`;
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showSendError(){
+  let box=document.getElementById('sendErr');
+  if(!box){
+    box=document.createElement('div');
+    box.id='sendErr';
+    box.className='bar-note';
+    box.style.cssText='border-left-color:#F87171;color:#b91c1c;margin-top:14px';
+    document.getElementById('submitBtn').insertAdjacentElement('afterend',box);
+  }
+  box.textContent="Something went wrong and your application didn't send. Your answers are still here — please press Send application again. If it keeps failing, message us on WhatsApp.";
+  box.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 renderForm();

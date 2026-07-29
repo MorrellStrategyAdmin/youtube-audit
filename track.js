@@ -9,19 +9,28 @@
   function qp(name) { try { return new URLSearchParams(location.search).get(name) || ''; } catch (e) { return ''; } }
   function host(u) { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } }
   function device() { var w = window.innerWidth || screen.width || 0; return w && w <= 640 ? 'mobile' : w && w <= 1024 ? 'tablet' : 'desktop'; }
+  // Map any raw source token (a utm_source or a referrer host) to a canonical channel.
+  // '' = not a recognized channel, so the caller decides (keep an intentional utm, else 'other').
+  function canon(s) {
+    s = (s || '').toLowerCase();
+    if (s === 'ig' || /instagram/.test(s)) return 'instagram';
+    if (s === 'yt' || /youtube|youtu\.be/.test(s)) return 'youtube';
+    if (/tiktok/.test(s)) return 'tiktok';
+    if (s === 'x' || /twitter|x\.com|t\.co/.test(s)) return 'twitter';
+    if (s === 'fb' || /facebook|fb\.com|fb\.me/.test(s)) return 'facebook';
+    if (/linkedin|lnkd\.in/.test(s)) return 'linkedin';
+    if (s === 'google' || /google\./.test(s)) return 'google';
+    if (/bing\./.test(s)) return 'bing';
+    return '';
+  }
   function source() {
-    var us = qp('utm_source'); if (us) return us.toLowerCase();
+    // A utm_source is deliberate: canonicalise a known channel (ig -> instagram), else keep the tag as-is.
+    var us = qp('utm_source'); if (us) return canon(us) || us.toLowerCase();
     var r = host(document.referrer);
     if (!r || r === host(location.href)) return 'direct';
-    if (/youtube|youtu\.be/.test(r)) return 'youtube';
-    if (/instagram/.test(r)) return 'instagram';
-    if (/tiktok/.test(r)) return 'tiktok';
-    if (/t\.co|twitter|x\.com/.test(r)) return 'twitter';
-    if (/facebook|fb\.com|fb\.me/.test(r)) return 'facebook';
-    if (/linkedin|lnkd\.in/.test(r)) return 'linkedin';
-    if (/google\./.test(r)) return 'google';
-    if (/bing\./.test(r)) return 'bing';
-    return r;
+    // A recognised referrer -> its channel; anything else (the go-link redirector, referral spam)
+    // -> 'other' rather than a raw hostname. The raw host is still kept in the `referrer` column.
+    return canon(r) || 'other';
   }
   function sess() {
     try { var s = sessionStorage.getItem('ms_sid'); if (!s) { s = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); sessionStorage.setItem('ms_sid', s); } return s; }
@@ -54,7 +63,7 @@
   // First-touch source (instagram / youtube / tiktok / ...): the first real source that
   // ever brought this device, so a later booking still traces back to it. Prefer an
   // explicit utm_source (branded links), else the detected referrer; never store 'direct'.
-  try { if (!localStorage.getItem('ms_first_source')) { var _fs = qp('utm_source') || BASE.ref_source; if (_fs && _fs !== 'direct') localStorage.setItem('ms_first_source', _fs); } } catch (e) {}
+  try { if (!localStorage.getItem('ms_first_source')) { var _fs = BASE.ref_source; if (_fs && _fs !== 'direct') localStorage.setItem('ms_first_source', _fs); } } catch (e) {}
 
   send({ event_type: 'pageview' });
 
