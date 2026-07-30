@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Video Editor (Full-Time) · Apply | Morrell Strategy</title>
-<meta property="og:title" content="We're hiring full-time video editors" />
-<meta property="og:description" content="Full-time Premiere Pro video editor - short-form, long-form, or both. Portfolio in our direction required." />
+<title>Video Editor · Apply | Morrell Strategy</title>
+<meta property="og:title" content="We're hiring video editors" />
+<meta property="og:description" content="Premiere Pro video editor - short-form, long-form, or both. Full-time, part-time, or freelance. Portfolio in our direction required." />
 <link rel="icon" href="/favicon-32.png" sizes="32x32" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -169,10 +169,10 @@ function renderForm(){
   document.getElementById('app').innerHTML = `
     <div class="card fade">
       <div class="eyebrow">Morrell Strategy · Now hiring</div>
-      <h1>Video Editor (Full-Time)</h1>
-      <p class="lead">We're hiring full-time video editors for the creators and brands we work with, in <b>Premiere Pro</b> (After Effects is a plus). We work in both <b>short-form</b> (reels, TikTok) and <b>long-form</b> (YouTube) - you tell us which you do.</p>
-      <p class="lead">This is a full-time, ongoing role, around 8 hours a day, 5 days a week, and more is welcome.</p>
-      <div class="bar-note">Two things we look at hardest: a <b>portfolio in the direction of our work</b>, and that you can do this <b>full-time</b>. Price yourself for a full-time role.</div>
+      <h1>Video Editor</h1>
+      <p class="lead">We're hiring video editors for the creators and brands we work with, in <b>Premiere Pro</b> (After Effects is a plus). We work in both <b>short-form</b> (reels, TikTok) and <b>long-form</b> (YouTube) - you tell us which you do.</p>
+      <p class="lead"><b>Full-time, part-time, or freelance</b> - whatever fits. You tell us the arrangement and hours that suit you below.</p>
+      <div class="bar-note">The main thing we look at is a <b>portfolio in the direction of our work</b>. Set your rate for the arrangement you're after.</div>
     </div>
 
     <div class="card">
@@ -209,17 +209,17 @@ function renderForm(){
     </div>
 
     <div class="card">
-      <div class="sec-k">Working full-time with us</div>
+      <div class="sec-k">Your availability</div>
+      ${choice("arrangement","What kind of arrangement are you looking for?",["Full-time (40 hrs/week)","Part-time (20 hrs/week)","Freelance (ad hoc, as needed)"],"Roughly: full-time is 40 hrs/week, part-time is half that, freelance is as-and-when.")}
       ${field("capacity","Roughly how much could you edit for us per week? A range is fine.",{hint:"In whatever terms fit the formats you do (reels per day, long-form videos per week, etc)."})}
       ${field("turnaround","What's your typical turnaround on one video, once you have the footage?")}
-      ${choice("fulltime_ok","Can you commit to this full-time?",["Yes","No"])}
       ${field("commitments","Any other commitments right now?",{type:"textarea"})}
       ${field("start","When can you start?")}
     </div>
 
     <div class="card">
       <div class="sec-k">Rate</div>
-      ${field("rate","What monthly rate are you looking for, for this full-time role? (USD)")}
+      ${field("rate","What are your rate expectations? (USD)",{hint:"However it makes sense for you - a monthly rate for full or part-time, or a per-video / hourly rate for freelance."})}
     </div>
 
     <div class="card">
@@ -246,7 +246,7 @@ function renderForm(){
 }
 
 const TEXT_REQ = ["name","email","whatsapp","timezone","portfolio","capacity","turnaround","commitments","start","rate"];
-const SINGLE_REQ = ["experience","premiere","aftereffects","fulltime_ok"];
+const SINGLE_REQ = ["experience","premiere","aftereffects","arrangement"];
 
 async function submit(){
   let firstErr=null;
@@ -278,6 +278,7 @@ async function submit(){
   // this into a note on the card so answers are readable at a glance. Format first.
   const qa = [
     ["What they edit", formatLabel],
+    ["Availability", pick("arrangement")],
     ["WhatsApp", val("whatsapp")],
     ["Instagram", val("instagram")||"(not given)"],
     ["Timezone", val("timezone")],
@@ -287,10 +288,9 @@ async function submit(){
     ["Portfolio", val("portfolio")],
     ["Weekly capacity", val("capacity")],
     ["Turnaround (one video)", val("turnaround")],
-    ["Full-time", pick("fulltime_ok")],
     ["Other commitments", val("commitments")],
     ["Start", val("start")],
-    ["Monthly rate (USD)", val("rate")],
+    ["Rate expectation", val("rate")],
     ["Notes", val("notes")||"(none)"]
   ];
 
@@ -303,8 +303,9 @@ async function submit(){
       formats: fmts, format_label: formatLabel,
       instagram: val("instagram"), experience: pick("experience"),
       premiere: pick("premiere"), aftereffects: pick("aftereffects"),
+      arrangement: pick("arrangement"),
       capacity: val("capacity"), turnaround: val("turnaround"),
-      fulltime_ok: pick("fulltime_ok"), commitments: val("commitments"), start: val("start"),
+      commitments: val("commitments"), start: val("start"),
       rate: val("rate"), notes: val("notes"), qa
     },
     source: "hiring-form",
