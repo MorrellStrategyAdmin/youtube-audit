@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Video Editor (Full-Time) · Apply | Morrell Strategy</title>
+<meta property="og:title" content="We're hiring full-time video editors" />
+<meta property="og:description" content="Full-time Premiere Pro video editor - short-form, long-form, or both. Portfolio in our direction required." />
+<link rel="icon" href="/favicon-32.png" sizes="32x32" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<script defer src="/track.js"></script>
+<style>
+  :root{
+    --bg:#0A0B0D; --bg-elev:#121419; --bg-elev2:#171A20;
+    --text:#F4F5F7; --muted:#9AA0A8; --faint:#6B7079;
+    --line:rgba(255,255,255,0.09); --line-strong:rgba(255,255,255,0.16);
+    --accent:#4F8CFF; --accent-soft:rgba(79,140,255,0.12); --accent-line:rgba(79,140,255,0.30);
+    --good:#3FB98C; --warn:#E0A64F; --bad:#E0654F;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --display:'Space Grotesk','Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
+  body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 18px 64px}
+  a{color:var(--accent)}
+  .wrap{width:100%;max-width:620px;margin:0 auto}
+
+  .topbar{display:flex;align-items:center;gap:10px;justify-content:center;margin:6px 0 26px}
+  .topbar .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .topbar span{font-family:var(--display);font-weight:600;letter-spacing:.02em;font-size:14px;color:var(--muted)}
+
+  .card{background:var(--bg-elev);border:1px solid var(--line);border-radius:18px;padding:34px 30px;margin-bottom:16px}
+  @media(max-width:520px){.card{padding:26px 20px}}
+
+  .eyebrow{font-family:var(--display);font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  h1{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.15;letter-spacing:-0.01em;margin-bottom:14px}
+  .lead{color:var(--muted);font-size:16px}
+  .lead + .lead{margin-top:12px}
+  .lead b{color:var(--text);font-weight:600}
+  .lead.sm{font-size:14.5px}
+
+  .bar-note{margin-top:20px;padding:14px 16px;border-radius:11px;background:var(--bg-elev2);border:1px solid var(--line);border-left:3px solid var(--warn);font-size:14px;color:var(--muted)}
+  .bar-note b{color:var(--text);font-weight:600}
+
+  .sec-k{font-family:var(--display);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:16px}
+
+  /* references */
+  .refgroup-label{font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);margin:0 0 8px}
+  .refs{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+  .ref{display:flex;align-items:center;gap:12px;padding:13px 15px;background:var(--bg-elev2);border:1px solid var(--line);border-radius:12px;color:var(--text);text-decoration:none;transition:border-color .15s,background .15s}
+  .ref:hover{border-color:var(--accent-line);background:#1B1F26}
+  .ref .play{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center}
+  .ref .play svg{margin-left:2px}
+  .ref .rl{font-size:15px;font-weight:500}
+  .ref .rl small{display:block;font-size:12.5px;color:var(--faint);font-weight:400;margin-top:1px}
+  .refs .placeholder{padding:14px;border:1px dashed var(--line-strong);border-radius:12px;color:var(--faint);font-size:13.5px}
+
+  .field{margin-bottom:18px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:14px;color:var(--text);margin-bottom:7px;font-weight:500}
+  .field .req{color:var(--accent);margin-left:2px}
+  .field .opt{color:var(--faint);margin-left:6px;font-weight:400;font-size:12.5px}
+  .field .hint{display:block;font-size:12.5px;color:var(--faint);margin:-3px 0 8px;font-weight:400}
+  .field input,.field textarea{width:100%;background:var(--bg-elev2);border:1px solid var(--line);border-radius:11px;color:var(--text);
+       padding:13px 15px;font-family:var(--sans);font-size:15.5px;transition:border-color .15s;resize:vertical}
+  .field textarea{min-height:78px;line-height:1.5}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent-line)}
+  .field input::placeholder,.field textarea::placeholder{color:var(--faint)}
+  .field.err input,.field.err textarea,.field.err .opts{border-color:var(--bad)!important}
+
+  .opts{display:flex;flex-wrap:wrap;gap:9px}
+  .choice-opt{display:inline-flex;align-items:center;gap:9px;background:var(--bg-elev2);border:1px solid var(--line);color:var(--text);
+       padding:11px 15px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
+  .choice-opt:hover{border-color:var(--line-strong)}
+  .choice-opt .dot2{width:15px;height:15px;border-radius:50%;border:2px solid var(--line-strong);position:relative;transition:.15s}
+  .choice-opt.sel{border-color:var(--accent-line);background:var(--accent-soft)}
+  .choice-opt.sel .dot2{border-color:var(--accent);background:var(--accent)}
+  .choice-opt.sel .dot2:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--bg-elev2)}
+  /* square checkbox for multi-select (checklist) */
+  .choice-opt .box2{width:16px;height:16px;border-radius:4px;border:2px solid var(--line-strong);position:relative;transition:.15s;flex:0 0 auto}
+  .choice-opt.sel .box2{border-color:var(--accent);background:var(--accent)}
+  .choice-opt.sel .box2:after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #04060B;border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+  .btn{font-family:var(--display);font-weight:600;font-size:15.5px;border:none;border-radius:11px;padding:15px 22px;cursor:pointer;transition:opacity .15s,transform .05s;width:100%}
+  .btn:active{transform:scale(.99)}
+  .btn-primary{background:var(--accent);color:#04060B}
+  .btn-primary:hover{opacity:.92}
+  .microcopy{color:var(--faint);font-size:13px;margin-top:14px;text-align:center}
+  .err-summary{display:none;margin-bottom:16px;padding:12px 15px;border-radius:10px;background:rgba(224,101,79,0.1);border:1px solid rgba(224,101,79,0.3);color:#e9a08f;font-size:14px}
+  .err-summary.show{display:block}
+
+  .thanks{text-align:center;padding:44px 30px}
+  .thanks .big{width:56px;height:56px;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+  .thanks .big:after{content:"";width:16px;height:26px;border:solid var(--accent);border-width:0 3px 3px 0;transform:rotate(45deg);margin-top:-6px}
+  .thanks h1{margin-bottom:12px}
+  .thanks .lead{margin-bottom:0}
+
+  .fade{animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .demo-tag{position:fixed;bottom:10px;right:10px;font-size:10.5px;color:var(--faint);background:var(--bg-elev);border:1px solid var(--line);border-radius:6px;padding:3px 7px;font-family:var(--display);letter-spacing:.03em}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar"><i class="dot"></i><span>Morrell Strategy</span></div>
+    <div id="app"></div>
+  </div>
+  <div class="demo-tag" id="demoTag" style="display:none">preview mode · nothing is submitted</div>
+
+<script>
+/* CONFIG: the only block to change when you deploy.
+   endpoint "" = preview mode (nothing leaves the page).
+   Live: https://gjfrarupnpsfiolpgtdc.supabase.co/functions/v1/apply-candidate */
+const CONFIG = {
+  endpoint:   "https://gjfrarupnpsfiolpgtdc.supabase.co/functions/v1/apply-candidate",
+  anonKey:    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqZnJhcnVwbnBzZmlvbHBndGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3Njg0NjEsImV4cCI6MjA5ODM0NDQ2MX0.sGW9weCJD02awUeZ482x-WByksTDi1vpwgKrFNjV0xQ",
+  role:       "video-editor",
+  role_label: "Video Editor"
+};
+
+/* Reference edits per format, DIRECTION not an exhaustive template. {url, label, note}. */
+const SHORT_REFS = [
+  { url: "https://www.instagram.com/reel/Day1pO9kkAJ/", label: "Short-form example 1", note: "Instagram reel" },
+  { url: "https://www.instagram.com/reel/Dar3lWViWBf/", label: "Short-form example 2", note: "Instagram reel" },
+  { url: "https://www.instagram.com/reel/DaWUEc3Ja08/", label: "Short-form example 3", note: "Instagram reel" }
+];
+const LONG_REFS = [
+  { url: "https://youtu.be/ZJ0QysBXNvc", label: "How I make $288k/year on YouTube with only 19k subscribers", note: "Tintin Smith · YouTube" },
+  { url: "https://youtu.be/vUbLw80KTpo", label: "Meta Ads Creative Strategy in 2026: The Full System", note: "Blue Sense Digital · YouTube" },
+  { url: "https://youtu.be/AVhM75_IUtM", label: "The BEST Ecommerce Subscription Brand Strategy for 2026", note: "Max Sturtevant · YouTube" }
+];
+
+function field(id,label,{type="text",required=true,hint="",ph="",optional=false}={}){
+  const tag = type==="textarea"
+    ? `<textarea id="${id}" placeholder="${ph}"></textarea>`
+    : `<input id="${id}" type="${type}" placeholder="${ph}" />`;
+  return `<div class="field" data-for="${id}">
+    <label>${label}${required?'<span class="req">*</span>':(optional?'<span class="opt">optional</span>':'')}</label>
+    ${hint?`<span class="hint">${hint}</span>`:''}
+    ${tag}
+  </div>`;
+}
+function choice(id,label,opts,hint=""){
+  return `<div class="field" data-for="${id}" data-single="1">
+    <label>${label}<span class="req">*</span></label>
+    ${hint?`<span class="hint">${hint}</span>`:''}
+    <div class="opts">${opts.map(o=>`<button type="button" class="choice-opt" data-v="${o}"><span class="dot2"></span>${o}</button>`).join('')}</div>
+  </div>`;
+}
+function multichoice(id,label,opts,hint=""){
+  return `<div class="field" data-for="${id}" data-multi="1">
+    <label>${label}<span class="req">*</span></label>
+    ${hint?`<span class="hint">${hint}</span>`:''}
+    <div class="opts">${opts.map(o=>`<button type="button" class="choice-opt" data-v="${o}"><span class="box2"></span>${o}</button>`).join('')}</div>
+  </div>`;
+}
+function refsHTML(arr){
+  if(!arr||!arr.length) return '<div class="placeholder">Examples go here.</div>';
+  return arr.map((r,i)=>`<a class="ref" href="${r.url}" target="_blank" rel="noopener">
+    <span class="play"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="rl">${r.label||('Reference '+(i+1))}${r.note?`<small>${r.note}</small>`:''}</span>
+  </a>`).join('');
+}
+
+function renderForm(){
+  document.getElementById('app').innerHTML = `
+    <div class="card fade">
+      <div class="eyebrow">Morrell Strategy · Now hiring</div>
+      <h1>Video Editor (Full-Time)</h1>
+      <p class="lead">We're hiring full-time video editors for the creators and brands we work with, in <b>Premiere Pro</b> (After Effects is a plus). We work in both <b>short-form</b> (reels, TikTok) and <b>long-form</b> (YouTube) - you tell us which you do.</p>
+      <p class="lead">This is a full-time, ongoing role, around 8 hours a day, 5 days a week, and more is welcome.</p>
+      <div class="bar-note">Two things we look at hardest: a <b>portfolio in the direction of our work</b>, and that you can do this <b>full-time</b>. Price yourself for a full-time role.</div>
+    </div>
+
+    <div class="card">
+      <div class="sec-k">What you edit</div>
+      ${multichoice("formats","Which do you edit? (tick all that apply)",["Short-form","Long-form"],"Tick both if you do both - it's fine either way.")}
+    </div>
+
+    <div class="card">
+      <div class="sec-k">The kind of work</div>
+      <p class="lead sm">Examples of the direction for each format - not a strict template. Show us work in the same ballpark for whatever you do.</p>
+      <div class="refgroup-label">Short-form</div>
+      <div class="refs">${refsHTML(SHORT_REFS)}</div>
+      <div class="refgroup-label" style="margin-top:18px">Long-form</div>
+      <div class="refs">${refsHTML(LONG_REFS)}</div>
+    </div>
+
+    <div class="err-summary" id="errSummary">A few required questions are missing. They're marked in red below.</div>
+
+    <div class="card">
+      <div class="sec-k">About you</div>
+      ${field("name","Full name",{ph:"First and last"})}
+      ${field("email","Email",{type:"email",ph:"you@email.com"})}
+      ${field("whatsapp","WhatsApp number (with country code)",{type:"tel",ph:"+44 …"})}
+      ${field("instagram","Instagram handle",{required:false,optional:true,ph:"@yourhandle"})}
+      ${field("timezone","What timezone are you in?",{ph:"e.g. GMT+0, EST, GMT+5:30"})}
+    </div>
+
+    <div class="card">
+      <div class="sec-k">Software and your work</div>
+      ${choice("experience","How long have you been editing video for?",["Less than 1 year","1 to 2 years","2 to 4 years","4+ years"])}
+      ${choice("premiere","Are you confident editing in Premiere Pro?",["Yes, it's my main tool","Yes, comfortable in it","No"])}
+      ${choice("aftereffects","Do you use After Effects?",["Yes, regularly","A little","No"])}
+      ${field("portfolio","Portfolio link",{type:"url",ph:"https://…",hint:"Your best editing work. If you do both short and long form, include both. In the direction of the examples above - they're examples, not a strict template."})}
+    </div>
+
+    <div class="card">
+      <div class="sec-k">Working full-time with us</div>
+      ${field("capacity","Roughly how much could you edit for us per week? A range is fine.",{hint:"In whatever terms fit the formats you do (reels per day, long-form videos per week, etc)."})}
+      ${field("turnaround","What's your typical turnaround on one video, once you have the footage?")}
+      ${choice("fulltime_ok","Can you commit to this full-time?",["Yes","No"])}
+      ${field("commitments","Any other commitments right now?",{type:"textarea"})}
+      ${field("start","When can you start?")}
+    </div>
+
+    <div class="card">
+      <div class="sec-k">Rate</div>
+      ${field("rate","What monthly rate are you looking for, for this full-time role? (USD)")}
+    </div>
+
+    <div class="card">
+      <div class="sec-k">Anything else</div>
+      ${field("notes","Optional, anything you want us to know",{type:"textarea",required:false})}
+      <div class="bar-note" style="border-left-color:var(--accent);margin-top:0;margin-bottom:18px">Here's what happens next. We expect a lot of applications and can't reply to everyone, so we only reach out to the shortlist. If you make it, we'll message you on WhatsApp and ask you to do a short trial edit on footage we provide.</div>
+      <button class="btn btn-primary" id="submitBtn">Send application</button>
+    </div>`;
+
+  document.querySelectorAll('[data-single] .choice-opt').forEach(o=>o.addEventListener('click',()=>{
+    o.parentElement.querySelectorAll('.choice-opt').forEach(s=>s.classList.remove('sel'));
+    o.classList.add('sel');
+    o.closest('.field').classList.remove('err');
+  }));
+  document.querySelectorAll('[data-multi] .choice-opt').forEach(o=>o.addEventListener('click',()=>{
+    o.classList.toggle('sel');
+    o.closest('.field').classList.remove('err');
+  }));
+  document.querySelectorAll('.field input,.field textarea').forEach(el=>{
+    el.addEventListener('input',()=>el.closest('.field').classList.remove('err'));
+  });
+  document.getElementById('submitBtn').addEventListener('click',submit);
+  if(!CONFIG.endpoint) document.getElementById('demoTag').style.display='block';
+}
+
+const TEXT_REQ = ["name","email","whatsapp","timezone","portfolio","capacity","turnaround","commitments","start","rate"];
+const SINGLE_REQ = ["experience","premiere","aftereffects","fulltime_ok"];
+
+async function submit(){
+  let firstErr=null;
+  const val = id => (document.getElementById(id)?.value||"").trim();
+  const pick = id => document.querySelector(`[data-for="${id}"] .choice-opt.sel`)?.dataset.v || "";
+  const picks = id => Array.from(document.querySelectorAll(`[data-for="${id}"] .choice-opt.sel`)).map(o=>o.dataset.v);
+
+  // Format checklist (near the top): at least one must be ticked.
+  const fmts = picks("formats");
+  const fmtField = document.querySelector('[data-for="formats"]');
+  if(!fmts.length){ fmtField.classList.add('err'); firstErr=firstErr||fmtField; }
+
+  TEXT_REQ.forEach(id=>{
+    const f=document.querySelector(`[data-for="${id}"]`);
+    if(!val(id)){ f.classList.add('err'); firstErr=firstErr||f; }
+  });
+  SINGLE_REQ.forEach(id=>{
+    const f=document.querySelector(`[data-for="${id}"]`);
+    if(!pick(id)){ f.classList.add('err'); firstErr=firstErr||f; }
+  });
+
+  const es=document.getElementById('errSummary');
+  if(firstErr){ es.classList.add('show'); firstErr.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+  es.classList.remove('show');
+
+  const formatLabel = fmts.length>=2 ? "Both (short-form and long-form)" : (fmts[0]||"");
+
+  // Ordered, human-labelled copy of the whole application. The CRM trigger renders
+  // this into a note on the card so answers are readable at a glance. Format first.
+  const qa = [
+    ["What they edit", formatLabel],
+    ["WhatsApp", val("whatsapp")],
+    ["Instagram", val("instagram")||"(not given)"],
+    ["Timezone", val("timezone")],
+    ["Experience", pick("experience")],
+    ["Premiere Pro", pick("premiere")],
+    ["After Effects", pick("aftereffects")],
+    ["Portfolio", val("portfolio")],
+    ["Weekly capacity", val("capacity")],
+    ["Turnaround (one video)", val("turnaround")],
+    ["Full-time", pick("fulltime_ok")],
+    ["Other commitments", val("commitments")],
+    ["Start", val("start")],
+    ["Monthly rate (USD)", val("rate")],
+    ["Notes", val("notes")||"(none)"]
+  ];
+
+  const payload = {
+    role: CONFIG.role, role_label: CONFIG.role_label,
+    name: val("name"), email: val("email"), whatsapp: val("whatsapp"), location: val("timezone"),
+    comp_expectation: val("rate"),
+    links: { portfolio: val("portfolio") },
+    answers: {
+      formats: fmts, format_label: formatLabel,
+      instagram: val("instagram"), experience: pick("experience"),
+      premiere: pick("premiere"), aftereffects: pick("aftereffects"),
+      capacity: val("capacity"), turnaround: val("turnaround"),
+      fulltime_ok: pick("fulltime_ok"), commitments: val("commitments"), start: val("start"),
+      rate: val("rate"), notes: val("notes"), qa
+    },
+    source: "hiring-form",
+    ref_source: (localStorage.getItem('ms_first_source')||""),
+    page: location.href
+  };
+
+  // Demo mode (no endpoint configured): nothing to send, just confirm.
+  if(!CONFIG.endpoint){ showThanks(); return; }
+
+  // Only show the thank-you screen once the server has actually accepted the
+  // application. The button locks while sending; on ANY failure the answers stay
+  // on screen and the applicant is asked to try again, so a submission can never
+  // vanish silently.
+  const btn=document.getElementById('submitBtn');
+  const btnLabel=btn.textContent;
+  btn.disabled=true; btn.textContent='Sending…';
+  try{
+    const res=await fetch(CONFIG.endpoint,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json",
+        ...(CONFIG.anonKey?{"Authorization":"Bearer "+CONFIG.anonKey,"apikey":CONFIG.anonKey}:{}) },
+      body: JSON.stringify(payload)
+    });
+    let j={}; try{ j=await res.json(); }catch(_){ }
+    if(!res.ok || j.ok===false) throw new Error((j&&j.error)||("HTTP "+res.status));
+    showThanks();
+  }catch(err){
+    btn.disabled=false; btn.textContent=btnLabel;
+    showSendError();
+  }
+}
+
+function showThanks(){
+  document.getElementById('errSummary')?.remove();
+  document.getElementById('app').innerHTML = `
+    <div class="card thanks fade">
+      <div class="big"></div>
+      <h1>Application Complete</h1>
+      <p class="lead">Thank you for your application. Due to high volume of applications, we may not contact you if unsuccessful. If you are shortlisted for a trial edit, we will reach out via WhatsApp.</p>
+    </div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showSendError(){
+  let box=document.getElementById('sendErr');
+  if(!box){
+    box=document.createElement('div');
+    box.id='sendErr';
+    box.className='bar-note';
+    box.style.cssText='border-left-color:#F87171;color:#b91c1c;margin-top:14px';
+    document.getElementById('submitBtn').insertAdjacentElement('afterend',box);
+  }
+  box.textContent="Something went wrong and your application didn't send. Your answers are still here — please press Send application again. If it keeps failing, message us on WhatsApp.";
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+renderForm();
+</script>
+</body>
+</html>
