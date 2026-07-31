@@ -106,10 +106,15 @@ const CONFIG = {
   role_label: "Thumbnail Designer"
 };
 
-/* Reference thumbnails, hosted next to this file (ref-1.jpg, ref-2.jpg, ...).
-   Images that don't exist are dropped, and the whole section stays hidden until
-   at least one loads - so the form can ship before the images are uploaded. */
-const REF_IMAGES = ["ref-1.jpg","ref-2.jpg","ref-3.jpg","ref-4.jpg","ref-5.jpg","ref-6.jpg","ref-7.jpg","ref-8.jpg"];
+/* Reference thumbnails, hosted next to this file. These are thumbnails from other
+   channels that show the standard we want, NOT our own portfolio - the copy below
+   must keep saying so. Full-size originals live in _originals/ (not published).
+   Any listed image that 404s is dropped and the whole section stays hidden until
+   at least one loads, so adding ref-7 here before uploading it is safe.
+   Do NOT put loading="lazy" back on these: the card starts display:none, and a
+   browser never loads a lazy image inside a hidden container, so onload would
+   never fire and the section would stay hidden forever with the images present. */
+const REF_IMAGES = ["ref-1.jpg","ref-2.jpg","ref-3.jpg","ref-4.jpg","ref-5.jpg","ref-6.jpg"];
 
 function field(id,label,{type="text",required=true,hint="",ph="",optional=false,cls=""}={}){
   const tag = type==="textarea"
@@ -133,9 +138,9 @@ function renderForm(){
     </div>
 
     <div class="card" id="refsCard" style="display:none">
-      <div class="sec-k">The style we make</div>
-      <p class="lead sm">Real thumbnails in the direction we work in - examples, not a strict template. Your portfolio should show you can work in this ballpark.</p>
-      <div class="thumbgrid">${REF_IMAGES.map(src=>`<a class="thumbref" href="${src}" target="_blank" rel="noopener"><img src="${src}" alt="Reference thumbnail" loading="lazy" onload="document.getElementById('refsCard').style.display=''" onerror="this.closest('.thumbref').remove()"></a>`).join('')}</div>
+      <div class="sec-k">The standard we're after</div>
+      <p class="lead sm">Thumbnails we rate, from channels in the space we work in. They're the bar and the direction, not our portfolio and not a template to copy. Your work should sit in this ballpark.</p>
+      <div class="thumbgrid">${REF_IMAGES.map(src=>`<a class="thumbref" href="${src}" target="_blank" rel="noopener"><img src="${src}" alt="Reference thumbnail" onload="document.getElementById('refsCard').style.display=''" onerror="this.closest('.thumbref').remove()"></a>`).join('')}</div>
     </div>
 
     <div class="err-summary" id="errSummary">A few required questions are missing. They're marked in red below.</div>
