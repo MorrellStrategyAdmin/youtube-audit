@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex" />
 <title>Video Editor · Apply | Morrell Strategy</title>
 <meta property="og:title" content="We're hiring video editors" />
-<meta property="og:description" content="Premiere Pro video editor - short-form, long-form, or both. Full-time, part-time, or freelance. Portfolio in our direction required." />
+<meta property="og:description" content="Video editor - short-form, long-form, or both. Premiere Pro preferred, a similar professional editor is fine. Full-time, part-time, or freelance. Portfolio in our direction required." />
 <link rel="icon" href="/favicon-32.png" sizes="32x32" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -170,7 +170,7 @@ function renderForm(){
     <div class="card fade">
       <div class="eyebrow">Morrell Strategy · Now hiring</div>
       <h1>Video Editor</h1>
-      <p class="lead">We're hiring video editors for the creators and brands we work with, in <b>Premiere Pro</b> (After Effects is a plus). We work in both <b>short-form</b> (reels, TikTok) and <b>long-form</b> (YouTube) - you tell us which you do.</p>
+      <p class="lead">We're hiring video editors for the creators and brands we work with. <b>Premiere Pro</b> is what we'd prefer, though another professional editor on a similar level, like Final Cut or DaVinci Resolve, is fine (After Effects is a plus). We work in both <b>short-form</b> (reels, TikTok) and <b>long-form</b> (YouTube) - you tell us which you do.</p>
       <p class="lead"><b>Full-time, part-time, or freelance</b> - whatever fits. You tell us the arrangement and hours that suit you below.</p>
       <div class="bar-note">The main thing we look at is a <b>portfolio in the direction of our work</b>. Set your rate for the arrangement you're after.</div>
     </div>
@@ -204,7 +204,8 @@ function renderForm(){
     <div class="card">
       <div class="sec-k">Software and your work</div>
       ${choice("experience","How long have you been editing video for?",["Less than 1 year","1 to 2 years","2 to 4 years","4+ years"])}
-      ${choice("premiere","Are you confident editing in Premiere Pro?",["Yes, it's my main tool","Yes, comfortable in it","No"])}
+      ${choice("software","What do you edit in?",["Premiere Pro","Final Cut Pro","DaVinci Resolve","Something else"],"Premiere Pro is what we'd prefer, but a professional editor on a similar level is fine.")}
+      ${field("software_other","If you picked something else, what do you edit in?",{required:false})}
       ${choice("aftereffects","Do you use After Effects?",["Yes, regularly","A little","No"])}
       ${field("portfolio","Portfolio link",{type:"url",ph:"https://…",hint:"Your best editing work. If you do both short and long form, include both. In the direction of the examples above - they're examples, not a strict template."})}
     </div>
@@ -247,7 +248,7 @@ function renderForm(){
 }
 
 const TEXT_REQ = ["name","email","whatsapp","timezone","portfolio","capacity","turnaround","commitments","start","rate"];
-const SINGLE_REQ = ["experience","premiere","aftereffects","arrangement"];
+const SINGLE_REQ = ["experience","software","aftereffects","arrangement"];
 
 async function submit(){
   let firstErr=null;
@@ -269,11 +270,18 @@ async function submit(){
     if(!pick(id)){ f.classList.add('err'); firstErr=firstErr||f; }
   });
 
+  // "Something else" is only useful if they tell us what it is.
+  if(pick("software")==="Something else" && !val("software_other")){
+    const f=document.querySelector('[data-for="software_other"]');
+    f.classList.add('err'); firstErr=firstErr||f;
+  }
+
   const es=document.getElementById('errSummary');
   if(firstErr){ es.classList.add('show'); firstErr.scrollIntoView({behavior:'smooth',block:'center'}); return; }
   es.classList.remove('show');
 
   const formatLabel = fmts.length>=2 ? "Both (short-form and long-form)" : (fmts[0]||"");
+  const software = pick("software")==="Something else" ? val("software_other") : pick("software");
 
   // Ordered, human-labelled copy of the whole application. The CRM trigger renders
   // this into a note on the card so answers are readable at a glance. Format first.
@@ -284,7 +292,7 @@ async function submit(){
     ["Instagram", val("instagram")||"(not given)"],
     ["Timezone", val("timezone")],
     ["Experience", pick("experience")],
-    ["Premiere Pro", pick("premiere")],
+    ["Edits in", software],
     ["After Effects", pick("aftereffects")],
     ["Portfolio", val("portfolio")],
     ["Weekly capacity", val("capacity")],
@@ -303,7 +311,7 @@ async function submit(){
     answers: {
       formats: fmts, format_label: formatLabel,
       instagram: val("instagram"), experience: pick("experience"),
-      premiere: pick("premiere"), aftereffects: pick("aftereffects"),
+      software: pick("software"), software_other: val("software_other"), aftereffects: pick("aftereffects"),
       arrangement: pick("arrangement"),
       capacity: val("capacity"), turnaround: val("turnaround"),
       commitments: val("commitments"), start: val("start"),
