@@ -49,7 +49,7 @@
     text-rendering:optimizeLegibility;
     overflow-x:hidden;
   }
-  h1,h2,h3,.sec-head,.metric .big{font-family:"Space Grotesk",Inter,sans-serif}
+  h1,h2,h3,.sec-head,.metric .big,.tq{font-family:"Space Grotesk",Inter,sans-serif}
 
   /* faint atmospheric glow */
   body::before{
@@ -104,44 +104,54 @@
   .topbar img{height:40px;width:auto;display:block}
 
   /* ---------- generic section spacing ---------- */
-  .band{padding:120px 0}
-  .band.head{padding:64px 0 0}
+  .band{padding:110px 0}
+  .band.head{padding:64px 0 100px}
   .divline{border-top:1px solid var(--line)}
 
-  .sec-head{max-width:24ch;margin-bottom:18px;font-size:clamp(2rem,4.2vw,3.3rem)}
+  .sec-head{max-width:26ch;margin-bottom:18px;font-size:clamp(2rem,4.2vw,3.3rem)}
+  .sec-head.again{margin-top:88px}
 
-  /* ---------- proof ---------- */
+  /* ---------- track record ---------- */
   .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 24px;margin-bottom:64px}
   .metric .big{font-size:clamp(2.4rem,4.4vw,3.6rem);font-weight:700;color:var(--text);letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums}
   .metric .big .accent{color:var(--accent)}
   .metric .cap{color:var(--muted);font-size:0.98rem;margin-top:12px;line-height:1.4}
-  .cases{display:flex;flex-direction:column;gap:26px}
-  .case{display:grid;grid-template-columns:1.55fr 1fr;gap:32px;align-items:center;background:var(--bg-elev);border:1px solid var(--line);border-radius:18px;padding:26px;transition:border-color .25s ease}
-  .case:hover{border-color:var(--line-strong)}
-  .case .badge{
-    display:inline-block;font-size:0.78rem;font-weight:650;letter-spacing:0.04em;
-    color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-line);
-    padding:6px 12px;border-radius:999px;margin-bottom:20px;
-  }
-  .case h3{font-size:1.5rem;margin-bottom:12px;line-height:1.15}
-  .case p{color:var(--muted);font-size:1.02rem;line-height:1.55}
-  .case-media{display:flex;flex-direction:column;gap:14px}
-  .media-item{position:relative;aspect-ratio:16/10;background:var(--bg-elev-2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-  .media-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;cursor:zoom-in;display:block}
 
-  .proof-clients{margin:6px 0 46px}
+  .proof-clients{margin:6px 0 0}
   .pc-label{display:block;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--faint);font-weight:600;margin-bottom:22px}
   .pc-row{display:flex;flex-wrap:wrap;gap:18px 38px;align-items:center}
   .pc-item{display:flex;align-items:center;gap:12px}
   .pc-item img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid var(--line-strong)}
   .pc-item span{font-size:1.08rem;font-weight:600;color:var(--text);letter-spacing:-0.01em}
 
-  /* ---------- wall of wins ---------- */
-  .wins-label{margin-top:52px;margin-bottom:18px;color:var(--muted);font-size:1.05rem}
-  .wins{display:flex;flex-direction:column;gap:18px}
-  .win{position:relative;aspect-ratio:2/1;border:1px solid var(--line);border-radius:12px;background:var(--bg-elev);overflow:hidden;cursor:zoom-in;transition:border-color .2s ease}
+  /* ---------- results cases ---------- */
+  .cases{display:flex;flex-direction:column;gap:26px}
+  .case{display:grid;grid-template-columns:1.55fr 1fr;gap:32px;align-items:center;background:var(--bg-elev);border:1px solid var(--line);border-radius:18px;padding:26px;transition:border-color .25s ease}
+  .case:hover{border-color:var(--line-strong)}
+  .case h3{font-size:1.5rem;margin-bottom:12px;line-height:1.2}
+  .case p{color:var(--muted);font-size:1.02rem;line-height:1.55}
+  .case-media{display:flex;flex-direction:column;gap:14px}
+  .media-item{position:relative;aspect-ratio:16/10;background:var(--bg-elev-2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .media-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;cursor:zoom-in;display:block}
+
+  /* ---------- dashboard screenshots ---------- */
+  .wins{display:flex;flex-direction:column;gap:20px}
+  .win{border:1px solid var(--line);border-radius:12px;background:var(--bg-elev);overflow:hidden;transition:border-color .2s ease}
   .win:hover{border-color:var(--line-strong)}
-  .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--bg-elev)}
+  .win .shot{position:relative;aspect-ratio:2/1;cursor:zoom-in}
+  .win .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--bg-elev)}
+  .win figcaption{text-align:center;font-weight:600;font-size:1rem;color:var(--text);padding:14px 16px 16px;border-top:1px solid var(--line)}
+
+  /* ---------- testimonials ---------- */
+  .tst{display:grid;grid-template-columns:1fr 1.15fr;gap:44px;align-items:center}
+  .tq{font-size:clamp(1.5rem,2.9vw,2.3rem);font-weight:700;letter-spacing:-0.025em;line-height:1.25}
+  .tperson{display:flex;align-items:center;gap:14px;margin-top:28px}
+  .tperson img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:1px solid var(--line-strong)}
+  .tperson span{font-size:1.05rem;font-weight:650}
+  .tshot{position:relative;border:1px solid var(--line);border-radius:12px;background:var(--bg-elev);overflow:hidden}
+  .tshot img{width:100%;height:auto;display:block;cursor:zoom-in}
+  .tstack{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+  .tstack .tshot.slim{max-width:560px;width:100%;margin:0 auto}
 
   /* ---------- lightbox ---------- */
   .lightbox{position:fixed;inset:0;background:rgba(6,9,13,0.94);display:none;align-items:center;justify-content:center;z-index:2000;cursor:zoom-out;padding:28px}
@@ -176,6 +186,7 @@
   @media (max-width:900px){
     .metrics{grid-template-columns:repeat(2,1fr)}
     .band{padding:90px 0}
+    .tst{grid-template-columns:1fr;gap:28px}
   }
   @media (max-width:880px){
     .case{grid-template-columns:1fr;gap:20px}
@@ -196,9 +207,10 @@
   </div>
 </header>
 
+<!-- Track record (deck slide: Proof.) -->
 <section class="band head">
   <div class="wrap">
-    <span class="eyebrow reveal">The track record</span>
+    <span class="eyebrow reveal">Track record</span>
     <h2 class="sec-head reveal" data-d="1">Proof.</h2>
     <div class="metrics">
       <div class="metric reveal"><div class="big"><span class="accent">4B+</span></div><div class="cap">organic long-form views across clients</div></div>
@@ -207,7 +219,7 @@
       <div class="metric reveal" data-d="3"><div class="big">9-figure</div><div class="cap">founders advised</div></div>
     </div>
     <div class="proof-clients reveal">
-      <span class="pc-label">The biggest names we've worked with</span>
+      <span class="pc-label">The biggest names we have worked with</span>
       <div class="pc-row">
         <div class="pc-item"><img src="img/avatar-neil-patel.png" alt="Neil Patel"><span>Neil Patel</span></div>
         <div class="pc-item"><img src="img/avatar-kwebbelkop.png" alt="Kwebbelkop"><span>Kwebbelkop</span></div>
@@ -217,54 +229,128 @@
         <div class="pc-item"><img src="img/avatar-playstation.png" alt="PlayStation"><span>PlayStation</span></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Results (deck slide: Real revenue from the channels we run) -->
+<section class="band divline">
+  <div class="wrap">
+    <span class="eyebrow reveal">Results</span>
+    <h2 class="sec-head reveal" data-d="1">Real revenue from the channels we run</h2>
     <div class="cases">
       <div class="case reveal">
         <div class="case-media">
-          <div class="media-item"><img class="zoomable" src="img/case-podcast.jpg" alt="In-person podcast with the $3M/month CEO"></div>
-          <div class="media-item"><img class="zoomable" src="img/case-daniel-testimonial.png" alt="Written testimonial from Daniel Iles"></div>
+          <div class="media-item"><img class="zoomable" src="img/case-565k.png" alt="$565,320 total revenue over 30 days"></div>
         </div>
         <div class="case-text">
-          <span class="badge">Marketing company</span>
-          <h3>Built from zero with $3M/month CEO (in-person)</h3>
-          <p>Six figures in attributable revenue, his first podcast, and what he calls his most valuable hiring funnel, all from a standing start.</p>
+          <h3>$180K to $565K / month</h3>
+          <p>Monthly revenue for a coaching offer, scaled across organic and paid combined.</p>
         </div>
       </div>
       <div class="case reveal">
         <div class="case-media">
-          <div class="media-item"><img class="zoomable" src="img/case-565k.png" alt="$565,320 revenue in 30 days"></div>
+          <div class="media-item"><img class="zoomable" src="img/case-podcast.jpg" alt="In-person podcast with the $3M / month CEO"></div>
         </div>
         <div class="case-text">
-          <span class="badge">Coaching offer</span>
-          <h3>$180k &rarr; $565k per month</h3>
-          <p>Monthly revenue scaled across organic and paid combined.</p>
+          <h3>6 figs / month from zero</h3>
+          <p>Attributable revenue, a first podcast, and a top hiring funnel, built in person with a $3M / month CEO.</p>
         </div>
       </div>
       <div class="case reveal">
         <div class="case-media">
-          <div class="media-item"><img class="zoomable" src="img/case-55k.png" alt="$55k per month attributed to YouTube"></div>
+          <div class="media-item"><img class="zoomable" src="img/case-55k.png" alt="Client message reporting $55k attributed revenue this month from YouTube"></div>
         </div>
         <div class="case-text">
-          <span class="badge">Coaching offer</span>
-          <h3>$55k / month attributed to YouTube</h3>
+          <h3>$55K / month directly attributed to YouTube</h3>
+          <p>Attributed directly to YouTube for a coaching offer.</p>
         </div>
       </div>
-    </div>
-    <p class="wins-label reveal">Real screenshots from the channels we run.</p>
-    <div class="wins">
-      <figure class="win reveal"><img class="zoomable" src="img/win-13m.png" alt="13M views and $73,781 revenue"></figure>
-      <figure class="win reveal"><img class="zoomable" src="img/win-4-5m.png" alt="4.5M views and $16,031 revenue"></figure>
-      <figure class="win reveal"><img class="zoomable" src="img/win-1-2m.png" alt="1.2M views and $6,343 revenue"></figure>
-      <figure class="win reveal"><img class="zoomable" src="img/win-ctr.png" alt="9.6 percent click-through rate"></figure>
-      <figure class="win reveal"><img class="zoomable" src="img/win-27m-channel.png" alt="27 million channel views and revenue"></figure>
-      <figure class="win reveal"><img class="zoomable" src="img/win-avd.png" alt="27.9M views and 9:32 average view duration"></figure>
-      <figure class="win reveal"><img class="zoomable" src="img/win-74k.png" alt="$74,500 gross volume from zero"></figure>
-      <figure class="win reveal"><img class="zoomable" src="img/win-30m-traffic.png" alt="30.2M views by traffic source"></figure>
     </div>
   </div>
 </section>
 
-<section class="final">
+<!-- Dashboard screenshots (deck slides: More dashboard screenshots / More from the channels we run) -->
+<section class="band divline">
   <div class="wrap">
+    <span class="eyebrow reveal">Proof</span>
+    <h2 class="sec-head reveal" data-d="1">More dashboard screenshots</h2>
+    <div class="wins">
+      <figure class="win reveal">
+        <div class="shot"><img class="zoomable" src="img/win-13m.png" alt="13M views, +75.5K subscribers, $73,781 revenue"></div>
+        <figcaption>13M views, +75.5K subscribers, $73,781 revenue</figcaption>
+      </figure>
+      <figure class="win reveal">
+        <div class="shot"><img class="zoomable" src="img/win-avd.png" alt="27.9M views, 5.3% CTR, 9:32 average view duration"></div>
+        <figcaption>27.9M views, 5.3% CTR, 9:32 average view duration</figcaption>
+      </figure>
+      <figure class="win reveal">
+        <div class="shot"><img class="zoomable" src="img/win-74k.png" alt="$74,500 in sales from a standing start"></div>
+        <figcaption>$74,500 in sales from a standing start</figcaption>
+      </figure>
+      <figure class="win reveal">
+        <div class="shot"><img class="zoomable" src="img/win-30m-traffic.png" alt="30.2M views, broken down by traffic source"></div>
+        <figcaption>30.2M views, broken down by traffic source</figcaption>
+      </figure>
+    </div>
+
+    <h2 class="sec-head again reveal">More from the channels we run</h2>
+    <div class="wins">
+      <figure class="win reveal">
+        <div class="shot"><img class="zoomable" src="img/win-27m-channel.png" alt="27.1M channel views, £58,655 in revenue"></div>
+        <figcaption>27.1M channel views, &pound;58,655 in revenue</figcaption>
+      </figure>
+      <figure class="win reveal">
+        <div class="shot"><img class="zoomable" src="img/win-4-5m.png" alt="4.5M views, +55.8K subscribers, $16,031 revenue"></div>
+        <figcaption>4.5M views, +55.8K subscribers, $16,031 revenue</figcaption>
+      </figure>
+      <figure class="win reveal">
+        <div class="shot"><img class="zoomable" src="img/win-1-2m.png" alt="1.2M views, +6.9K subscribers, $6,343 revenue"></div>
+        <figcaption>1.2M views, +6.9K subscribers, $6,343 revenue</figcaption>
+      </figure>
+      <figure class="win reveal">
+        <div class="shot"><img class="zoomable" src="img/win-ctr.png" alt="2.5M impressions at a 9.6% click-through rate"></div>
+        <figcaption>2.5M impressions at a 9.6% click-through rate</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial: Daniel Iles (deck slide) -->
+<section class="band divline">
+  <div class="wrap">
+    <span class="eyebrow reveal">Testimonial</span>
+    <div class="tst">
+      <div class="reveal">
+        <p class="tq">&ldquo;If you don't have him advising your content, plan to get less traction.&rdquo;</p>
+        <div class="tperson">
+          <img src="img/avatar-daniel-iles.png" alt="Daniel Iles">
+          <span>Daniel Iles</span>
+        </div>
+      </div>
+      <div class="tshot reveal" data-d="1">
+        <img class="zoomable" src="img/case-daniel-testimonial.png" alt="Daniel Iles's written testimonial in full">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial: Chris Bumstead (deck slide) -->
+<section class="band divline">
+  <div class="wrap">
+    <span class="eyebrow reveal">Testimonial</span>
+    <div class="tstack">
+      <div class="tshot slim reveal">
+        <img class="zoomable" src="img/testimonial-cbum-slack.png" alt="Chris Bumstead message: Cranking! You guys all crushed again">
+      </div>
+      <div class="tshot reveal" data-d="1">
+        <img class="zoomable" src="img/testimonial-cbum-analytics.png" alt="Video analytics: 2.3m views, 6.7 times higher than usual, +18.5k subscribers">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final divline">
+  <div class="wrap" style="padding-top:110px">
     <span class="eyebrow reveal">Next step</span>
     <h2 class="reveal" data-d="1">It starts with a free, live audit of your channel.</h2>
     <p class="lede reveal" data-d="2">On the call, we read your channel live and diagnose what's actually holding it back.</p>
