@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MS | The Track Record</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="Client results from MS: 4B+ organic long-form views, 45M+ subscribers grown, and the revenue screenshots behind them.">
+<meta name="theme-color" content="#0A0B0D">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MS | The Track Record">
+<meta property="og:description" content="Client results from MS: 4B+ organic long-form views, 45M+ subscribers grown, and the revenue screenshots behind them.">
+<meta property="og:image" content="https://morrellstrategy.com/og-image.png">
+<meta property="og:url" content="https://morrellstrategy.com/proof">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0B0D;
+    --bg-elev:#121419;
+    --bg-elev-2:#171A20;
+    --text:#F4F5F7;
+    --muted:#9AA0A8;
+    --faint:#6B7079;
+    --line:rgba(255,255,255,0.09);
+    --line-strong:rgba(255,255,255,0.16);
+    --accent:#4F8CFF;
+    --accent-soft:rgba(79,140,255,0.12);
+    --accent-line:rgba(79,140,255,0.30);
+    --ink:#FFFFFF;
+    --maxw:1080px;
+    --read:64ch;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    line-height:1.6;
+    font-size:18px;
+    letter-spacing:-0.011em;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.sec-head,.metric .big{font-family:"Space Grotesk",Inter,sans-serif}
+
+  /* faint atmospheric glow */
+  body::before{
+    content:"";
+    position:fixed;
+    top:-30vh;left:50%;
+    width:120vw;height:90vh;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse at center,rgba(79,140,255,0.10),rgba(79,140,255,0) 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;position:relative;z-index:1}
+  section{position:relative;z-index:1}
+
+  .eyebrow{
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.22em;
+    font-weight:650;
+    color:var(--accent);
+    margin-bottom:22px;
+    display:inline-block;
+  }
+
+  h1,h2,h3{letter-spacing:-0.03em;line-height:1.04;font-weight:700}
+  .lede{color:var(--muted);font-size:clamp(1.1rem,1.7vw,1.35rem);max-width:var(--read);line-height:1.55}
+  .accent{color:var(--accent)}
+
+  /* ---------- buttons ---------- */
+  .cta{
+    display:inline-flex;align-items:center;gap:12px;
+    background:var(--accent);color:var(--ink);
+    font-size:1.06rem;font-weight:650;letter-spacing:-0.01em;
+    padding:19px 34px;border-radius:11px;
+    text-decoration:none;border:0;cursor:pointer;
+    transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+    box-shadow:0 10px 30px -10px rgba(79,140,255,0.5);
+  }
+  .cta:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 16px 40px -12px rgba(79,140,255,0.6)}
+  .cta .arr{font-size:1.1em;transform:translateY(0.5px)}
+  .cta-note{display:block;margin-top:16px;color:var(--faint);font-size:0.95rem;letter-spacing:0}
+
+  /* ---------- topbar ---------- */
+  .topbar{padding:30px 0 0;position:relative;z-index:2}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between}
+  .brandmark{
+    font-size:0.82rem;letter-spacing:0.28em;text-transform:uppercase;
+    color:var(--faint);font-weight:600;text-decoration:none;
+  }
+  .topbar img{height:40px;width:auto;display:block}
+
+  /* ---------- generic section spacing ---------- */
+  .band{padding:120px 0}
+  .band.head{padding:64px 0 0}
+  .divline{border-top:1px solid var(--line)}
+
+  .sec-head{max-width:24ch;margin-bottom:18px;font-size:clamp(2rem,4.2vw,3.3rem)}
+
+  /* ---------- proof ---------- */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 24px;margin-bottom:64px}
+  .metric .big{font-size:clamp(2.4rem,4.4vw,3.6rem);font-weight:700;color:var(--text);letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums}
+  .metric .big .accent{color:var(--accent)}
+  .metric .cap{color:var(--muted);font-size:0.98rem;margin-top:12px;line-height:1.4}
+  .cases{display:flex;flex-direction:column;gap:26px}
+  .case{display:grid;grid-template-columns:1.55fr 1fr;gap:32px;align-items:center;background:var(--bg-elev);border:1px solid var(--line);border-radius:18px;padding:26px;transition:border-color .25s ease}
+  .case:hover{border-color:var(--line-strong)}
+  .case .badge{
+    display:inline-block;font-size:0.78rem;font-weight:650;letter-spacing:0.04em;
+    color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-line);
+    padding:6px 12px;border-radius:999px;margin-bottom:20px;
+  }
+  .case h3{font-size:1.5rem;margin-bottom:12px;line-height:1.15}
+  .case p{color:var(--muted);font-size:1.02rem;line-height:1.55}
+  .case-media{display:flex;flex-direction:column;gap:14px}
+  .media-item{position:relative;aspect-ratio:16/10;background:var(--bg-elev-2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .media-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;cursor:zoom-in;display:block}
+
+  .proof-clients{margin:6px 0 46px}
+  .pc-label{display:block;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--faint);font-weight:600;margin-bottom:22px}
+  .pc-row{display:flex;flex-wrap:wrap;gap:18px 38px;align-items:center}
+  .pc-item{display:flex;align-items:center;gap:12px}
+  .pc-item img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid var(--line-strong)}
+  .pc-item span{font-size:1.08rem;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+
+  /* ---------- wall of wins ---------- */
+  .wins-label{margin-top:52px;margin-bottom:18px;color:var(--muted);font-size:1.05rem}
+  .wins{display:flex;flex-direction:column;gap:18px}
+  .win{position:relative;aspect-ratio:2/1;border:1px solid var(--line);border-radius:12px;background:var(--bg-elev);overflow:hidden;cursor:zoom-in;transition:border-color .2s ease}
+  .win:hover{border-color:var(--line-strong)}
+  .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--bg-elev)}
+
+  /* ---------- lightbox ---------- */
+  .lightbox{position:fixed;inset:0;background:rgba(6,9,13,0.94);display:none;align-items:center;justify-content:center;z-index:2000;cursor:zoom-out;padding:28px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:96%;max-height:96%;object-fit:contain;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,0.65)}
+  .lightbox .lb-hint{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:var(--faint);font-size:0.82rem;letter-spacing:0.05em}
+
+  /* ---------- final cta ---------- */
+  .final{padding:20px 0 140px;text-align:center}
+  .final h2{font-size:clamp(2rem,4.4vw,3.2rem);max-width:20ch;margin:0 auto 24px}
+  .final .lede{margin:0 auto 44px;color:#C9CDD3;font-size:clamp(1.15rem,1.8vw,1.4rem);max-width:56ch}
+  .final .cta-note{margin-top:20px}
+
+  footer{border-top:1px solid var(--line);padding:38px 0;color:var(--faint);font-size:0.9rem}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer .fb{letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+
+  /* ---------- reveal (visible by default; only hidden once JS confirms it can re-show them) ---------- */
+  .reveal{transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js-reveal .reveal{opacity:0;transform:translateY(20px)}
+  .js-reveal .reveal.in{opacity:1;transform:none}
+  .reveal[data-d="1"]{transition-delay:.08s}
+  .reveal[data-d="2"]{transition-delay:.16s}
+  .reveal[data-d="3"]{transition-delay:.24s}
+
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .band{padding:90px 0}
+  }
+  @media (max-width:880px){
+    .case{grid-template-columns:1fr;gap:20px}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 22px}
+    .metrics{grid-template-columns:1fr}
+    body{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="/"><img src="/logo.png" alt="MS"></a>
+    <a class="brandmark" href="/">morrellstrategy.com</a>
+  </div>
+</header>
+
+<section class="band head">
+  <div class="wrap">
+    <span class="eyebrow reveal">The track record</span>
+    <h2 class="sec-head reveal" data-d="1">Proof.</h2>
+    <div class="metrics">
+      <div class="metric reveal"><div class="big"><span class="accent">4B+</span></div><div class="cap">organic long-form views across clients</div></div>
+      <div class="metric reveal" data-d="1"><div class="big"><span class="accent">45M+</span></div><div class="cap">subscribers grown</div></div>
+      <div class="metric reveal" data-d="2"><div class="big">8-figure</div><div class="cap">brands worked with</div></div>
+      <div class="metric reveal" data-d="3"><div class="big">9-figure</div><div class="cap">founders advised</div></div>
+    </div>
+    <div class="proof-clients reveal">
+      <span class="pc-label">The biggest names we've worked with</span>
+      <div class="pc-row">
+        <div class="pc-item"><img src="img/avatar-neil-patel.png" alt="Neil Patel"><span>Neil Patel</span></div>
+        <div class="pc-item"><img src="img/avatar-kwebbelkop.png" alt="Kwebbelkop"><span>Kwebbelkop</span></div>
+        <div class="pc-item"><img src="img/avatar-willne.png" alt="WillNE"><span>WillNE</span></div>
+        <div class="pc-item"><img src="img/avatar-chris-bumstead.png" alt="Chris Bumstead"><span>Chris Bumstead</span></div>
+        <div class="pc-item"><img src="img/avatar-daniel-iles.png" alt="Daniel Iles"><span>Daniel Iles</span></div>
+        <div class="pc-item"><img src="img/avatar-playstation.png" alt="PlayStation"><span>PlayStation</span></div>
+      </div>
+    </div>
+    <div class="cases">
+      <div class="case reveal">
+        <div class="case-media">
+          <div class="media-item"><img class="zoomable" src="img/case-podcast.jpg" alt="In-person podcast with the $3M/month CEO"></div>
+          <div class="media-item"><img class="zoomable" src="img/case-daniel-testimonial.png" alt="Written testimonial from Daniel Iles"></div>
+        </div>
+        <div class="case-text">
+          <span class="badge">Marketing company</span>
+          <h3>Built from zero with $3M/month CEO (in-person)</h3>
+          <p>Six figures in attributable revenue, his first podcast, and what he calls his most valuable hiring funnel, all from a standing start.</p>
+        </div>
+      </div>
+      <div class="case reveal">
+        <div class="case-media">
+          <div class="media-item"><img class="zoomable" src="img/case-565k.png" alt="$565,320 revenue in 30 days"></div>
+        </div>
+        <div class="case-text">
+          <span class="badge">Coaching offer</span>
+          <h3>$180k &rarr; $565k per month</h3>
+          <p>Monthly revenue scaled across organic and paid combined.</p>
+        </div>
+      </div>
+      <div class="case reveal">
+        <div class="case-media">
+          <div class="media-item"><img class="zoomable" src="img/case-55k.png" alt="$55k per month attributed to YouTube"></div>
+        </div>
+        <div class="case-text">
+          <span class="badge">Coaching offer</span>
+          <h3>$55k / month attributed to YouTube</h3>
+        </div>
+      </div>
+    </div>
+    <p class="wins-label reveal">Real screenshots from the channels we run.</p>
+    <div class="wins">
+      <figure class="win reveal"><img class="zoomable" src="img/win-13m.png" alt="13M views and $73,781 revenue"></figure>
+      <figure class="win reveal"><img class="zoomable" src="img/win-4-5m.png" alt="4.5M views and $16,031 revenue"></figure>
+      <figure class="win reveal"><img class="zoomable" src="img/win-1-2m.png" alt="1.2M views and $6,343 revenue"></figure>
+      <figure class="win reveal"><img class="zoomable" src="img/win-ctr.png" alt="9.6 percent click-through rate"></figure>
+      <figure class="win reveal"><img class="zoomable" src="img/win-27m-channel.png" alt="27 million channel views and revenue"></figure>
+      <figure class="win reveal"><img class="zoomable" src="img/win-avd.png" alt="27.9M views and 9:32 average view duration"></figure>
+      <figure class="win reveal"><img class="zoomable" src="img/win-74k.png" alt="$74,500 gross volume from zero"></figure>
+      <figure class="win reveal"><img class="zoomable" src="img/win-30m-traffic.png" alt="30.2M views by traffic source"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <span class="eyebrow reveal">Next step</span>
+    <h2 class="reveal" data-d="1">It starts with a free, live audit of your channel.</h2>
+    <p class="lede reveal" data-d="2">On the call, we read your channel live and diagnose what's actually holding it back.</p>
+    <div class="reveal" data-d="3">
+      <a class="cta" href="https://cal.com/dominic-morrell-2/youtube-audit-call">Book a call <span class="arr">&rarr;</span></a>
+      <span class="cta-note">Takes one call. Free. No obligation to continue.</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="fb">MS</span>
+    <span>morrellstrategy.com</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged screenshot">
+  <img id="lightboxImg" src="" alt="">
+  <span class="lb-hint">Click anywhere to close</span>
+</div>
+
+<script>
+(function(){
+  // reveal on scroll (elements stay visible unless JS can animate them in)
+  try{
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    document.documentElement.classList.add('js-reveal');
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }catch(e){}
+
+  // lightbox for the proof screenshots
+  var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightboxImg');
+  document.querySelectorAll('.zoomable').forEach(function(img){
+    img.addEventListener('click',function(){
+      lbImg.src=img.src;lbImg.alt=img.alt;lb.classList.add('open');
+    });
+  });
+  lb.addEventListener('click',function(){lb.classList.remove('open');lbImg.src='';});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});
+})();
+</script>
+<script defer src="/track.js"></script>
+</body>
+</html>
