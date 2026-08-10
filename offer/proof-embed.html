@@ -378,4 +378,34 @@ html,body{margin:0;background:#0A0B0D}.reveal{opacity:1!important;transform:none
       </div>
     </div>
   </section><script>function ph(){try{parent.postMessage({mProofHeight:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},"*");}catch(e){}}window.addEventListener("load",ph);window.addEventListener("resize",ph);try{new ResizeObserver(ph).observe(document.body);}catch(e){}setTimeout(ph,300);setTimeout(ph,1200);setTimeout(ph,3000);</script>
+<script>
+(function(){
+  // Lightbox for the zoomable screenshots. This embed renders inside a content-height
+  // iframe, so a fixed overlay in THIS document would sit mid-iframe, off the viewer's
+  // screen. Same-origin lets us mount the overlay in the parent page instead; if the
+  // embed is ever opened directly (or cross-origin), it falls back to its own document.
+  var doc=document;
+  try{if(window.parent!==window&&window.parent.document.body)doc=window.parent.document;}catch(e){}
+  var lb=doc.getElementById('msProofLightbox');
+  if(!lb){
+    lb=doc.createElement('div');
+    lb.id='msProofLightbox';
+    lb.setAttribute('role','dialog');
+    lb.setAttribute('aria-label','Enlarged screenshot');
+    lb.style.cssText='position:fixed;inset:0;background:rgba(6,9,13,0.94);display:none;align-items:center;justify-content:center;z-index:2000;cursor:zoom-out;padding:28px';
+    lb.innerHTML='<img style="max-width:96%;max-height:96%;object-fit:contain;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,0.65)" alt="">'+
+      '<span style="position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#6B7079;font-size:0.82rem;letter-spacing:0.05em">Click anywhere to close</span>';
+    doc.body.appendChild(lb);
+  }
+  var lbImg=lb.querySelector('img');
+  function close(){lb.style.display='none';lbImg.src='';}
+  function onKey(e){if(e.key==='Escape')close();}
+  document.querySelectorAll('.zoomable').forEach(function(img){
+    img.addEventListener('click',function(){lbImg.src=img.src;lbImg.alt=img.alt;lb.style.display='flex';});
+  });
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',onKey);
+  if(doc!==document)doc.addEventListener('keydown',onKey);
+})();
+</script>
 </body></html>
