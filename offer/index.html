@@ -647,5 +647,21 @@ function msRunCounters(instant){
   upd();
 })();
 </script>
+<script>
+try{
+  var vtag='',stag='';
+  var sp=new URLSearchParams(location.search);
+  vtag=localStorage.getItem('ms_first_video')||sp.get('utm_campaign')||'';
+  stag=localStorage.getItem('ms_first_source')||sp.get('utm_source')||'';
+  var rtag=vtag||(stag?'src:'+stag:'');
+  if(rtag){
+    document.querySelectorAll('a[href^="https://cal.com/"]').forEach(function(a){
+      var u=new URL(a.href);
+      u.searchParams.set('referring-video',rtag);
+      a.href=u.toString();
+    });
+  }
+}catch(e){}
+</script>
 </body>
 </html>

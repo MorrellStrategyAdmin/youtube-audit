@@ -972,7 +972,8 @@ function mountCal(){
   const slug = (CONFIG.calLink||"").replace(/^https?:\/\/(app\.)?cal\.com\//,"");
   if (!slug || !document.getElementById("cal-inline")) return;
   Cal("init", "audit", {origin:"https://cal.com"});
-  Cal.ns.audit("inline", { elementOrSelector:"#cal-inline", config:{layout:"month_view"}, calLink: slug });
+  var _calcfg={layout:"month_view"}; var _rtag=referringTag(); if(_rtag){_calcfg["referring-video"]=_rtag;}
+  Cal.ns.audit("inline", { elementOrSelector:"#cal-inline", config:_calcfg, calLink: slug });
   Cal.ns.audit("ui", { hideEventTypeDetails:false, layout:"month_view", theme:"dark", cssVarsPerTheme:{ dark:{ "cal-brand":"#4F8CFF" } } });
 }
 
@@ -1008,12 +1009,13 @@ function renderResult(){
   // CTA only for qualified (A). Unqualified prospects get the roadmap, no CTA.
   let ctaHTML = ``;
   if (Q.tier==="A"){
+    var _rtag=referringTag(), _calHref=_rtag?CONFIG.calLink+'?referring-video='+encodeURIComponent(_rtag):CONFIG.calLink;
     ctaHTML = `<div class="cta">
       <h2>You're exactly who we build for.</h2>
       <p>It starts with a free, live audit of your channel. We'll look at what's holding your growth back, then walk you through how we'd fix it together.${Q.bigOperator?" At your scale, the advisory Strategy track is on the table too.":""}</p>
       <div class="cta-proof"><span><b>4B+</b> organic views</span><span><b>45M+</b> subscribers</span><span>built for <b>$1M+/mo</b> operators</span></div>
       <div id="cal-inline" class="cal-embed"></div>
-      <a class="btn btn-ghost btn-block cal-fallback" href="${CONFIG.calLink}" target="_blank" rel="noopener">Prefer a new tab? Open the calendar →</a>
+      <a class="btn btn-ghost btn-block cal-fallback" href="${_calHref}" target="_blank" rel="noopener">Prefer a new tab? Open the calendar →</a>
     </div>`;
   }
 
@@ -1145,6 +1147,16 @@ function contactValid(){
 function refSource(){
   try{ return localStorage.getItem('ms_first_source') || new URLSearchParams(location.search).get('utm_source') || ''; }
   catch(e){ return ''; }
+}
+function referringTag(){
+  try{
+    var sp=new URLSearchParams(location.search);
+    var vtag=localStorage.getItem('ms_first_video')||sp.get('utm_campaign')||'';
+    if(vtag) return vtag;
+    var stag=localStorage.getItem('ms_first_source')||sp.get('utm_source')||'';
+    if(stag) return 'src:'+stag;
+    return '';
+  }catch(e){ return ''; }
 }
 // Shared contact fields, collected up front (name + email + Instagram, near the start).
 function baseLead(){
