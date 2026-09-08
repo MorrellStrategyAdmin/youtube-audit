@@ -271,11 +271,7 @@
   .dvd-col.dfy .dvd-li{color:var(--text)}
   .cta-proof{display:flex;flex-wrap:wrap;gap:7px 16px;justify-content:center;margin:0 0 15px;font-family:var(--hud-mono);font-size:11px;letter-spacing:.02em;color:var(--muted)}
   .cta-proof b{color:var(--text);font-weight:700}
-  /* inline cal.com booking embed */
-  .cal-embed{width:100%;margin-top:4px;border-radius:12px;overflow:hidden;min-height:150px}
-  .cal-embed iframe{width:100%!important;border:0;border-radius:12px}
   .cal-ph{display:flex;align-items:center;justify-content:center;text-align:center;min-height:200px;background:var(--bg-elev2);border:1px solid var(--line);color:var(--faint);font-family:var(--hud-mono);font-size:12px;letter-spacing:.03em;padding:24px}
-  .cal-fallback{margin-top:10px;font-size:13px}
 
   /* mobile clarity */
   @media(max-width:520px){
@@ -358,7 +354,6 @@
 const CONFIG = {
   endpoint: "https://gjfrarupnpsfiolpgtdc.supabase.co/functions/v1/capture-lead",                                             // e.g. "https://<proj>.supabase.co/functions/v1/capture-lead"
   anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqZnJhcnVwbnBzZmlvbHBndGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3Njg0NjEsImV4cCI6MjA5ODM0NDQ2MX0.sGW9weCJD02awUeZ482x-WByksTDi1vpwgKrFNjV0xQ",                                             // Supabase anon key, sent as Bearer for the Edge Function
-  calLink:  "https://cal.com/dominic-morrell-2/youtube-audit-call", // the free live audit
   siteUrl:  "https://morrellstrategy.com",
   strategyUrl: "https://morrellstrategy.com"                // where the lighter Strategy track lives
 };
@@ -966,16 +961,6 @@ function diyDfySection(){
       </div>`;
 }
 
-// Inline cal.com booking embed (qualified leads only) — book without leaving the page
-function mountCal(){
-  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-  const slug = (CONFIG.calLink||"").replace(/^https?:\/\/(app\.)?cal\.com\//,"");
-  if (!slug || !document.getElementById("cal-inline")) return;
-  Cal("init", "audit", {origin:"https://cal.com"});
-  var _calcfg={layout:"month_view"}; var _rtag=referringTag(); if(_rtag){_calcfg["referring-video"]=_rtag;}
-  Cal.ns.audit("inline", { elementOrSelector:"#cal-inline", config:_calcfg, calLink: slug });
-  Cal.ns.audit("ui", { hideEventTypeDetails:false, layout:"month_view", theme:"dark", cssVarsPerTheme:{ dark:{ "cal-brand":"#4F8CFF" } } });
-}
 
 /* ------------------------------ RESULT -------------------------------- */
 function renderResult(){
@@ -1009,13 +994,21 @@ function renderResult(){
   // CTA only for qualified (A). Unqualified prospects get the roadmap, no CTA.
   let ctaHTML = ``;
   if (Q.tier==="A"){
-    var _rtag=referringTag(), _calHref=_rtag?CONFIG.calLink+'?referring-video='+encodeURIComponent(_rtag):CONFIG.calLink;
+    var _v='', _s='';
+    try{
+      var _sp=new URLSearchParams(location.search);
+      _v=localStorage.getItem('ms_first_video')||_sp.get('utm_campaign')||'';
+      _s=localStorage.getItem('ms_first_source')||_sp.get('utm_source')||'';
+    }catch(e){}
+    var _wq=[];
+    if(_v)_wq.push('utm_campaign='+encodeURIComponent(_v));
+    if(_s)_wq.push('utm_source='+encodeURIComponent(_s));
+    var _waitHref='/waitlist'+(_wq.length?'?'+_wq.join('&'):'');
     ctaHTML = `<div class="cta">
       <h2>You're exactly who we build for.</h2>
       <p>It starts with a free, live audit of your channel. We'll look at what's holding your growth back, then walk you through how we'd fix it together.${Q.bigOperator?" At your scale, the advisory Strategy track is on the table too.":""}</p>
       <div class="cta-proof"><span><b>4B+</b> organic views</span><span><b>45M+</b> subscribers</span><span>built for <b>$1M+/mo</b> operators</span></div>
-      <div id="cal-inline" class="cal-embed"></div>
-      <a class="btn btn-ghost btn-block cal-fallback" href="${_calHref}" target="_blank" rel="noopener">Prefer a new tab? Open the calendar →</a>
+      <a class="btn btn-primary btn-block" data-track="roadmap-tier-a-cta" href="${_waitHref}">Book a free channel audit</a>
     </div>`;
   }
 
@@ -1101,9 +1094,6 @@ function renderResult(){
       <p class="microcopy">This roadmap is generated from your answers, so treat it as a starting point rather than a full read of your channel.</p>
     </div>`;
 
-  // qualified leads get the inline booking calendar (no click-out)
-  if (Q.tier==="A") { try { mountCal(); } catch(e){} }
-
   // animate bars + funnel donut
   requestAnimationFrame(()=>{
     document.querySelectorAll('.bar > i').forEach(el=>{
@@ -1147,16 +1137,6 @@ function contactValid(){
 function refSource(){
   try{ return localStorage.getItem('ms_first_source') || new URLSearchParams(location.search).get('utm_source') || ''; }
   catch(e){ return ''; }
-}
-function referringTag(){
-  try{
-    var sp=new URLSearchParams(location.search);
-    var vtag=localStorage.getItem('ms_first_video')||sp.get('utm_campaign')||'';
-    if(vtag) return vtag;
-    var stag=localStorage.getItem('ms_first_source')||sp.get('utm_source')||'';
-    if(stag) return 'src:'+stag;
-    return '';
-  }catch(e){ return ''; }
 }
 // Shared contact fields, collected up front (name + email + Instagram, near the start).
 function baseLead(){
