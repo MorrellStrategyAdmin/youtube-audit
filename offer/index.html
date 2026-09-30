@@ -352,7 +352,7 @@
     <p class="eyebrow">Morrell Strategy</p>
     <h1>Done-for-you, <span class="accent">human-led</span> YouTube growth.</h1>
     <p class="sub">For established operators who want their channel to bring in clients, not just rack up views. We run the strategy, the ideas, the scripting, and the systems that keep it going, backed by 4 billion+ views and 45 million+ subscribers across our clients.</p>
-    <a class="btn" data-track="offer-hero-cta" href="/waitlist">Book a free channel audit</a>
+    <a class="btn" href="https://cal.com/dominic-morrell-2/youtube-audit-call">Book a free channel audit</a>
     <div class="hero-clients">
       <p class="hero-clients-label">We've worked with</p>
       <div class="hero-faces">
@@ -585,7 +585,7 @@ window.addEventListener('message',function(ev){if(ev.data&&ev.data.mProofHeight)
       <div class="card"><h3>A clear picture</h3><p>Of what we'd change, and why each change works.</p></div>
       <div class="card"><h3>A plan you can use</h3><p>Whether or not we end up working together.</p></div>
     </div>
-    <a class="btn" data-track="offer-footer-cta" href="/waitlist">Book your free audit</a>
+    <a class="btn" href="https://cal.com/dominic-morrell-2/youtube-audit-call">Book your free audit</a>
     <p class="cta-note">Takes one call. Free. No obligation to continue.</p>
   </div>
 </section>
@@ -648,18 +648,19 @@ function msRunCounters(instant){
 })();
 </script>
 <script>
-// Carry first-touch video and source onto waitlist links as utm_campaign and utm_source.
 try{
   var vtag='',stag='';
   var sp=new URLSearchParams(location.search);
   vtag=localStorage.getItem('ms_first_video')||sp.get('utm_campaign')||'';
   stag=localStorage.getItem('ms_first_source')||sp.get('utm_source')||'';
-  document.querySelectorAll('a[href^="/waitlist"]').forEach(function(a){
-    var u=new URL(a.getAttribute('href'),location.origin);
-    if(vtag)u.searchParams.set('utm_campaign',vtag);
-    if(stag)u.searchParams.set('utm_source',stag);
-    a.setAttribute('href',u.pathname+u.search);
-  });
+  var rtag=vtag||(stag?'src:'+stag:'');
+  if(rtag){
+    document.querySelectorAll('a[href^="https://cal.com/"]').forEach(function(a){
+      var u=new URL(a.href);
+      u.searchParams.set('referring-video',rtag);
+      a.href=u.toString();
+    });
+  }
 }catch(e){}
 </script>
 </body>

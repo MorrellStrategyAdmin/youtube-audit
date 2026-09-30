@@ -90,11 +90,19 @@
   .vsl-ph .label{font-size:1.02rem}
   .vsl-ph .sub{font-size:0.85rem;color:var(--faint)}
 
+  /* book a call CTA */
+  .cta-block{margin:0 auto 30px}
+  .cta-text{font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:700;letter-spacing:-0.02em}
+  .arrows{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:-6px;color:var(--accent)}
+  .arrows span{font-size:1.9rem;line-height:0.7;animation:bob 1.4s ease-in-out infinite}
+  .arrows span:nth-child(2){animation-delay:0.15s;opacity:0.7}
+  .arrows span:nth-child(3){animation-delay:0.3s;opacity:0.4}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
   /* calendar */
   .calendar{max-width:820px;margin:0 auto}
-  .cal-frame{display:flex;align-items:center;justify-content:center;padding:8px 0}
-  .cal-cta{background:var(--accent);color:#0A0B0D;font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:clamp(1rem,2vw,1.15rem);border-radius:12px;padding:16px 30px;text-decoration:none;display:inline-block}
-  .cal-cta:hover{filter:brightness(1.06)}
+  .cal-frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg-elev);min-height:640px}
+  .cal-frame iframe{width:100%;min-height:700px;border:0;display:block}
   .cal-ph{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);padding:40px;text-align:center}
   .cal-ph .label{font-size:1.05rem}
   .cal-ph .sub{font-size:0.85rem;color:var(--faint);max-width:42ch;line-height:1.5}
@@ -164,9 +172,14 @@
       </div>
     </div>
 
+    <div class="cta-block reveal" data-d="3">
+      <div class="cta-text">Book a call</div>
+      <div class="arrows"><span>&#8964;</span><span>&#8964;</span><span>&#8964;</span></div>
+    </div>
+
     <div class="calendar reveal" data-d="4">
       <div class="cal-frame" id="cal-frame">
-        <a class="cal-cta" id="waitlist-cta" data-track="home-join-waitlist" href="/waitlist">Join the waitlist</a>
+        <div id="my-cal-inline" style="width:100%;min-height:700px"></div>
       </div>
     </div>
   </div>
@@ -179,14 +192,16 @@
       els.forEach(function(e){io.observe(e)});
     })();
   </script>
-  <script>
-    var vtag='',stag='';
-    try{var _sp=new URLSearchParams(location.search);vtag=localStorage.getItem('ms_first_video')||_sp.get('utm_campaign')||'';stag=localStorage.getItem('ms_first_source')||_sp.get('utm_source')||'';}catch(e){}
-    var a=document.getElementById('waitlist-cta');
-    if(a&&(vtag||stag)){ var u=new URL(a.href,location.origin);
-      if(vtag)u.searchParams.set('utm_campaign',vtag);
-      if(stag)u.searchParams.set('utm_source',stag);
-      a.href=u.pathname+u.search; }
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "youtube-audit-call", {origin:"https://cal.com"});
+    var vtag='',stag=''; try{var _sp=new URLSearchParams(location.search);vtag=localStorage.getItem('ms_first_video')||_sp.get('utm_campaign')||'';stag=localStorage.getItem('ms_first_source')||_sp.get('utm_source')||'';}catch(e){}
+    // Carry attribution into the booking via the hidden 'referring-video' field: a bare tag is a
+    // YouTube video; 'src:<source>' (e.g. src:instagram) marks a non-video traffic source.
+    var rtag=vtag||(stag?'src:'+stag:'');
+    var _calcfg={"layout":"month_view","theme":"dark"}; if(rtag){_calcfg["referring-video"]=rtag;}
+    Cal.ns["youtube-audit-call"]("inline", { elementOrSelector:"#my-cal-inline", config: _calcfg, calLink: "dominic-morrell-2/youtube-audit-call" });
+    Cal.ns["youtube-audit-call"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
   </script>
   <footer class="site-footer">
     <div class="foot-inner">
