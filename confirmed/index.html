@@ -48,7 +48,6 @@
   .check{display:block;width:44px;height:44px;margin:0 auto 22px;padding:11px;border:1px solid var(--accent-line);border-radius:50%;background:var(--accent-soft);color:var(--accent)}
   h1,h2{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;letter-spacing:-0.032em}
   h1{font-size:clamp(2.5rem,5.2vw,4.1rem);line-height:1.08;margin-bottom:22px;overflow-wrap:anywhere}
-  .next{max-width:48ch;margin:0 auto;color:var(--muted);font-size:1.05rem}
   .call-time{margin:20px auto 0;color:var(--accent);font-weight:500;overflow-wrap:anywhere}
   section{margin-top:32px}
   h2{font-size:1.4rem;line-height:1.25;margin-bottom:20px}
@@ -59,10 +58,27 @@
   .expect li::marker{color:var(--accent)}
   .video-frame{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line-strong);background:var(--bg-elev);box-shadow:0 30px 80px -30px rgba(0,0,0,0.7)}
   .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .chapters{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chapters button{font:inherit;font-size:0.9rem;color:var(--text);background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:8px;padding:8px 12px;cursor:pointer;overflow-wrap:anywhere;max-width:100%}
+  button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+  .breakout-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+  .breakout-grid h3{font-size:1rem;line-height:1.4;margin-bottom:12px;overflow-wrap:anywhere}
   .waiting{padding:4px 0 28px;border-bottom:1px solid var(--line)}
-  .waiting img{display:block;max-width:100%;height:auto;border-radius:16px}
+  .proof-wall{column-count:1;column-gap:20px}
+  .proof-wall figure{min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--bg-elev);overflow:hidden}
+  .proof-wall figure{break-inside:avoid;margin-bottom:20px}
+  .proof-wall button{display:block;width:100%;border:0;background:transparent;color:var(--text);cursor:zoom-in}
+  .proof-wall img{display:block;width:100%;max-width:100%;height:auto;font:inherit}
+  .proof-wall figcaption{padding:14px;font-size:0.9rem;line-height:1.5;overflow-wrap:anywhere}
+  .lightbox{position:fixed;inset:0;background:rgba(6,9,13,0.94);display:none;align-items:center;justify-content:center;z-index:2000;cursor:zoom-out;padding:28px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:96%;max-height:90%;object-fit:contain;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,0.65)}
+  .lightbox .lb-hint{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:var(--muted);font-size:0.82rem}
   .closing{margin-top:26px;color:var(--muted);font-size:0.9rem}
+  .closing p+p{margin-top:8px}
   @media(min-width:560px){.page{padding:54px 24px 80px}.brandmark{margin-bottom:48px}.expect{padding:32px}section{margin-top:36px}}
+  @media(min-width:640px){.breakout-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-wall{column-count:2}}
+  @media(min-width:1280px){.proof-wall{column-count:3}}
 </style>
 <script defer src="/track.js"></script>
 </head>
@@ -75,11 +91,11 @@
   <div class="confirmation">
     <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
     <h1 id="confirmation-title">You're booked.</h1>
-    <p class="next">The calendar invite with your call link is in your inbox. Accept it so the call is on your calendar.</p>
   </div>
   <section class="expect" aria-labelledby="expect-title">
     <h2 id="expect-title">What to expect on the call</h2>
     <ul>
+      <li>Dominic will message you on Instagram to confirm the call.</li>
       <li>30 minutes with Dominic over Google Meet.</li>
       <li>We'll discuss your goals, review your current YouTube strategy (if you have one), and propose a game plan.</li>
       <li>If it looks like a good fit, we'll explore what working together could look like.</li>
@@ -87,12 +103,36 @@
   </section>
   <section class="waiting" aria-labelledby="waiting-title">
     <h2 id="waiting-title">What clients say</h2>
-    <img src="/proof/img/case-daniel-testimonial.png" alt="Daniel Iles's testimonial" loading="lazy" />
+    <div class="proof-wall">
+      <figure><button type="button" aria-label="Enlarge Daniel Iles's testimonial"><img class="zoomable" src="/proof/img/case-daniel-testimonial.png" alt="Daniel Iles's written testimonial in full" loading="lazy" /></button><figcaption>$3M / month CEO, Viral Coach and Daniel Iles Holding Company</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge Chris Bumstead's message"><img class="zoomable" src="/proof/img/testimonial-cbum-slack.png" alt="Chris Bumstead message: Cranking! You guys all crushed again" loading="lazy" /></button><figcaption>6x Mr. Olympia, co-owner of RAW Nutrition and BUM Energy</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge Chris Bumstead's video analytics"><img class="zoomable" src="/proof/img/testimonial-cbum-analytics.png" alt="Video analytics: 2.3m views, 6.7 times higher than usual, +18.5k subscribers" loading="lazy" /></button><figcaption>6x Mr. Olympia, co-owner of RAW Nutrition and BUM Energy</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge $565K revenue result"><img class="zoomable" src="/proof/img/case-565k.png" alt="$565,320 total revenue over 30 days" loading="lazy" /></button><figcaption>$180K to $565K / month</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge podcast case"><img class="zoomable" src="/proof/img/case-podcast.jpg" alt="In-person podcast with the $3M / month CEO" loading="lazy" /></button><figcaption>6 figs / month from zero</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge $55K YouTube result"><img class="zoomable" src="/proof/img/case-55k.png" alt="Client message reporting $55k attributed revenue this month from YouTube" loading="lazy" /></button><figcaption>$55K / month directly attributed to YouTube</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge 13M views dashboard"><img class="zoomable" src="/proof/img/win-13m.png" alt="13M views, +75.5K subscribers, $73,781 revenue" loading="lazy" /></button><figcaption>13M views, +75.5K subscribers, $73,781 revenue</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge average view duration dashboard"><img class="zoomable" src="/proof/img/win-avd.png" alt="27.9M views, 5.3% CTR, 9:32 average view duration" loading="lazy" /></button><figcaption>27.9M views, 5.3% CTR, 9:32 average view duration</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge $74,500 sales result"><img class="zoomable" src="/proof/img/win-74k.png" alt="$74,500 in sales from a standing start" loading="lazy" /></button><figcaption>$74,500 in sales from a standing start</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge traffic source dashboard"><img class="zoomable" src="/proof/img/win-30m-traffic.png" alt="30.2M views, broken down by traffic source" loading="lazy" /></button><figcaption>30.2M views, broken down by traffic source</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge 27.1M channel views dashboard"><img class="zoomable" src="/proof/img/win-27m-channel.png" alt="27.1M channel views, £58,655 in revenue" loading="lazy" /></button><figcaption>27.1M channel views, &pound;58,655 in revenue</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge 4.5M views dashboard"><img class="zoomable" src="/proof/img/win-4-5m.png" alt="4.5M views, +55.8K subscribers, $16,031 revenue" loading="lazy" /></button><figcaption>4.5M views, +55.8K subscribers, $16,031 revenue</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge 1.2M views dashboard"><img class="zoomable" src="/proof/img/win-1-2m.png" alt="1.2M views, +6.9K subscribers, $6,343 revenue" loading="lazy" /></button><figcaption>1.2M views, +6.9K subscribers, $6,343 revenue</figcaption></figure>
+      <figure><button type="button" aria-label="Enlarge click-through rate dashboard"><img class="zoomable" src="/proof/img/win-ctr.png" alt="2.5M impressions at a 9.6% click-through rate" loading="lazy" /></button><figcaption>2.5M impressions at a 9.6% click-through rate</figcaption></figure>
+    </div>
   </section>
-  <p class="closing">Can't make it? Use the reschedule link in your confirmation email.</p>
+  <div class="closing">
+    <p>Your calendar invite with the call link is in your inbox.</p>
+    <p>Can't make it? Use the reschedule link in your confirmation email.</p>
+  </div>
 </main>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged screenshot" tabindex="-1">
+  <img id="lightboxImg" alt="" />
+  <span class="lb-hint">Click anywhere or press Escape to close</span>
+</div>
 <script>
   const CONFIRM_VIDEO_URL = "";
+  const CONFIRM_VIDEO_CHAPTERS = [];
+  const BREAKOUT_VIDEOS = [];
 
   const params = new URLSearchParams(window.location.search);
   const firstName = (params.get('attendeeName') || '').trim().split(/\s+/)[0];
@@ -119,32 +159,109 @@
     }
   }
 
-  if (CONFIRM_VIDEO_URL) {
+  function loomEmbedUrl(value) {
     try {
-      const url = new URL(CONFIRM_VIDEO_URL);
+      const url = new URL(value);
       const match = url.pathname.match(/^\/(?:share|embed)\/([a-zA-Z0-9]+)\/?$/);
       if (url.protocol === 'https:' && ['loom.com', 'www.loom.com'].includes(url.hostname) && match) {
-        const section = document.createElement('section');
-        section.className = 'confirmation-video';
-        section.setAttribute('aria-labelledby', 'video-title');
-        const heading = document.createElement('h2');
-        heading.id = 'video-title';
-        heading.textContent = 'Watch this before our call';
-        const frame = document.createElement('div');
-        frame.className = 'video-frame';
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.loom.com/embed/${match[1]}?hideEmbedTopBar=true`;
-        iframe.title = 'Watch this before our call';
-        iframe.allowFullscreen = true;
-        iframe.referrerPolicy = 'no-referrer';
-        frame.append(iframe);
-        section.append(heading, frame);
-        document.querySelector('.expect').before(section);
+        return `https://www.loom.com/embed/${match[1]}?hideEmbedTopBar=true`;
       }
     } catch (error) {
       // Leave the video out when its configured URL is invalid.
     }
+    return null;
   }
+
+  function videoFrame(src, title, lazy = false) {
+    const frame = document.createElement('div');
+    frame.className = 'video-frame';
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = title;
+    iframe.allow = 'autoplay; fullscreen';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'no-referrer';
+    if (lazy) iframe.loading = 'lazy';
+    frame.append(iframe);
+    return frame;
+  }
+
+  const mainVideo = loomEmbedUrl(CONFIRM_VIDEO_URL);
+  if (mainVideo) {
+    const section = document.createElement('section');
+    section.className = 'confirmation-video';
+    section.setAttribute('aria-labelledby', 'video-title');
+    const heading = document.createElement('h2');
+    heading.id = 'video-title';
+    heading.textContent = 'Watch this before our call';
+    const frame = videoFrame(mainVideo, heading.textContent);
+    section.append(heading, frame);
+    if (CONFIRM_VIDEO_CHAPTERS.length) {
+      const chapters = document.createElement('div');
+      chapters.className = 'chapters';
+      chapters.setAttribute('role', 'group');
+      chapters.setAttribute('aria-label', 'Video chapters');
+      CONFIRM_VIDEO_CHAPTERS.forEach(chapter => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = chapter.label;
+        button.addEventListener('click', () => {
+          // Loom documents seconds with an s suffix, plus autoplay=1.
+          // https://support.atlassian.com/loom/docs/embed-your-video-into-a-webpage/
+          frame.querySelector('iframe').src = `${mainVideo}&t=${chapter.start}s&autoplay=1`;
+        });
+        chapters.append(button);
+      });
+      section.append(chapters);
+    }
+    document.querySelector('.expect').before(section);
+  }
+
+  const breakoutGrid = document.createElement('div');
+  breakoutGrid.className = 'breakout-grid';
+  BREAKOUT_VIDEOS.forEach(video => {
+    const src = loomEmbedUrl(video.url);
+    if (!src) return;
+    const item = document.createElement('div');
+    const title = document.createElement('h3');
+    title.textContent = video.title;
+    item.append(title, videoFrame(src, video.title, true));
+    breakoutGrid.append(item);
+  });
+  if (breakoutGrid.childElementCount) {
+    const section = document.createElement('section');
+    section.className = 'breakouts';
+    section.setAttribute('aria-labelledby', 'breakout-title');
+    const heading = document.createElement('h2');
+    heading.id = 'breakout-title';
+    heading.textContent = 'Your questions, answered';
+    section.append(heading, breakoutGrid);
+    document.querySelector('.expect').before(section);
+  }
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  let openedFrom;
+  document.querySelectorAll('.proof-wall button').forEach(button => {
+    button.addEventListener('click', () => {
+      const img = button.querySelector('.zoomable');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      openedFrom = button;
+      lightbox.classList.add('open');
+      lightbox.focus();
+    });
+  });
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightboxImg.removeAttribute('src');
+    if (openedFrom) openedFrom.focus({preventScroll: true});
+  }
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'Tab' && lightbox.classList.contains('open')) event.preventDefault();
+  });
 </script>
 </body>
 </html>
