@@ -56,6 +56,7 @@
   .expect li{padding-left:4px}
   .expect li+li{margin-top:12px}
   .expect li::marker{color:var(--accent)}
+  .expect strong{font-weight:600}
   .video-frame{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line-strong);background:var(--bg-elev);box-shadow:0 30px 80px -30px rgba(0,0,0,0.7)}
   .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .chapters{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
@@ -78,7 +79,6 @@
   .closing p+p{margin-top:8px}
   @media(min-width:560px){.page{padding:54px 24px 80px}.brandmark{margin-bottom:48px}.expect{padding:32px}section{margin-top:36px}}
   @media(min-width:640px){.breakout-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-wall{column-count:2}}
-  @media(min-width:1280px){.proof-wall{column-count:3}}
 </style>
 <script defer src="/track.js"></script>
 </head>
@@ -95,14 +95,14 @@
   <section class="expect" aria-labelledby="expect-title">
     <h2 id="expect-title">What to expect on the call</h2>
     <ul>
-      <li>Dominic will message you on Instagram to confirm the call.</li>
+      <li>Dom will message you on <strong>Instagram</strong> (or WhatsApp) to confirm the call.</li>
       <li>30 minutes with Dominic over Google Meet.</li>
       <li>We'll discuss your goals, review your current YouTube strategy (if you have one), and propose a game plan.</li>
       <li>If it looks like a good fit, we'll explore what working together could look like.</li>
     </ul>
   </section>
   <section class="waiting" aria-labelledby="waiting-title">
-    <h2 id="waiting-title">What clients say</h2>
+    <h2 id="waiting-title">Results &amp; Testimonials</h2>
     <div class="proof-wall">
       <figure><button type="button" aria-label="Enlarge Daniel Iles's testimonial"><img class="zoomable" src="/proof/img/case-daniel-testimonial.png" alt="Daniel Iles's written testimonial in full" loading="lazy" /></button><figcaption>$3M / month CEO, Viral Coach and Daniel Iles Holding Company</figcaption></figure>
       <figure><button type="button" aria-label="Enlarge Chris Bumstead's message"><img class="zoomable" src="/proof/img/testimonial-cbum-slack.png" alt="Chris Bumstead message: Cranking! You guys all crushed again" loading="lazy" /></button><figcaption>6x Mr. Olympia, co-owner of RAW Nutrition and BUM Energy</figcaption></figure>
